@@ -1,0 +1,10 @@
+{
+  "id": "ARCH-001",
+  "artifacts": ["RESULT-OLD"],
+  "disposition": "superseded",
+  "reason": "填写实际退出原因与选择依据",
+  "by": "填写实际责任角色",
+  "evidence": ["_pm/DECISIONS.md"],
+  "change": "CH-001",
+  "replacement": "RESULT-NEW"
+}

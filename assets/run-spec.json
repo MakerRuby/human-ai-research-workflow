@@ -1,0 +1,11 @@
+{
+  "id": "RUN-001",
+  "inputs": [],
+  "code": [],
+  "config": "_pm/config.json",
+  "environment": "environment/lock.txt",
+  "environment_rebuilt": false,
+  "cache_policy": "待按真实运行填写",
+  "outputs": ["results/example.csv"],
+  "purpose": "待填写；本模板不能证明运行成功"
+}

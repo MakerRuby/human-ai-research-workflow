@@ -1,0 +1,6 @@
+{
+  "id": "REP-001", "title": "待填写实际验证范围", "run": "RUN-001",
+  "scope": "partial", "required": true,
+  "inputs": [], "by": "待填写实际执行角色", "rationale": "待填写验证理由",
+  "comparisons": [], "limitations": "模板不代表已经复现；按分析设计填写容差和覆盖范围"
+}

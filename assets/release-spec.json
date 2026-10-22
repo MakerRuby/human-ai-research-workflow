@@ -1,0 +1,15 @@
+{
+  "id": "SUB-001_initial",
+  "title": "投稿候选材料",
+  "journal": "待明确",
+  "recipient": "待明确通用项目交付对象；研究项目填写 journal",
+  "stage": "initial",
+  "requirements_record": "_pm/reviews/journal-requirements.md",
+  "required_gates": ["G3"],
+  "required_artifacts": [],
+  "required_reproductions": [],
+  "critical_results": [],
+  "files": [],
+  "confirmations": [],
+  "notes": "先按期刊本轮官方要求补齐清单；空模板不能发布为 ready"
+}
