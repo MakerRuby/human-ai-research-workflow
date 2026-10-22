@@ -93,7 +93,7 @@ class ProjectToolsTests(unittest.TestCase):
     def test_medium_layout_and_unicode_name(self):
         name = '研究: "糖尿病" \\ cohort'
         result = self.init(name=name)
-        self.assertEqual(len(result["created"]), 7)
+        self.assertEqual(len(result["created"]), 9)
         config = json.loads((self.root / "_pm/config.json").read_text(encoding="utf-8"))
         self.assertEqual(config["project_name"], name)
         self.assertIsNone(config["reproducibility"]["seed"])
@@ -102,7 +102,7 @@ class ProjectToolsTests(unittest.TestCase):
 
     def test_large_research_layout_and_initial_gate(self):
         result = self.init(scale="L", profile="research")
-        self.assertEqual(len(result["created"]), 20)
+        self.assertEqual(len(result["created"]), 22)
         self.assertTrue((self.root / "_pm/templates/task-package.md").is_file())
         self.assertTrue(self.audit()["ok"])
         self.assertFalse(self.audit(require_gate="G3")["ok"])

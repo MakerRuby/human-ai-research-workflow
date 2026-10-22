@@ -67,7 +67,7 @@ def initialize(args):
         "_pm/LAYOUT.md": "LAYOUT.md",
     }
     # Host adapters contain navigation only; the contract remains authoritative.
-    entries = getattr(args, "ai_entry", [])
+    entries = [] if getattr(args, "no_ai_entry", False) else (getattr(args, "ai_entry", None) or ["agents", "claude"])
     for entry in entries:
         template_map[{"agents": "AGENTS.md", "claude": "CLAUDE.md"}[entry]] = "AI_ENTRY.md"
     substitutions["{{SKILL_PATH}}"] = str(Path(__file__).resolve().parents[1])
@@ -166,8 +166,10 @@ def main(argv=None):
     parser.add_argument("--name", required=True)
     parser.add_argument("--scale", choices=("S", "M", "L"), default="M")
     parser.add_argument("--profile", choices=("general", "research"), default="general")
-    parser.add_argument("--ai-entry", action="append", choices=("agents", "claude"), default=[],
-                        help="Create optional host entry files; repeat to select both. Existing files are preserved.")
+    entry_options = parser.add_mutually_exclusive_group()
+    entry_options.add_argument("--ai-entry", action="append", choices=("agents", "claude"),
+                               help="Select host entries; defaults to both. Existing files are preserved.")
+    entry_options.add_argument("--no-ai-entry", action="store_true", help="Do not create host entry files.")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--date", default=date.today().isoformat())
     args = parser.parse_args(argv)

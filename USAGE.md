@@ -23,7 +23,7 @@ python <技能目录>/scripts/init_project.py --target <项目目录> --name <�
 
 项目统一约定保存在根目录 `AI_CONTRACT.md`，其中记录技能路径与每轮恢复、收尾规则。不要再创建一份重复的管理总纲。
 
-初始化时可加 `--ai-entry agents` 生成 `AGENTS.md`，加 `--ai-entry claude` 生成 `CLAUDE.md`，两者可以同时使用：
+初始化 M/L 项目时默认生成 `AGENTS.md` 与 `CLAUDE.md`。可用 `--ai-entry agents` 或 `--ai-entry claude` 仅选择一种，或用 `--no-ai-entry` 关闭。两种入口也可显式指定：
 
 ```text
 python <技能目录>/scripts/init_project.py --target <项目目录> --name <项目名> --scale L --profile research --ai-entry agents --ai-entry claude --dry-run
@@ -32,3 +32,11 @@ python <技能目录>/scripts/init_project.py --target <项目目录> --name <�
 检查预览后移除 `--dry-run` 执行。入口文件只引导读取统一约定；已有文件一律保留，AI 应读取现有内容后提出最小合并，保留原规则与作用范围，不能直接覆盖。项目迁移或团队共用时，将约定中的本机技能路径改为团队可用位置。
 
 初始化后应在新会话验证：让助手指出实际读取的入口、技能位置、当前任务与下一动作，确认它确实恢复了状态。不能仅因文件存在就宣称自动加载成功。宿主不支持自动入口时，将“先读取项目根目录 AI_CONTRACT.md 并按其恢复项目”作为固定开场指令。
+
+### 一句口令启用
+
+在目标项目中首次调用本技能后，说：
+
+> 初始化本项目并启用持续协作。
+
+AI 会检查已有资料，新项目建立必要记录，既有项目只补工作流绑定与入口导航。只调用技能开展项目实施、没有逐字说出口令时，也执行这项首次检查；讨论和评审不会自动写入。项目自身的文件构成持久记忆，不依赖某个助手的私有记忆功能。既有入口若被脚本跳过，应完成最小合并并明确告知，不能把“已跳过”报告成“已绑定”。

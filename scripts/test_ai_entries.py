@@ -8,6 +8,22 @@ import unittest
 
 
 class EntryTests(unittest.TestCase):
+    def test_default_and_explicit_entry_selection(self):
+        script = Path(__file__).with_name("init_project.py")
+        cases = [([], {"AGENTS.md", "CLAUDE.md"}),
+                 (["--ai-entry", "claude"], {"CLAUDE.md"}),
+                 (["--no-ai-entry"], set())]
+        for options, expected in cases:
+            with self.subTest(options=options), tempfile.TemporaryDirectory() as folder:
+                target = Path(folder) / "project"
+                command = [sys.executable, "-B", str(script), "--target", str(target),
+                           "--name", "entry-test", "--scale", "M"] + options
+                result = subprocess.run(command, capture_output=True, text=True, encoding="utf-8")
+                self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+                actual = {name for name in ("AGENTS.md", "CLAUDE.md") if (target / name).exists()}
+                self.assertEqual(actual, expected)
+                self.assertTrue((target / "AI_CONTRACT.md").exists())
+
     def test_adapters_and_preservation(self):
         script = Path(__file__).with_name("init_project.py")
         with tempfile.TemporaryDirectory() as folder:
