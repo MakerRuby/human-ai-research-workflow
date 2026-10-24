@@ -2,6 +2,12 @@
 
 项目负责人：待明确。目标与完成标准见 `_pm/BRIEF.md`。
 
+- **作用**：项目导航和当前交付包入口。
+- **不负责**：不重复维护任务状态、来源摘要或科学结论。
+- **读者**：负责人、协作者和新接手人员。
+- **更新触发**：新增/迁移权威文档或产生新交付包。
+- **相邻文档**：完整职责登记只在 `_pm/LAYOUT.md`，执行约定见 `AI_CONTRACT.md`。
+
 ## 从这里开始
 
 - 当前情况、阻塞和下一动作：`_pm/STATUS.md`
@@ -10,6 +16,7 @@
 - 任务、成果版本、待决事项、变更闭环：`_pm/project-state.json`
 - AI 工作授权与入口：`AI_CONTRACT.md`
 - 科研方案：科研项目的 `_pm/research/RESEARCH_PLAN.md`
+- 来源与写作素材：科研项目的 `references/INDEX.md`，核心来源链接到证据卡
 - 复现范围与运行方法：科研项目的 `_pm/research/REPRODUCIBILITY.md`
 - 当前投稿包：尚无；形成后链接到对应 `releases/<包编号>/README.md`
 - 退出使用记录：成果的 lifecycle/retirement 索引；归档快照默认在 `archive/retired/`

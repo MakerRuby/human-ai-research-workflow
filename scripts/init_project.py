@@ -82,6 +82,8 @@ def initialize(args):
         for name in ("RESEARCH_PLAN.md", "DATA_REGISTER.md", "EXPOSURE_LOG.md"):
             template_map[f"_pm/research/{name}"] = f"research/{name}"
         template_map["_pm/research/REPRODUCIBILITY.md"] = "research/REPRODUCIBILITY.md"
+        template_map["references/INDEX.md"] = "research/REFERENCES_INDEX.md"
+        template_map["references/sources/REFERENCE_CARD.md"] = "research/REFERENCE_CARD.md"
         template_map["_pm/templates/run-spec.json"] = "run-spec.json"
         template_map["_pm/templates/release-spec.json"] = "release-spec.json"
         template_map["_pm/templates/reproduction-spec.json"] = "reproduction-spec.json"

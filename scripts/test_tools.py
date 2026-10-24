@@ -93,19 +93,52 @@ class ProjectToolsTests(unittest.TestCase):
     def test_medium_layout_and_unicode_name(self):
         name = '研究: "糖尿病" \\ cohort'
         result = self.init(name=name)
-        self.assertEqual(len(result["created"]), 9)
+        self.assertIn("_pm/LAYOUT.md", result["created"])
+        self.assertNotIn("references/INDEX.md", result["created"])
         config = json.loads((self.root / "_pm/config.json").read_text(encoding="utf-8"))
         self.assertEqual(config["project_name"], name)
         self.assertIsNone(config["reproducibility"]["seed"])
         self.assertFalse((self.root / "_pm/WBS.md").exists())
         self.assertTrue(self.audit()["ok"])
 
+    def test_initialized_project_documents_state_roles_and_triggers(self):
+        self.init()
+        for relative in ("README.md", "AI_CONTRACT.md", "_pm/BRIEF.md", "_pm/STATUS.md", "_pm/LAYOUT.md"):
+            with self.subTest(relative=relative):
+                content = (self.root / relative).read_text(encoding="utf-8")
+                self.assertIn("**作用**", content)
+                self.assertIn("**不负责**", content)
+                self.assertIn("**读者**", content)
+                self.assertIn("**更新触发**", content)
+                self.assertIn("**相邻文档**", content)
+
     def test_large_research_layout_and_initial_gate(self):
         result = self.init(scale="L", profile="research")
-        self.assertEqual(len(result["created"]), 22)
+        self.assertIn("references/INDEX.md", result["created"])
+        self.assertIn("references/sources/REFERENCE_CARD.md", result["created"])
+        self.assertIn("_pm/research/EXPOSURE_LOG.md", result["created"])
         self.assertTrue((self.root / "_pm/templates/task-package.md").is_file())
+        self.assertTrue((self.root / "references/INDEX.md").is_file())
+        self.assertTrue((self.root / "references/sources/REFERENCE_CARD.md").is_file())
         self.assertTrue(self.audit()["ok"])
         self.assertFalse(self.audit(require_gate="G3")["ok"])
+
+    def test_medium_research_initializes_source_index_and_card(self):
+        result = self.init(profile="research")
+        self.assertIn("references/INDEX.md", result["created"])
+        self.assertIn("references/sources/REFERENCE_CARD.md", result["created"])
+        index = (self.root / "references/INDEX.md").read_text(encoding="utf-8")
+        card = (self.root / "references/sources/REFERENCE_CARD.md").read_text(encoding="utf-8")
+        self.assertIn("candidate", index)
+        self.assertIn("准确位置", card)
+        self.assertTrue(self.audit()["ok"])
+
+    def test_research_reference_templates_preserve_existing_files(self):
+        self.write("references/INDEX.md", "project-owned index\n")
+        result = self.init(profile="research")
+        self.assertIn("references/INDEX.md", result["skipped"])
+        self.assertEqual((self.root / "references/INDEX.md").read_text(encoding="utf-8"), "project-owned index\n")
+        self.assertTrue((self.root / "references/sources/REFERENCE_CARD.md").is_file())
 
     def test_rerun_preserves_modified_records(self):
         self.init()
