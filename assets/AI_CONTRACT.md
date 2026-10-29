@@ -26,7 +26,13 @@
 - 共享配置：`{{CONFIG_PATH}}`
 - 交付物、依赖、检查与关口：`_pm/project-state.json`
 - 研究方案（科研项目适用）：`_pm/research/RESEARCH_PLAN.md`
-- 来源与写作素材（科研项目适用）：`references/INDEX.md`；按需读取相关证据卡，不全量加载。
+- 问题树与假设池（科研项目适用）：`_pm/research/HYPOTHESES.md`
+- 来源与写作素材（科研项目适用）：`references/INDEX.md`；检索前先查 `references/SEARCH_LOG.md`；按需读取相关证据卡，不全量加载。
+- 论文主线（科研项目适用）：`manuscript/NARRATIVE.md`
+
+## 科研协作节奏（科研项目适用）
+
+AI 按技能的 `references/roles-and-checkpoints.md` 承担六个角色。在 CP0–CP9 先给一页决策卡，写明推荐与理由，由负责人拍板。研究任务用 `serves` 挂到问题树上；非平凡任务先写意图简报，关键结果出来后写解释简报；结果一旦验收，当场写入论证骨架。负责人不确定下一步时，AI 给出 2–3 个排好序的选项，并说明理由。
 
 ## 执行约定（初始草稿，按已有授权填写）
 

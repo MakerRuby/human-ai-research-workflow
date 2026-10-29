@@ -12,6 +12,24 @@
 - tasks：id/status/inputs/outputs；inputs 为版本引用，outputs 为成果编号列表。状态 todo/doing/blocked/done。
 - gates：id/status/artifacts/checks/depends_on；列表使用编号，状态 pending/conditional/pass/fail。pass 需 by/rationale/evidence，且必要前置与证据满足。
 
+## v4 研究模型扩展（可选集合，schema_version 仍为 2）
+
+v4 新建的研究项目会带 `questions`、`hypotheses` 两个空数组。旧项目没有这两个集合也照样有效；需要时手工补上即可，不需要迁移状态。这些扩展字段由 `scripts/research_model.py` 校验。
+
+| 集合或字段 | 必需信息 | 状态或取值 |
+|---|---|---|
+| questions | id/statement/clarity（0–5 的整数）；可选 parent/type/findings/claims/decisions | open/answered/parked/dropped/superseded；`answered` 需要 findings 或 claims |
+| hypotheses | id/question/statement/origin（ai/human）/predictions（非空）；可选 source/findings/decision/record/derived_from/validated_on/independence | candidate/prioritized/testing/supported/refuted/inconclusive/parked/superseded；已检验的状态需要 findings；由锦标赛提升的假设需要已登记的 decision |
+| hypotheses.derived_from / validated_on | 成果编号列表：生成假设所用的数据，以及验证所用的数据 | 两者不得重叠。上游（depends_on 闭包）有交集时，需在 `independence` 中写明理由 |
+| tasks.serves | Q/H/CLAIM 编号组成的非空列表 | 研究项目一旦有了问题，未挂靠的任务会收到警告 |
+| tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 文件散列须一致；须早于 run.json 中 `task` 指向该任务的运行 |
+| gates.question | 可选，问题编号：在混合项目中把关口限定到某个子问题 | 必须是已登记的问题 |
+| run.json.task | 可选；由运行规格的 `task` 写入 | 必须是已登记的任务 |
+| claims.basis | data/literature/synthesis | `synthesis` 标为 supported 时需要 `reviewed_by` |
+| project.designs | 研究类型列表，取值见 [研究类型](research-types.md) | — |
+
+问题树不允许出现环；`type` 必须是已知的研究类型。由 `tournament.py promote` 写入的假设带 `source`（锦标赛、名次、排名快照），排名文件必须存在。
+
 ## 新集合
 
 | 集合 | 必需信息 | 状态 |

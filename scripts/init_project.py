@@ -9,6 +9,13 @@ import sys
 
 
 ASSETS = Path(__file__).resolve().parents[1] / "assets"
+# Study types from references/research-types.md; hands-on types get an experiment register.
+DESIGNS = ("secondary", "omics", "wet_lab", "animal", "clinical_observational", "diagnostic_prognostic",
+           "clinical_trial", "evidence_synthesis", "methods")
+HANDS_ON_DESIGNS = {"omics", "wet_lab", "animal", "clinical_observational", "clinical_trial"}
+# Human material (including samples used only at the bench) belongs to a clinical/diagnostic design.
+ETHICS_DESIGNS = {"animal", "clinical_observational", "diagnostic_prognostic", "clinical_trial"}
+REGISTRATION_DESIGNS = {"clinical_trial", "evidence_synthesis"}
 
 
 def check_destination(root, relative):
@@ -57,6 +64,9 @@ def initialize(args):
         if project.get("name") != args.name or project.get("profile") != args.profile:
             raise ValueError("Existing project name/profile differs; review migration instead of creating conflicting records.")
 
+    designs = list(dict.fromkeys(getattr(args, "design", None) or []))
+    if designs and args.profile != "research":
+        raise ValueError("--design applies to research projects only")
     substitutions = {"{{PROJECT_NAME}}": args.name, "{{DATE}}": args.date,
                      "{{PROFILE}}": args.profile, "{{CONFIG_PATH}}": config_path}
     template_map = {
@@ -79,8 +89,14 @@ def initialize(args):
             "_pm/templates/task-package.md": "task-package.md",
         })
     if args.profile == "research":
-        for name in ("RESEARCH_PLAN.md", "DATA_REGISTER.md", "EXPOSURE_LOG.md"):
+        for name in ("RESEARCH_PLAN.md", "DATA_REGISTER.md", "EXPOSURE_LOG.md", "HYPOTHESES.md"):
             template_map[f"_pm/research/{name}"] = f"research/{name}"
+        # v4 thinking and narrative layers: question tree, search log, argument spine.
+        template_map["references/SEARCH_LOG.md"] = "research/SEARCH_LOG.md"
+        template_map["references/EVIDENCE_MAP.md"] = "research/EVIDENCE_MAP.md"
+        template_map["manuscript/NARRATIVE.md"] = "research/NARRATIVE.md"
+        if set(designs) & HANDS_ON_DESIGNS:
+            template_map["_pm/research/EXPERIMENTS.md"] = "research/EXPERIMENTS.md"
         template_map["_pm/research/REPRODUCIBILITY.md"] = "research/REPRODUCIBILITY.md"
         template_map["references/INDEX.md"] = "research/REFERENCES_INDEX.md"
         template_map["references/sources/REFERENCE_CARD.md"] = "research/REFERENCE_CARD.md"
@@ -108,10 +124,19 @@ def initialize(args):
         plans[config_path] = json.dumps(config, ensure_ascii=False, indent=2) + "\n"
     gates = []
     if args.profile == "research":
-        for gate_id, dependencies in (("G1", []), ("G2", ["G1"]), ("G3", ["G2"])):
+        skeleton = [("G1", []), ("G2", ["G1"]), ("G3", ["G2"])]
+        # E: ethics/approval recorded by people before collection; R: registration before enrolment/screening.
+        if set(designs) & ETHICS_DESIGNS:
+            skeleton.append(("E1", ["G1"]))
+        if set(designs) & REGISTRATION_DESIGNS:
+            skeleton.append(("R1", ["G3"]))
+        for gate_id, dependencies in skeleton:
             gates.append({"id": gate_id, "status": "pending", "artifacts": [],
                           "checks": [], "depends_on": dependencies})
-    state = {"schema_version": 2, "project": {"name": args.name, "profile": args.profile},
+    project = {"name": args.name, "profile": args.profile}
+    if designs:
+        project["designs"] = designs
+    state = {"schema_version": 2, "project": project,
              "layout": {"management": "_pm", "references": "references", "raw_data": "data/raw",
                         "interim_data": "data/interim", "analysis_data": "data/processed", "code": "src",
                         "exploration": "notebooks", "runs": "runs", "results": "results",
@@ -119,6 +144,8 @@ def initialize(args):
              "artifacts": [], "checks": [], "tasks": [], "gates": gates,
              "findings": [], "decisions": [], "changes": [], "claims": [], "risks": [],
              "review_items": [], "runs": [], "reproductions": []}
+    if args.profile == "research":
+        state.update(questions=[], hypotheses=[])
     plans["_pm/project-state.json"] = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
 
     pending, skipped = [], []
@@ -172,6 +199,8 @@ def main(argv=None):
     entry_options.add_argument("--ai-entry", action="append", choices=("agents", "claude"),
                                help="Select host entries; defaults to both. Existing files are preserved.")
     entry_options.add_argument("--no-ai-entry", action="store_true", help="Do not create host entry files.")
+    parser.add_argument("--design", action="append", choices=DESIGNS,
+                        help="Research study type(s); see references/research-types.md. Repeat for mixed projects.")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--date", default=date.today().isoformat())
     args = parser.parse_args(argv)

@@ -23,11 +23,27 @@
 | `notebooks/` | 探索过程；正式结果须有完整执行路径 | 需要时 |
 | `runs/` | 重要运行的实际输入、参数、环境、日志、输出 | 正式运行 |
 | `results/` | 统计结果、图表及来源索引 | 首次生成 |
-| `manuscript/` | 正文、图注、补充和投稿材料的工作源文件 | 写作时 |
+| `manuscript/` | 论证骨架 `NARRATIVE.md`、章节草稿 `sections/`、图注、补充和投稿材料的工作源文件 | 研究项目启动时建骨架；章节按事件生成 |
 | `releases/` | 固定交付包；上传文件与内部检查分开 | 打包时 |
 | `review/` | 自动生成的只读审阅快照 | 需要审阅时 |
 | `archive/` | 退出使用的材料快照、原位置、原因及替代关系 | 实际退出时 |
 
 文件按内容归属；通过验收时更新状态，不在“待审/通过”目录间反复搬动。子目录存在理解门槛时才加 README。大型数据不重复复制；临时文件按实际工具惯例管理。
 
-README 面向人，AI_CONTRACT 面向执行，STATUS 负责当前上下文，LAYOUT 负责文档职责登记，state 负责机器状态/版本/依赖索引，具体方案/发现/决策/来源记录负责事实与理由。`references/INDEX.md` 是来源索引，不是项目文档登记表。不要把同一事实手工维护成多份。
+README 面向人，AI_CONTRACT 面向执行，STATUS 负责当前上下文，LAYOUT 负责文档职责登记，state 负责机器状态、版本和依赖索引，具体的方案、发现、决策和来源记录负责事实与理由。`references/INDEX.md` 是来源索引，不是项目文档登记表。不要把同一事实手工维护成多份。
+
+## 研究项目文档（科研项目适用）
+
+| 文档 | 唯一职能 | 不负责 |
+|---|---|---|
+| `_pm/project-state.json` 的 questions / hypotheses / claims | 问题、假设、论断的当前表述、状态与链接（`research_tree.py` 维护） | 论证文字 |
+| `_pm/research/RESEARCH_PLAN.md` | 研究设计、方法与解释边界（G1–G3） | 问题树、假设详情、论断对应表 |
+| `_pm/research/HYPOTHESES.md` | 问题与假设的论证（按编号引用 state） | 状态本身、锦标赛原始记录 |
+| `_pm/research/tournaments/<TID>/` | 一轮锦标赛的配置、假设、评审、比较和排名（脚本生成，只追加） | 项目级假设的最终状态 |
+| `_pm/research/EXPERIMENTS.md` | 湿实验、动物实验方案版本、批次、偏离与原始数据位置（按研究类型生成） | 分析运行 |
+| `_pm/research/DATA_REGISTER.md`、`EXPOSURE_LOG.md`、`REPRODUCIBILITY.md` | 数据来源、结果接触记录、复现范围 | 研究设计 |
+| `references/INDEX.md`、`references/SEARCH_LOG.md` | 来源索引；检索轮次与结论 | 研究判断 |
+| `references/EVIDENCE_MAP.md` | 按根问题汇总的现状：已确立、争议、空白、最接近工作 | 来源详情、立项决定 |
+| `_pm/intents/<任务>.md` | 非平凡任务的意图简报（登记时间与散列，不改写） | 结果解释（在 F-*） |
+| `manuscript/NARRATIVE.md` | 论文主线、图故事板、缺口和预期审稿质疑 | 论断的证据链（在 state 的 claims） |
+| `_pm/capabilities.json`（按需建立） | 项目级的数据库、工具与 know-how 登记，覆盖技能的种子注册表 | 运行记录 |

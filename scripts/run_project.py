@@ -61,7 +61,11 @@ def run(root, spec, command, timeout=None):
     for number, (role, relative, file) in enumerate(resolved):
         snapshot = f'{run_base}/snapshots/{number:03d}-{file.name}'
         snapshots.append({'role': role, 'source': relative, 'snapshot': snapshot, 'sha256': digest(file)})
+    task = spec.get('task')
+    if task is not None and task not in {t.get('id') for t in current.get('tasks', []) if isinstance(t, dict)}:
+        raise ValueError('Unknown task for this run; register the task first')
     record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': now(),
+              **({'task': task} if task is not None else {}),
               'ended_at': None, 'returncode': None, 'cwd': '.', 'command': command,
               'inputs': inputs, 'input_hashes': input_hashes, 'snapshots': snapshots,
               'environment_rebuilt': spec['environment_rebuilt'], 'cache_policy': spec['cache_policy'],

@@ -15,7 +15,8 @@
 - 目录职责与实际路径：`_pm/LAYOUT.md` 和 `_pm/project-state.json` 的 layout
 - 任务、成果版本、待决事项、变更闭环：`_pm/project-state.json`
 - AI 工作授权与入口：`AI_CONTRACT.md`
-- 科研方案：科研项目的 `_pm/research/RESEARCH_PLAN.md`
+- 科研方案：科研项目的 `_pm/research/RESEARCH_PLAN.md`；问题树与假设：`_pm/research/HYPOTHESES.md`
+- 论文主线与图故事板：科研项目的 `manuscript/NARRATIVE.md`
 - 来源与写作素材：科研项目的 `references/INDEX.md`，核心来源链接到证据卡
 - 复现范围与运行方法：科研项目的 `_pm/research/REPRODUCIBILITY.md`
 - 当前投稿包：尚无；形成后链接到对应 `releases/<包编号>/README.md`

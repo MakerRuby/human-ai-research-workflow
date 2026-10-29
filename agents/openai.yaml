@@ -1,4 +1,4 @@
 interface:
   display_name: "人与 AI 科研协作工作流"
-  short_description: "统筹复杂项目与公开数据科研，按需调用专项技能并追踪证据和变更影响"
-  default_prompt: "使用 $human-ai-research-workflow 读取当前研究项目入口，检查未闭环变更、版本和证据，推进下一项交付，并按实际能力调用专项技能。"
+  short_description: "生物医学科研全流程人机协作：问题塑形、假设竞争、执行、论证骨架到投稿前材料"
+  default_prompt: "使用 $human-ai-research-workflow 读取当前研究项目入口，恢复问题树、检查点和未闭环变更，按信息价值推荐下一步并说明理由，推进已授权的工作，按实际能力调用专项技能。"

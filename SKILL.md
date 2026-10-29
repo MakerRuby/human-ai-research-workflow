@@ -1,8 +1,8 @@
 ---
 name: human-ai-research-workflow
-description: 管理人与 AI 从研究构想到投稿前材料的科研协作，支持研究规划、数据可行性核实、分析执行、决策留痕、变更闭环、负责人审阅、成果归档、可复现性与固定交付；按需调用专项技能。尤其适合公开数据和代码分析为主的跨阶段研究，也可调整用于其他复杂项目。简单独立任务不必建立项目脚手架。
+description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
 metadata:
-  version: "3.1.0"
+  version: "4.0.0"
 ---
 
 # 人与 AI 科研协作工作流
@@ -58,20 +58,37 @@ metadata:
 
 本技能可以作为统筹入口调用其他技能；专项技能负责领域工作，本技能负责目标、接口、证据和集成验收。**技能调用不等同于开设新会话、创建子代理或获得额外权限。**
 
-遇到领域方法、文献检索、统计分析、代码、科学绘图、文档或投稿材料等专项任务时，读取 [技能协作协议](references/skill-composition.md)。按实际技能目录、技能文件或宿主提供的发现工具确认能力，不能假设某个名称对应的技能已安装。
+遇到领域方法、文献检索、统计分析、代码、科学绘图、文档或投稿材料等专项任务时，读取 [技能协作协议](references/skill-composition.md)。生物医学执行任务先用 [能力注册表](references/capability-registry.md) 检索出短名单（数据库、工具、技能、操作经验），再读选中的说明。按实际技能目录、技能文件或宿主提供的发现工具确认能力，不能假设某个名称对应的技能已安装。
 
 调用前只读所选技能的必要说明，传入最小相关任务包。仅当任务能独立拆分、并行收益明显且协调成本可控时考虑扇出或委派；不能把“复杂”自动等同于必须并行。优先保留现有授权，不为普通技能切换反复请求确认。缺少技能时使用可验证的现有工具，或明确缺少的关键能力；不自行安装插件、上传数据或发布内容。
 
-## 4. 公开数据科研流程
+## 4. 生物医学科研全流程
 
-项目以科学研究为目标时，读取 [科研流程](references/research.md) 和 [资料、证据与写作素材](references/evidence-and-materials.md)，按实际设计调整：
+项目以科学研究为目标时，先读 [AI 角色与人机检查点](references/roles-and-checkpoints.md)。AI 承担六个角色：问题教练、证据测绘员、假设锦标赛组织者、执行工程师、红队与模拟审稿人、书记官与叙事编辑。问题的价值、实验现实、伦理与最终解释由人掌握。流程如下，阶段可以迭代：
 
-- **G1 立项**：问题、价值、最接近证据、候选数据与关键反对意见。
-- **G2 数据可行性**：实际文件、样本单位、变量、质量、信息量、来源关系、计算条件与接触记录。
-- **G3 分析准备**：主分析、验证、缺失处理、多重分析、解释规则和技术试跑。
-- 后续衔接正式分析、结论挑战、图表与论文整合、投稿前发布检查。
+| 阶段 | 检查点 / 关口 | 读取 |
+|---|---|---|
+| 启动问卷，问题塑形（澄清度 L0→L2 以上） | CP0、CP1 | [问题塑形与增量](references/question-shaping.md) |
+| 证据地图、检索日志、科学增量与答案矩阵 | CP2 → G1 | 同上；[资料与证据](references/evidence-and-materials.md) |
+| 多假设生成、评审、两两比较、进化与元评审 | CP3 | [假设锦标赛](references/hypothesis-tournament.md) |
+| 可行性探针：实测数据或模型，排除致命条件；补伦理关口 | CP4 → G2、E1 | [研究类型与执行深度](references/research-types.md)、[科研流程](references/research.md) |
+| 设计定稿：对照、功效、预期结果矩阵；补注册关口 | CP5 → G3、R1 | 同上；`experimental-design`、`statistical-power` |
+| 执行：计算分析或湿实验在环 | — | [能力注册表](references/capability-registry.md)、[复现](references/reproducibility.md) |
+| 结果解释，更新问题树 | CP6 | [角色与检查点](references/roles-and-checkpoints.md) 解释简报 |
+| 解锁验证数据或开展验证实验（核对独立性） | CP7 | 同上；`research_tree.py` 的 `derived_from` / `validated_on` |
+| 论证骨架锁定、模拟审稿、投稿前对账 | CP8、CP9 | [论证骨架](references/narrative-spine.md)、[固定交付](references/release.md) |
 
-研究过程中持续积累有价值的来源、证据和写作素材，但不保存所有搜索结果，也不把详细资料全部写入项目记忆。按需建立 `references/INDEX.md`，核心来源使用证据卡；资料、发现、决定、运行和重要论断用稳定 ID 关联。关键事件即时记录，普通来源批量整理，阶段节点补齐，不要求每次搜索都生成完整记录。
+**必须**：
+
+- 研究任务用 `serves` 挂到问题树节点（`Q-*`、`H-*`、`CLAIM-*`）上。
+- 非平凡任务先写意图简报：为什么现在做；结果为 A 或 B 时各意味着什么。
+- 首次接触关键结果时写解释简报。
+- 检索前先查 `references/SEARCH_LOG.md`。
+- 结果一旦验收，当场写入论证骨架和章节草稿。
+
+这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
+
+研究过程中持续积累有价值的来源、证据和写作素材，但不保存所有搜索结果，也不把详细资料全部写进项目记忆。资料、发现、决定、运行和重要论断用稳定 ID 互相关联。关键事件当场记录，普通来源批量整理，到阶段节点再补齐。
 
 需要外部工具或代码能力时，先盘点本地已有技能、库和项目实现。仅当非琐碎任务存在实质能力缺口时，才考虑 GitHub 开源项目补位；按活跃度、社区采用度（如 stars）、许可证、技术栈、部署成本和任务适配度筛选少量候选，选最适配者并说明不确定性。采用方式分为直接使用、在许可证允许下改装、只借鉴方法后重写；无许可证的仓库只读思路，不复制代码；GPL 衍生作品遵守相应同许可义务。冻结/预注册的专属设计不视为工具缺口，外部项目不得据此改变设计。使用前审查仓库和依赖、确认数据与密钥边界，先做隔离冒烟测试，再用于正式工作；记录来源、版本/提交、许可证、采用方式和本地修改。未发现合适项目时自行规划，不为“补位”而引入依赖。
 
@@ -138,7 +155,20 @@ python <skill>/scripts/render_review.py --project <project>
 python <skill>/scripts/render_review.py --project <project> --check
 python <skill>/scripts/build_release.py --project <project> --spec _pm/release-spec.json --mode draft
 python <skill>/scripts/archive_artifacts.py --project <project> --spec _pm/archive-spec.json
+python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research --design secondary --design wet_lab
+python <skill>/scripts/research_tree.py --project <project> question add --id Q-001 --statement "…" --clarity 2
+python <skill>/scripts/research_tree.py --project <project> task intent --id T-003 --path _pm/intents/T-003.md
+python <skill>/scripts/tournament.py --project <project> rank --id T01
+python <skill>/scripts/registry_search.py --project <project> --query "单细胞 注释"
 ```
+
+- `--design` 的取值见 [研究类型](references/research-types.md)，可以重复传入。
+  - 指定湿实验、组学、动物或临床类型时，增加实验登记表。
+  - 动物、临床和诊断类研究增加伦理关口 `E1`。
+  - 临床试验和系统评价增加注册关口 `R1`。
+- `research_tree.py` 维护问题树、项目级假设，以及任务的目的链接与意图简报。写入前先在副本上运行检查，会引入错误的改动一律拒绝。
+- `tournament.py` 只记录和计算，不调用模型。
+- `registry_search.py` 只读。
 
 初始化不覆盖已有文件，拒绝将写入导向项目外的符号链接；不安装依赖。结构检查器只验证记录一致性、文件、依赖和声明的检查状态，不能判定科学成立或报告真实。默认检查不会执行记录中的命令，也不会改变项目状态。
 
@@ -147,6 +177,13 @@ python <skill>/scripts/archive_artifacts.py --project <project> --spec _pm/archi
 ## 9. 按需读取的资源
 
 - [工作流程](references/workflow.md)：启动、续接、任务粒度、风险探针和工作周期。
+- [角色与检查点](references/roles-and-checkpoints.md)：AI 的六个角色、CP0–CP9 与决策卡、意图简报与解释简报。
+- [问题塑形与增量](references/question-shaping.md)：启动问卷、澄清度阶梯、追问清单、证据地图、增量评估、问题树与下一步导航。
+- [假设锦标赛](references/hypothesis-tournament.md)：多假设的生成、评审、比较、进化和人评。
+- [研究类型](references/research-types.md)：各类研究的 AI 执行深度、额外关口和报告规范。
+- [论证骨架](references/narrative-spine.md)：边做边写，叙事锁定与投稿前流程。
+- [能力注册表](references/capability-registry.md)：数据库、工具、技能与操作经验的检索，计划清单。
+- [外部经验](references/design-lessons.md)：借鉴 Co-Scientist、Biomni 等系统的取舍与来源。
 - [科研流程](references/research.md)：G1/G2/G3 细则及分析到投稿前衔接。
 - [技能协作](references/skill-composition.md)：发现、调用、权限、冲突、集成和回退。
 - [质量与变更](references/quality-and-change.md)：验收、证据、状态结构和影响追踪。
@@ -157,3 +194,4 @@ python <skill>/scripts/archive_artifacts.py --project <project> --spec _pm/archi
 - `assets/task-package.md`、`assets/REVIEW.md`：任务交接与可审查记录。
 - `scripts/test_tools.py`：在临时目录验证脚本行为；技能维护时运行。
 - `scripts/test_v3.py`：治理、实际运行、比较、审阅快照与固定包行为验证。
+- `scripts/test_v4.py`：研究类型初始化、问题树校验、锦标赛与能力注册表行为验证。

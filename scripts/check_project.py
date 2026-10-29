@@ -341,6 +341,8 @@ class Audit:
         if self.state.get("schema_version") == 2:
             from governance import validate
             extended = validate(self, artifacts, tasks, gates, children, impact)
+            from research_model import validate as validate_research
+            extended["research_model"] = validate_research(self, tasks)
         if self.unhashed:
             self.warnings.append("Hash verification not available for: " + ", ".join(sorted(self.unhashed)))
         return {"ok": not self.errors, "errors": self.errors, "warnings": self.warnings,
