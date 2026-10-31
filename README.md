@@ -1,6 +1,6 @@
 # 人与 AI 科研协作工作流
 
-**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.0.0
+**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.1.0
 
 这是人与 AI 合作完成生物医学科研的全流程工作流。负责人只需提出一个初步想法，AI 就会引导把问题具体化，评估现状与科学增量，组织多个假设竞争，再陪同完成设计、执行、解释和论证骨架，一直到投稿前材料。在关键节点，AI 给出推荐和理由，由负责人拍板。工作流适用于公开数据、组学、湿实验、动物、临床和系统评价研究，并按任务调用已可用的专项技能。
 
@@ -55,7 +55,7 @@ python scripts/init_project.py --target "你的项目目录" --name "研究名�
 | [assets/capabilities/](assets/capabilities/) | 种子能力注册表与操作经验文档 |
 | [references/design-lessons.md](references/design-lessons.md) | 借鉴外部 AI 科学家系统的取舍与来源 |
 | [CHANGELOG.md](CHANGELOG.md) | 版本和命名变更 |
-| [AUDIT-4.0.0.md](AUDIT-4.0.0.md) | 当前版本的规则审核、场景走查和验证记录（3.1.0 的记录见 CHANGELOG） |
+| [AUDIT-4.1.0.md](AUDIT-4.1.0.md) | 当前版本的真实课题试点复盘、改动依据与验证记录（4.0.0 的记录在 archive/） |
 
 ## 验证与边界
 

@@ -121,7 +121,7 @@ class V4Tests(unittest.TestCase):
 
     def test_supported_synthesis_claim_needs_named_reviewer(self):
         self.init()
-        (self.root / 'results').mkdir()
+        (self.root / 'results').mkdir(exist_ok=True)  # research init creates it since v4.1
         (self.root / 'results/r.csv').write_text('x\n', encoding='utf-8')
         (self.root / 'manuscript/sections').mkdir(parents=True)
         (self.root / 'manuscript/sections/results.md').write_text('text\n', encoding='utf-8')

@@ -2,7 +2,7 @@
 name: human-ai-research-workflow
 description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
 metadata:
-  version: "4.0.0"
+  version: "4.1.0"
 ---
 
 # 人与 AI 科研协作工作流
@@ -85,6 +85,10 @@ metadata:
 - 首次接触关键结果时写解释简报。
 - 检索前先查 `references/SEARCH_LOG.md`。
 - 结果一旦验收，当场写入论证骨架和章节草稿。
+- 每个检查点要么有 `D-*`，要么登记“不适用”及理由。选定一个过程、机制或假设去检验，就是 CP3 决定：走锦标赛，或登记跳过理由。
+- CP2 起就填论证骨架；每个正式分析先写明对应哪张图、支撑哪条论断。
+- 已批准的工作包连续做完并验收再汇报；只在越权、科学取舍或真阻塞时停下（见 [角色与检查点](references/roles-and-checkpoints.md) 第 3 节）。
+- 预检产出正式执行直接加载的冻结输入；面向负责人的数字只来自已验收的输出。对照、分组或样本来源的判断，核对全文方法与原始记录，不凭摘要或 AI 生成的标签。
 
 这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
 
@@ -160,6 +164,7 @@ python <skill>/scripts/research_tree.py --project <project> question add --id Q-
 python <skill>/scripts/research_tree.py --project <project> task intent --id T-003 --path _pm/intents/T-003.md
 python <skill>/scripts/tournament.py --project <project> rank --id T01
 python <skill>/scripts/registry_search.py --project <project> --query "单细胞 注释"
+python <skill>/scripts/record.py --project <project> decision --id D-003 --title "…" --status adopted --by 负责人 --authorization "…" --checkpoint CP3
 ```
 
 - `--design` 的取值见 [研究类型](references/research-types.md)，可以重复传入。
@@ -167,6 +172,7 @@ python <skill>/scripts/registry_search.py --project <project> --query "单细胞
   - 动物、临床和诊断类研究增加伦理关口 `E1`。
   - 临床试验和系统评价增加注册关口 `R1`。
 - `research_tree.py` 维护问题树、项目级假设，以及任务的目的链接与意图简报。写入前先在副本上运行检查，会引入错误的改动一律拒绝。
+- `record.py` 登记决定（含检查点及跳过理由）、成果（自动计算散列）和发现，同样先校验再写入。不要用临时脚本直接改写 `project-state.json`。
 - `tournament.py` 只记录和计算，不调用模型。
 - `registry_search.py` 只读。
 
@@ -195,3 +201,4 @@ python <skill>/scripts/registry_search.py --project <project> --query "单细胞
 - `scripts/test_tools.py`：在临时目录验证脚本行为；技能维护时运行。
 - `scripts/test_v3.py`：治理、实际运行、比较、审阅快照与固定包行为验证。
 - `scripts/test_v4.py`：研究类型初始化、问题树校验、锦标赛与能力注册表行为验证。
+- `scripts/test_v41.py`：标准目录、`record.py`、CP3 与论证骨架留空警告、未登记运行目录的行为验证。

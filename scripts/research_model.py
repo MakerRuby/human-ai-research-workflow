@@ -3,6 +3,9 @@
 All collections are optional so schema-2 projects without them stay valid. The checks
 verify registered links only; whether a question is worth asking is a human judgement.
 """
+from pathlib import Path
+import re
+
 from project_io import digest, load, local
 
 Q_STATUSES = {'open', 'answered', 'parked', 'dropped', 'superseded'}
@@ -61,6 +64,74 @@ def run_starts(audit, state):
         if isinstance(doc.get('task'), str) and isinstance(doc.get('started_at'), str):
             result.setdefault(doc['task'], []).append((row['id'], doc['started_at']))
     return result
+
+
+CHECKPOINTS = {f'CP{i}' for i in range(10)}
+STARTED = {'pass', 'conditional', 'waived'}
+# Research documents that must carry content once G1 has started (template still = warning).
+G1_DOCUMENTS = {'references/EVIDENCE_MAP.md': 'research/EVIDENCE_MAP.md',
+                'manuscript/NARRATIVE.md': 'research/NARRATIVE.md'}
+TEMPLATES = Path(__file__).resolve().parents[1] / 'assets'
+
+
+def substantive_lines(text):
+    """Lines that carry content: not headers, field labels, empty table cells or placeholders."""
+    lines = set()
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith(('#', '- **', '|---')):
+            continue
+        cells = [c.strip() for c in line.strip('|').split('|')] if line.startswith('|') else [line]
+        if all(not c or c.endswith(('-', '：', ':')) or c in {'—', '计划', 'v0'} for c in cells):
+            continue
+        lines.add(line)
+    return lines
+
+
+def still_template(root, relative, template):
+    """True when every content line matches a template line ({{...}} treated as wildcards)."""
+    path = root / relative
+    if not path.is_file():
+        return False
+    filled = substantive_lines(path.read_text(encoding='utf-8'))
+    patterns = [re.compile('^' + '.*'.join(map(re.escape, re.split(r'\{\{[A-Z_]+\}\}', line))) + '$')
+                for line in substantive_lines((TEMPLATES / template).read_text(encoding='utf-8'))]
+    return all(any(p.match(line) for p in patterns) for line in filled)
+
+
+def checkpoint_and_template_checks(audit, state, hypotheses):
+    decisions = [r for r in state.get('decisions', []) if isinstance(r, dict)]
+    for row in decisions:
+        checkpoint = row.get('checkpoint')
+        if checkpoint is not None and checkpoint not in CHECKPOINTS:
+            audit.error(f"{row.get('id')}: checkpoint must be CP0-CP9")
+        if row.get('checkpoint_outcome') == 'skipped' and not audit.nonempty(row.get('rationale')):
+            audit.error(f"{row.get('id')}: a skipped checkpoint needs a rationale")
+    if state.get('project', {}).get('profile') != 'research':
+        return
+    gates = {g.get('id'): g for g in state.get('gates', []) if isinstance(g, dict)}
+    g1_started = gates.get('G1', {}).get('status') in STARTED
+    if g1_started:
+        for relative, template in G1_DOCUMENTS.items():
+            if still_template(audit.root, relative, template):
+                audit.warnings.append(f'{relative} is still the blank template although G1 has started; '
+                           'fill the CP2 content or record why it is empty')
+    # Run folders on disk that the state does not know about (formal runs done outside run_project.py).
+    registered = {str(r.get('path', '')).split('/')[1] for r in state.get('runs', [])
+                  if isinstance(r, dict) and str(r.get('path', '')).startswith('runs/')}
+    on_disk = sorted(p.name for p in (audit.root / 'runs').glob('RUN-*') if p.is_dir()) \
+        if (audit.root / 'runs').is_dir() else []
+    unregistered = [name for name in on_disk if name not in registered]
+    if unregistered:
+        audit.warnings.append('Run folders exist on disk but are not registered in state runs: '
+                              + ', '.join(unregistered) + '; register them so gates and impacts can see them')
+    selected = [h for h, r in hypotheses.items() if r.get('status') in {'prioritized', 'testing', 'supported', 'refuted'}]
+    later = any(gates.get(g, {}).get('status') in STARTED for g in ('G2', 'G3')) or bool(on_disk) \
+        or bool(state.get('runs'))
+    has_cp3 = any(r.get('checkpoint') == 'CP3' for r in decisions)
+    if (selected or later) and not has_cp3:
+        audit.warnings.append('A hypothesis or analysis route has been chosen but no decision records CP3; '
+                   'run a tournament or record the skip with its rationale')
 
 
 def validate(audit, tasks):
@@ -127,6 +198,8 @@ def validate(audit, tasks):
             if not audit.nonempty(row.get('decision')) or row['decision'] not in decisions:
                 audit.error(f'{identity}: tournament-promoted hypothesis needs the CP3 decision (D-*)')
         independence(audit, identity, row, artifacts)
+
+    checkpoint_and_template_checks(audit, state, hypotheses)
 
     for gate in state.get('gates', []) if isinstance(state.get('gates'), list) else []:
         # Mixed projects may scope a gate (e.g. a second ethics gate) to one sub-question.

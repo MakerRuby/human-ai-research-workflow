@@ -14,6 +14,15 @@ DESIGNS = ("secondary", "omics", "wet_lab", "animal", "clinical_observational", 
            "clinical_trial", "evidence_synthesis", "methods")
 HANDS_ON_DESIGNS = {"omics", "wet_lab", "animal", "clinical_observational", "clinical_trial"}
 # Human material (including samples used only at the bench) belongs to a clinical/diagnostic design.
+RESEARCH_FOLDERS = {
+    "data/raw/public": "公共数据原始下载，每个数据集一个子文件夹（如 GSE 编号）；原样保存，不修改。",
+    "data/raw/reference": "外部参考资源（基因集、注释、图谱），按资源名与版本分子文件夹。",
+    "data/interim": "清洗、映射、样本对应表等中间产物；可由 src/ 中的脚本重建。",
+    "references/papers": "论文全文与补充材料，按 PMID 或 DOI 分子文件夹；来源与核实状态登记在 references/INDEX.md。",
+    "src": "分析与核查脚本。",
+    "results": "核查表、统计结果和图表，按阶段与版本分子文件夹；旧版本不覆盖。",
+    "runs": "每次正式运行一个 RUN-* 文件夹，保存代码与配置快照、输入散列、日志和退出状态。",
+}
 ETHICS_DESIGNS = {"animal", "clinical_observational", "diagnostic_prognostic", "clinical_trial"}
 REGISTRATION_DESIGNS = {"clinical_trial", "evidence_synthesis"}
 
@@ -147,6 +156,10 @@ def initialize(args):
     if args.profile == "research":
         state.update(questions=[], hypotheses=[])
     plans["_pm/project-state.json"] = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
+    if args.profile == "research":
+        # Standard folders exist from day one so people and AI file things in one place.
+        for folder, purpose in RESEARCH_FOLDERS.items():
+            plans.setdefault(f"{folder}/README.md", f"# {folder}\n\n{purpose}\n\n职责总表见 `_pm/LAYOUT.md`。\n")
 
     pending, skipped = [], []
     for relative, content in plans.items():
