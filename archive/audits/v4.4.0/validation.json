@@ -1,0 +1,124 @@
+{
+  "version": "4.4.0",
+  "date": "2026-11-02",
+  "status": "passed_with_documented_limits",
+  "scope": "Specified source copy only; no installation, publishing, real research or executable-code changes",
+  "changed_original_files": [
+    "CHANGELOG.md",
+    "README.md",
+    "SKILL.md",
+    "USAGE.md",
+    "assets/AI_CONTRACT.md",
+    "assets/LAYOUT.md",
+    "references/behavioral-evaluation.md",
+    "references/capability-registry.md",
+    "references/design-lessons.md",
+    "references/evidence-and-materials.md",
+    "references/hypothesis-tournament.md",
+    "references/migration.md",
+    "references/narrative-spine.md",
+    "references/portability.md",
+    "references/project-layout.md",
+    "references/quality-and-change.md",
+    "references/question-shaping.md",
+    "references/release.md",
+    "references/reproducibility.md",
+    "references/research-types.md",
+    "references/research-value-review.md",
+    "references/research.md",
+    "references/roles-and-checkpoints.md",
+    "references/skill-composition.md",
+    "references/state-schema-v2.md",
+    "references/workflow.md",
+    "assets/research/NARRATIVE.md",
+    "assets/research/RESEARCH_PLAN.md",
+    "assets/capabilities/know-how/bulk-rnaseq-de.md",
+    "assets/capabilities/know-how/public-omics-reuse.md"
+  ],
+  "new_source_files": [
+    "AUDIT-4.4.0.md",
+    "references/tooling.md",
+    "assets/evaluation/generality-scenarios.json",
+    "assets/evaluation/tool-scope-scenarios.json"
+  ],
+  "missing_original_files": [],
+  "all_executable_scripts_unchanged": true,
+  "structure": {
+    "entry_lines_before": 218,
+    "entry_lines_after": 71,
+    "entry_chars_before": 12113,
+    "entry_chars_after": 3392,
+    "active_guide_chars_before": 87589,
+    "active_guide_chars_after_including_new_tooling": 58607,
+    "active_guide_chars_reduction_percent": 33.1,
+    "active_guide_lines_before": 1837,
+    "active_guide_lines_after_including_new_tooling": 1307,
+    "metric_scope": "SKILL/README/USAGE and references, not archive or efficacy measurement"
+  },
+  "tests": {
+    "baseline_total": 159,
+    "baseline_passed": 158,
+    "baseline_skipped": 1,
+    "final_total": 159,
+    "final_passed": 158,
+    "final_skipped": 1,
+    "skip_reason": "Windows symbolic-link creation permission unavailable",
+    "new_permanent_test_scripts": 0,
+    "python_syntax_files": 24,
+    "registry_entries": 51,
+    "basic_skill_validator": "Skill is valid!"
+  },
+  "template_compatibility": {
+    "new_blank_template_detected": true,
+    "previous_blank_template_detected": true,
+    "scope": "Synthetic read-only template classification; not scientific validation"
+  },
+  "bootstrap": {
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "actual_output": {
+      "identities": [
+        "synthetic-A",
+        "synthetic-B"
+      ]
+    },
+    "current_intent_bound": true,
+    "no_extra_src_created": true,
+    "cp3_not_fabricated": true,
+    "scope": "One synthetic local metadata bootstrap, not external retrieval or research validation"
+  },
+  "forward_initial": {
+    "cases": 6,
+    "actual_input_files": 5,
+    "actual_inputs_verified_before_correction": true,
+    "issue_found": "Overbroad animal/human AI-drafts-only wording; corrected after preserving original read version"
+  },
+  "forward_targeted": {
+    "cases": 2,
+    "independent_new_context": true,
+    "actual_input_files": 6,
+    "all_actual_inputs_match_final": true,
+    "implementation_read_only": true,
+    "research_or_packaging_executed": false
+  },
+  "checks": {
+    "local_links_checked": 151,
+    "missing_links": [],
+    "source_patch_sha256": "8ef56e1e224f2ae41246d7a35412c9c5715a61de7dd985a5e1ace5dbd87aa74e"
+  },
+  "protected_locations": {
+    "installed_files": 261,
+    "installed_unchanged": true,
+    "github_checkout_files": 261,
+    "github_checkout_unchanged": true,
+    "research_state_unchanged": true,
+    "all_executable_scripts_unchanged": true
+  },
+  "known_limits": [
+    "review respond transaction CLI, universal dry-run and explicit layout mapping CLI not added",
+    "research ready packager still requires computational full reproduction; truthful manual path documented for noncomputational research",
+    "no auto recursive scientific coverage inference or doc_resolved interface",
+    "no prospective validation in a different real project; synthetic contexts do not prove cross-disciplinary efficacy"
+  ]
+}

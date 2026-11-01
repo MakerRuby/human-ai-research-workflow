@@ -2,7 +2,7 @@
 
 文件 `_pm/project-state.json`，UTF-8 JSON。`schema_version: 2`；`project` 含 name、profile（general/research）。`layout` 是非空的职责到项目相对目录的映射；路径用 `/`，禁止绝对路径、`..` 和链接逃逸。management 固定 `_pm`。同一个集合内编号唯一，版本为非空字符串。
 
-所有集合即使为空也保留数组：artifacts/checks/tasks/gates/findings/decisions/changes/claims/risks/review_items/runs/reproductions。v1 基础字段与规则继续适用，详见 [质量与变更](quality-and-change.md)。v1 不执行扩展规则，不能因此声称扩展治理已通过。
+v2的基础及治理集合即使为空也保留数组：artifacts/checks/tasks/gates/findings/decisions/changes/claims/risks/review_items/runs/reproductions。字段只在本页维护，状态含义见[质量规则](quality-and-change.md)。旧v1兼容见文末，不因能读取就宣称扩展治理已通过。
 
 ## 基础集合
 
@@ -10,7 +10,7 @@
 - artifacts 可选 lifecycle 为 active/retired；retired 需 retirement.by/at/reason/disposition/manifest/snapshot/evidence。disposition 与操作见 [归档协议](archive.md)。当前质量状态与是否还被采用分别表达。
 - checks：id/artifact/version/kind/status/required；kind 为 machine/professional/source，status 为 pending/pass/fail/waived。完成检查需 by/rationale/evidence 文件列表。waived 仅用于非必要检查并有 waiver_reason；命令字段只是记录，核查器不执行。
 - tasks：id/status/inputs/outputs；inputs 为版本引用，outputs 为成果编号列表。状态 todo/doing/blocked/done/paused/stopped/cancelled。后3种是执行控制，不代表完成；需 `status_record` 的 status/by/rationale/at/evidence/decision（真实已采用的 D）。历史状态留在 status_history。
-- gates：id/status/artifacts/checks/depends_on；列表使用编号，状态 pending/conditional/pass/fail。pass 需 by/rationale/evidence，且必要前置与证据满足。
+- gates：id/status/artifacts/checks/depends_on；列表使用编号，状态 pending/conditional/pass/fail。pass需by/rationale/evidence、至少一个当前accepted成果及一个当前pass检查，关联证据和前置关口均满足；初始空骨架不等于放行。
 
 ## v4 研究模型扩展（可选集合，schema_version 仍为 2）
 
@@ -73,3 +73,9 @@ inputs/results 是成果版本引用；sources 是成果编号；findings/decisi
 `changes.items` 字段及操作见 [治理协议](governance.md)。closed 记录是历史处理结果，保留当时版本；open 清单必须覆盖当前已登记影响。脚本计算只能覆盖注册的关系，人工审阅补全语义影响。
 
 run.json 和 comparison 报告由实际运行/比较脚本产生，详细字段由其输出定义；勿手工捏造通过。state 中索引与详细证据必须对齐。结构合法不证明内容真实；环境重建与独立复现需要额外实际证据。
+
+## 旧v1的只读兼容
+
+v1顶层仅要求schema_version、project及artifacts/checks/tasks/gates数组，沿用上方基础字段和检查语义；不要求layout或v2治理集合。任务inputs使用id/version引用，outputs用成果ID，done的输出须当前accepted；accepted的必要检查须当前通过，证据路径须项目内合法文件。
+
+v1通过只证明其基础登记范围一致，不涵盖研究树、复现、变更或新控制状态。需使用v2治理/运行工具时，先按[迁移](migration.md)显式审阅、保留原件与编号，不自动改schema或补造历史。配置与详细科学理由仍在各自权威文件，不塞入机器索引。

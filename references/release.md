@@ -13,7 +13,9 @@ python <skill>/scripts/build_release.py --project <project> --verify releases/<I
 python <skill>/scripts/build_release.py --project <project> --verify releases/<ID> --against-current
 ```
 
-draft 仍要求文件与版本真实存在，可以带明确阻塞供审阅；ready 拒绝结构错误、未闭环变更、未接受的阻塞审阅、未验收或过期的必要成果和未满足的必要关口。研究项目必须明确关键结果和完整范围复现验证，确保声明的覆盖连接到对应结果。普通项目不强制研究关口和复现。
+draft仍要求文件与版本真实存在，可带明确阻塞；ready拒绝结构错误、未闭环变更、未接受的阻塞审阅、未验收/过期的必要成果和未满足的必要关口。当前脚本对research-profile的ready还硬性要求critical_results及full范围的计算复现，覆盖须连到对应结果；普通项目不强制该要求。
+
+这是现有打包器的适用限制，不是所有学科的科研必要条件。含计算关键结果时，full明确其计算起终点，不代表重新做湿实验、招募或访谈。没有可执行计算关键结果的研究，可按真实来源/过程追溯、适用规范、专业核查及作者/机构责任人工固定文件清单和版本包；不能伪造RUN/REP、改成general来掩盖研究属性，或把未通过的脚本ready说成通过。必要时工具只生成如实标明限制的draft，交付是否就绪仍据实际适用要求判断；本版未修改该脚本分支。
 
 研究项目必须逐项记录作者、声明、期刊要求和跨文档一致性；普通项目采用交付授权、交付要求和跨文档一致性。确认项结构为 `id/status/by/rationale/evidence`，status 为 confirmed 或有依据的 not_applicable。只能登记实际获得的确认；不适用也要有理由，不能用 AI 猜测合作者已同意。
 

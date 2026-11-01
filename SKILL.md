@@ -1,218 +1,71 @@
 ---
 name: human-ai-research-workflow
-description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
+description: 管理人与 AI 从研究问题到投稿前材料的持续协作：评估科学增量、比较解释、设计与执行研究、解释结果并组织论文，在关键取舍时提供推荐和理由，维护证据、版本与真实决策。适用于公开数据、组学、湿实验、动物、临床、系统评价及方法研究；其他领域可沿用共同原则并调整领域规范。单次答疑或局部修改采用轻量流程。
 metadata:
-  version: "4.3.1"
+  version: "4.4.0"
 ---
 
 # 人与 AI 科研协作工作流
 
-这是通用技能：核心规则不依赖某一 AI 产品、会话系统或工具名称。参见 [跨平台使用说明](USAGE.md)。宿主不支持执行脚本时，按同一规则维护普通文件，并明确哪些检查尚未执行。科研是可选流程，普通项目无需经过科学研究关口。
+共同原则适用于不同研究问题与设计；领域方法、伦理和报告规范按需加载。研究不必经过湿实验、独立验证或假设锦标赛才有价值。技能不依赖某个AI产品；无脚本能力时用普通文件保留同等语义，说明未执行的检查。
 
-帮助负责人把目标变成可验收的交付物，让执行、证据、版本和决策能够衔接。保留探索空间，把会影响下游的选择和检查记录清楚。项目管理流程随风险、复杂度和用户要求调整。
+## 1. 识别范围并恢复上下文
 
-### 规则强度与触发边界
+- **讨论或单次任务**：直接回答、评审或修改指定对象，只保留必要证据；不因调用技能就建立项目脚手架或重走科研阶段。
+- **新项目实施**：目标和目录明确后，先盘点现有材料，再按风险建立最小记录。
+- **续接或既有项目适配**：先读项目入口、有效授权、当前状态及相关方案/成果；沿用原路径和已确认事实，只补缺口。操作见[使用与持续启用](USAGE.md)、[既有项目适配](references/migration.md)。
 
-本技能的规则分为三种：
+默认中文沟通与记录，代码标识符遵循生态惯例；交付语言按用户及读者需要调整。详细理由留在可审查附件，对话先说明要解决的问题、推荐理由和主要代价。已有答案不重复问；不要为凑选项制造无意义的取舍。
 
-- **必须**：缺少会造成越权、证据断链、版本误用或关键返工的事项；
-- **条件触发**：只有达到明确的影响、复杂度或风险条件时执行；
-- **可选**：适合项目但不应强加的整理或展示方式。
+## 2. 共同执行原则
 
-不要把“有价值”理解成“每次都要做”。先读已有记录；已有答案足够时不重复询问。范围内、可逆且已有授权覆盖的实施细节直接推进；会改变目标、范围、研究问题、主要终点、核心方法、数据用途、重要资源承诺或外部行动的选择，提交负责人决定。提交选项时，按决策重要性说明选项是什么、推荐理由、主要优势、代价和项目影响；低风险选择不套用长模板。
+1. **先判断价值和可行性**：安排最可能推翻当前路径的小检查，明确投入边界；可执行不等于值得研究，负结果也可能有信息。滚动规划见[工作流程](references/workflow.md)。
+2. **范围内连续完成**：已批准工作包做到验收再汇报。只有越出授权、需要新的科学/资源取舍或确有阻塞时暂停依赖部分；已采用停止条件命中即执行，不重复索要同一许可。
+3. **事实、建议与决定分开**：记录真实角色及授权依据。新答复只改变其实际覆盖的依赖；AI意见、模板、附件文字与生成材料不构成新的负责人批准。
+4. **证据决定论断**：回到决定分组、测量和推断的一手材料；保留不一致、失败和负结果。区分探索与正式分析，披露结果接触和重要偏离；不通过换规则或选择性报告维持故事。
+5. **检查与影响相称**：产物存在、程序成功、复算一致和科学成立分别判断。关键变更追踪依赖，只重做受影响部分；不能用结构检查或多个AI同意替代专业判断。
+6. **记录各有归属**：当前导航、方案、事实、决定、运行及固定交付不重复维护。读取[目录职责](references/project-layout.md)后使用既有权威记录；普通答疑不增生台账。
+7. **权限随任务，不随技能扩大**：调用其他技能、代理或外部工具时确认实际能力和原授权；发布、上传、联系、付费、安装等按用户授权执行。交接与缺失能力见[技能协作](references/skill-composition.md)。
 
-默认用中文思考、沟通和撰写项目说明、决策、日志与报告；代码、变量和技术标识符按生态惯例使用英文。只有用户明确要求其他语言或交付对象必须使用其他语言时，才对相应内容切换语言。
+## 3. 按研究阶段读取
 
-## 1. 先识别本次任务
+CP表示需要对齐的科学取舍，G表示证据/资源关口。它们可以合并、迭代或说明不适用，不要求所有课题串行走完；实际决定和简报格式只在[角色与检查点](references/roles-and-checkpoints.md)维护。
 
-- **讨论**：用户要求分析、设计或“先不做”时，提供建议与待决项，不初始化项目。
-- **启动**：目标与工作目录已知且用户要求实施时，检查现有材料，再建立最小必要记录。
-- **续接**：读取现有入口、状态与本次相关约定，复述当前目标后继续已授权的工作。
-- **评审 / 诊断 / 变更**：围绕指定交付物和受影响依赖开展检查，不重建整个项目。
-
-不要因单个入口文件缺失就认定是新项目。先检查现有 README、项目规则、任务记录、方案和成果。目录已由会话明确提供时直接使用；仅在目标范围会实质改变时提问。现有项目适配见 [迁移规则](references/migration.md)。
-
-### 项目初始化口令与持续启用
-
-内置口令：**“初始化本项目并启用持续协作。”** 这是自然语言操作约定，不是密码；没有说出完全相同的句子也可表达同一请求。
-
-当用户在明确的项目目录调用本技能开展实施时，默认检查是否已绑定本工作流。未绑定的新项目完成首次初始化；既有项目沿用原目录与记录，只补技能位置、读取顺序与每轮收尾规则，不重新初始化科研方案。只有项目范围不明确时询问路径。单纯讨论、阅读、评审或要求“先不做”不触发写入。
-
-持久约定写入项目根目录 `AI_CONTRACT.md`，包括技能位置、每轮加载规则及权威记录索引。M/L 初始化默认生成 `AGENTS.md` 和 `CLAUDE.md`，两者只引导至统一约定；可按宿主用 `--ai-entry` 选择或用 `--no-ai-entry` 关闭。已有入口由 AI 阅读后最小合并；脚本只跳过，不负责合并。保留既有规则、授权与适用范围，不写入助手的全局私有记忆。S 级任务仍不自动创建脚手架；明确要求持续启用时采用最小 M 级记录。
-
-完成后说明实际写入、保留或待合并的文件。按 [使用说明](USAGE.md) 在新会话验证加载；仅创建入口不等于宿主已自动读取。后续每轮先恢复状态再继续工作，正常情况下无需用户重复点名技能。
-
-## 2. 启动与滚动规划
-
-读取 [工作流程](references/workflow.md)，按需要完成以下动作，可合并或跳过已有答案的部分：
-
-1. 明确问题、预期用途、交付物、边界、资源和主要未知。
-2. 优先安排最可能推翻当前路径的可行性检查；提前写明投入上限和转向条件。
-3. 为近期交付物定义检查对象、判据、方法和检查责任。探索任务的交付可以是“不确定性得到怎样的澄清”。
-4. 拆分近期任务与依赖，远期保留里程碑；按上下游关系和风险确定顺序。
-5. 明确执行权限、重要决定的责任人和必要检查，开始首个可验收任务。
-
-可以合并澄清问题；优先使用已有上下文。开始调查前，先读取项目材料并判断用户已有知识或已做工作是否会改变调查范围；只有会改变方向、范围或判断时才提出针对性问题。可逆、低风险的实施细节自行判断并说明假设。缺失数据、科学事实或授权不能靠默认值补齐。遇到阻塞，只暂停依赖该信息的部分，继续独立工作。
-
-仅依赖公共数据时，在承诺主体分析前并列筛查认知增量与最小证据链，尽早核实际测量、独立人数/配对上限、乐观精度和论断确实需要的外部支持；见 [公共数据可行性](references/public-data-feasibility.md)。验证元数据可提前查，验证效应按锁定规则解锁。
-
-首次推荐候选时就展示原始背景、最接近工作、具体未解认识和最强反对理由，区分“线索”“推荐有限核查”“建议立项”；不等负责人质疑后才补依据。连续筛查还要核累计投入和目标偏移，可以报告当前没有合格主线。复用 CP1–CP2 和既有记录，见 [问题塑形](references/question-shaping.md)，不新增普遍关口。
-
-## 3. 按需调用专项技能
-
-本技能可以作为统筹入口调用其他技能；专项技能负责领域工作，本技能负责目标、接口、证据和集成验收。**技能调用不等同于开设新会话、创建子代理或获得额外权限。**
-
-遇到领域方法、文献检索、统计分析、代码、科学绘图、文档或投稿材料等专项任务时，读取 [技能协作协议](references/skill-composition.md)。生物医学执行任务先用 [能力注册表](references/capability-registry.md) 检索出短名单（数据库、工具、技能、操作经验），再读选中的说明。按实际技能目录、技能文件或宿主提供的发现工具确认能力，不能假设某个名称对应的技能已安装。
-
-调用前只读所选技能的必要说明，传入最小相关任务包。仅当任务能独立拆分、并行收益明显且协调成本可控时考虑扇出或委派；不能把“复杂”自动等同于必须并行。优先保留现有授权，不为普通技能切换反复请求确认。缺少技能时使用可验证的现有工具，或明确缺少的关键能力；不自行安装插件、上传数据或发布内容。
-
-## 4. 生物医学科研全流程
-
-项目以科学研究为目标时，先读 [AI 角色与人机检查点](references/roles-and-checkpoints.md)。AI 承担六个角色：问题教练、证据测绘员、假设锦标赛组织者、执行工程师、红队与模拟审稿人、书记官与叙事编辑。问题的价值、实验现实、伦理与最终解释由人掌握。流程如下，阶段可以迭代：
-
-| 阶段 | 检查点 / 关口 | 读取 |
+| 当前要解决的问题 | 对应阶段 | 读取 |
 |---|---|---|
-| 启动问卷，问题塑形（澄清度 L0→L2 以上） | CP0、CP1 | [问题塑形与增量](references/question-shaping.md) |
-| 证据地图、检索日志、科学增量与答案矩阵 | CP2 → G1 | 同上；[资料与证据](references/evidence-and-materials.md) |
-| 多假设生成、评审、两两比较、进化与元评审 | CP3 | [假设锦标赛](references/hypothesis-tournament.md) |
-| 可行性探针：实测数据或模型，排除致命条件；补伦理关口 | CP4 → G2、E1 | [研究类型与执行深度](references/research-types.md)、[科研流程](references/research.md) |
-| 设计定稿：对照、功效、预期结果矩阵；补注册关口 | CP5 → G3、R1 | 同上；`experimental-design`、`statistical-power` |
-| 执行：计算分析或湿实验在环 | — | [能力注册表](references/capability-registry.md)、[复现](references/reproducibility.md) |
-| 结果解释，更新问题树 | CP6 | [角色与检查点](references/roles-and-checkpoints.md) 解释简报 |
-| 解锁验证效应或开展验证实验（提前核元数据与独立性） | CP7 | 同上；`research_tree.py` 的 `derived_from` / `validated_on` |
-| 论证骨架锁定、模拟审稿、投稿前对账 | CP8、CP9 | [论证骨架](references/narrative-spine.md)、[固定交付](references/release.md) |
+| 把主题变成可回答的问题，核现状与增量 | CP0–CP2 / G1 | [问题塑形](references/question-shaping.md)、[来源与证据](references/evidence-and-materials.md) |
+| 比较解释并确定优先检验对象 | CP3 | [竞争解释与锦标赛](references/hypothesis-tournament.md)；简表足够时不用Elo |
+| 核实资源、信息量与设计并冻结方案 | CP4–CP5 / G2–G3 | [研究关口](references/research.md)、[类型差异](references/research-types.md)；公共数据另读[可行性](references/public-data-feasibility.md) |
+| 执行与解释关键结果，决定下一块投入 | CP6 | [运行与复现](references/reproducibility.md)、[信息量与投入审阅](references/research-value-review.md) |
+| 解锁验证或增加支持性证据 | 适用时CP7 | 先按上行审阅补强收益，再按实际设计核来源独立性、条件与接触边界 |
+| 形成论证、锁定主线并准备投稿 | CP8–CP9 | [论证骨架](references/narrative-spine.md)、[固定交付](references/release.md)；实质审稿先于大排版 |
 
-**必须**：
+研究类型决定测量、对照、独立单位和适用规范；不把某种疾病、平台、统计阈值或样本数作为通用默认。伦理、注册、作者责任由适用机构与实际责任人确认，不由AI补造。
 
-- 研究任务用 `serves` 挂到问题树节点（`Q-*`、`H-*`、`CLAIM-*`）上。
-- 非平凡任务先写意图简报：为什么现在做；结果为 A 或 B 时各意味着什么。
-- 首次接触关键结果时写解释简报。
-- 检索前先查 `references/SEARCH_LOG.md`。
-- 结果一旦验收，当场写入论证骨架和章节草稿。
-- 每个检查点要么有 `D-*`，要么登记“不适用”及理由。选定一个过程、机制或假设去检验，就是 CP3 决定：走锦标赛，或登记跳过理由。
-- CP2 起就填论证骨架；每个正式分析先写明对应哪张图、支撑哪条论断。
-- 已批准的工作包连续做完并验收再汇报；只在越权、科学取舍或真阻塞时停下（见 [角色与检查点](references/roles-and-checkpoints.md) 第 3 节）。
-- 负责人已采用的明确停止条件命中后，依原授权执行并报告，不重复索要同一确认；探索值或内部审计通过不自动接管原主线。
-- 关键结果使主张收窄、必要支持失效或准备大规模写作/出图时，在现有 CP6/CP8 分别判断可信度、科学信息量和下一块投入价值；实质审稿先于大排版，见 [结果后的价值审阅](references/research-value-review.md)。
-- 预检产出正式执行直接加载的冻结输入；面向负责人的数字只来自已验收的输出。对照、分组或样本来源的判断，核对全文方法与原始记录，不凭摘要或 AI 生成的标签。
+## 4. 将执行、证据与写作连接起来
 
-这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
+对持续管理的研究，任务用`serves`挂到问题/假设/论断；非平凡任务在接触结果前写意图，关键读出后写解释。检索前查已有日志，重要结果验收后更新论证与相关章节；预期论断不冒充已有结果。
 
-研究过程中持续积累有价值的来源、证据和写作素材，但不保存所有搜索结果，也不把详细资料全部写进项目记忆。资料、发现、决定、运行和重要论断用稳定 ID 互相关联。关键事件当场记录，普通来源批量整理，到阶段节点再补齐。
-
-需要外部工具或代码能力时，先盘点本地已有技能、库和项目实现。仅当非琐碎任务存在实质能力缺口时，才考虑 GitHub 开源项目补位；按活跃度、社区采用度（如 stars）、许可证、技术栈、部署成本和任务适配度筛选少量候选，选最适配者并说明不确定性。采用方式分为直接使用、在许可证允许下改装、只借鉴方法后重写；无许可证的仓库只读思路，不复制代码；GPL 衍生作品遵守相应同许可义务。冻结/预注册的专属设计不视为工具缺口，外部项目不得据此改变设计。使用前审查仓库和依赖、确认数据与密钥边界，先做隔离冒烟测试，再用于正式工作；记录来源、版本/提交、许可证、采用方式和本地修改。未发现合适项目时自行规划，不为“补位”而引入依赖。
-
-区分探索与正式分析；如实记录看过的数据和结果。显著性、预期方向、某个性能数值或期刊接收不作为项目完成的通用条件。方法学判断由适任评审者作出，不能以程序检查替代。
-
-## 5. 验收、证据与变更
-
-读取 [质量与变更规则](references/quality-and-change.md)。同时考虑科学或业务有效性、计算与内容正确性、表达与交付、来源与可重复性；只选择本任务适用的检查。
-
-- 区分 `produced`、`checked` 与 `accepted`。实际检查记录是依据；自述、另一模型同意、清单有勾选均不足以独立证明正确。
-- 可程序化的项目执行检查；需要专业判断的项目记录理由、证据和评审者。允许 `pending`、`fail` 及说明适用范围的 `waived`，不得静默当作通过。
-- 批量操作按返工成本和不确定性选择代表件及边界件；检查通过且权限已覆盖时直接继续。高风险事项采用项目约定的放行方式。
-- 输出绑定输入、代码、参数和环境版本；容差和随机性按任务设定，不保证固定种子即可逐字节重现。
-- 关键版本变化后，追踪所有下游成果；将需重跑的成果标为 `stale`，相关任务重开、关口待复审。
-
-## 6. 记录、发现与变更闭环
-
-暂停/停止执行与原目标是否达成分别记录；负责人要求停止后，只完成其授权的收尾，不自动转题或恢复旧任务。`record.py project`、`research_tree.py task set`、`record.py check/accept/decision-set` 提供事务式写入，细则与授权边界见 [治理协议](references/governance.md)。旧项目不自动迁移；未支持的宿主按相同语义保存记录。
-
-先读 [目录与唯一事实源](references/project-layout.md)。根目录 `README.md` 是负责人的导航入口，`AI_CONTRACT.md` 是 AI 的执行约定，`STATUS.md` 只保留续接上下文；`_pm/LAYOUT.md` 是唯一的人类可读文档职责登记表，`_pm/project-state.json` 是机器状态、版本和依赖索引，不复制完整文档目录。目录按需创建，既有项目保留原路径，通过 `layout` 映射职责。不为状态变化移动文件。
-
-重要新发现、负结果、矛盾和会改变后续路线的观察，按 [治理记录协议](references/governance.md) 分配稳定编号。区分观察与解释、发现与决策、决定与变更；记录证据、输入版本、责任和授权来源，保留被推翻的记录。不得把模型建议登记成负责人已批准。
-
-决定不再使用的文件和结果按 [退出与归档规则](references/archive.md) 管理：明确原因及替代关系，使用独立 lifecycle 标记，归档有编号的历史快照，先处理依赖影响，保留被引用原件。不得把归档结果重新混入当前分析或投稿包。
-
-发生关键变化时，先登记变更及完整影响清单，再处理成果、任务、关口、复现验证、正文结论和审阅事项。每项必须明确“已更新”或“核实无需改动”，附版本、理由和证据；有未决项就保持未关闭。`manage_change.py open` 会传播失效状态，`close` 核查处理清单；它不能发现未登记的语义依赖，应人工补充。详见 [状态结构 v2](references/state-schema-v2.md)。
-
-记录按信息类型分工，不把所有事实复制进状态页：
-
-| 记录 | 负责的信息 |
+| 当前需要 | 规则的权威位置 |
 |---|---|
-| `AI_CONTRACT.md` | 工作入口、授权边界和记录位置 |
-| `_pm/BRIEF.md` | 目标、范围、完成定义和主要约束 |
-| `_pm/STATUS.md` | 当前阶段、阻塞、下一动作和记录索引 |
-| `_pm/config.json` 或项目既有配置 | 共享且经过确认的参数；未知值留空 |
-| `_pm/project-state.json` | 交付物版本与依赖、任务、检查记录和关口状态 |
-| `_pm/FINDINGS.md` | 观察、解释、矛盾、限制与发现详述；按需建立 |
-| `_pm/DECISIONS.md` | 方案比较、决定理由和授权依据；按需建立 |
+| 检查、接受和变更后的质量状态 | [质量规则](references/quality-and-change.md) |
+| 发现、决定、任务状态与变更闭环 | [治理操作](references/governance.md)、[状态结构](references/state-schema-v2.md) |
+| 输入/代码/参数/环境、实际运行和复现范围 | [复现协议](references/reproducibility.md) |
+| 负责人审阅、实际答复和只读快照 | [审阅协议](references/reviewer.md) |
+| 退出采用、保留历史和替代关系 | [归档规则](references/archive.md) |
+| 能力发现、平台限制与工程排错 | [能力注册表](references/capability-registry.md)、[宿主适配](references/portability.md) |
 
-科研的方案、数据登记和接触记录使用 `assets/research/` 模板。模板是草稿，不代表任务已完成或关口已通过。存在既有等价记录时优先复用，不建立第二套事实源。
+完成一轮后核对受影响记录，交付可打开的产物、实际检查及其局限、未决项和下一动作。暂停/停止执行与原目标是否达成分开记录；历史成果和未解决问题保留。
 
-续接时读取入口、状态、相关方案与任务，核对关键版本和未决问题；已授权的工作继续执行，只有目标冲突、关键科学选择或权限不足时才询问。结束前记录完成及证据、阻塞与影响、下一具体动作。不得把失败、未执行或未核查写成通过。
+## 5. 可选辅助脚本
 
-## 7. 可复现、负责人审阅与固定交付
-
-研究计算按 [复现协议](references/reproducibility.md) 保存实际输入、代码、参数、环境、执行日志和输出指纹。`run_project.py` 执行本次明确提供的命令，保留成功和失败；`verify_reproduction.py` 比较新输出并记录范围。区分材料齐全、小规模试跑、部分重跑、完整范围重跑和独立复现；计算一致不代表科学结论成立。按具体分析制定容差，记录缓存和环境重建情况，冻结进入正式分析的 AI 生成材料，不要求保存模型内部思维过程。
-
-负责人审阅使用 [审阅协议](references/reviewer.md)：提供问题、建议、备选、影响、证据和所审版本。`render_review.py` 生成离线只读页面，分六个视图展示；正式答复在真实获得后登记。页面是快照，源记录更新后检查并重新生成；文件差异基线不能冒充实际审阅记录。
-
-按 [固定交付协议](references/release.md) 将一轮投稿或交付材料集中在一个新编号目录：`upload/` 放拟提交文件，`internal_review/` 放内部依据。区分 `draft` 与 `ready`，检查未闭环变更、当前验收、复现覆盖、负责人决定和实际适用要求；历史包不覆盖。科研项目应在执行时核对目标期刊的现行要求。生成包不等于实际投稿或发布。
-
-## 8. 初始化与脚本
-
-`S` 用于单次小任务，初始化脚本只给建议且不写文件；`M` 建立最小记录；`L` 增加任务分解、决策、评审和交接模板。风险和依赖比固定天数更重要；用户可以要求其他布局。
+Python 3.9+、标准库；研究分析使用自己的环境。先预览初始化或只读检查：
 
 ```text
-python <skill>/scripts/init_project.py --target <project> --name <name> --scale M --profile general --dry-run
-python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research
-python <skill>/scripts/init_project.py --target <existing-project> --name <name> --scale M --profile research --no-research-folders --dry-run
-python <skill>/scripts/check_project.py --project <project>
-python <skill>/scripts/check_project.py --project <project> --impact DATA01
-python <skill>/scripts/check_project.py --project <project> --require-gate G3 --verify-hashes
-python <skill>/scripts/manage_change.py --project <project> open --spec _pm/change-spec.json
-python <skill>/scripts/run_project.py --project <project> --spec _pm/run-spec.json -- <executable> <arguments>
-python <skill>/scripts/verify_reproduction.py --project <project> --spec _pm/reproduction-spec.json
-python <skill>/scripts/render_review.py --project <project>
-python <skill>/scripts/render_review.py --project <project> --check
-python <skill>/scripts/build_release.py --project <project> --spec _pm/release-spec.json --mode draft
-python <skill>/scripts/archive_artifacts.py --project <project> --spec _pm/archive-spec.json
-python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research --design secondary --design wet_lab
-python <skill>/scripts/research_tree.py --project <project> question add --id Q-001 --statement "…" --clarity 2
-python <skill>/scripts/research_tree.py --project <project> task add --id T-003 --title "候选数据身份核查" --serves Q-001
-python <skill>/scripts/research_tree.py --project <project> task intent --id T-003 --path _pm/intents/T-003.md
-python <skill>/scripts/tournament.py --project <project> rank --id T01
-python <skill>/scripts/registry_search.py --project <project> --query "单细胞 注释"
-python <skill>/scripts/record.py --project <project> decision --id D-003 --title "…" --status adopted --by 负责人 --authorization "…" --checkpoint CP3
+python <skill>/scripts/init_project.py --target <project> --name <name> --scale M --profile research --dry-run
+python <skill>/scripts/check_project.py --project <project> --verify-hashes
 ```
 
-- `--design` 的取值见 [研究类型](references/research-types.md)，可以重复传入。
-  - 指定湿实验、组学、动物或临床类型时，增加实验登记表。
-  - 动物、临床和诊断类研究增加伦理关口 `E1`。
-  - 临床试验和系统评价增加注册关口 `R1`。
-- `research_tree.py` 维护问题树、项目级假设，以及任务的目的链接与意图简报。写入前先在副本上运行检查，会引入错误的改动一律拒绝。
-- `record.py` 登记决定（含检查点及跳过理由）、成果（自动计算散列）和发现，同样先校验再写入。不要用临时脚本直接改写 `project-state.json`。
-- `tournament.py` 只记录和计算，不调用模型。
-- `registry_search.py` 只读。
+S级仅给建议不写文件，M/L按依赖复杂度选择；已有项目可用`--no-research-folders`跳过默认目录占位。命令分工、元数据启动示例和验证边界见[工具说明](references/tooling.md)。脚本不自动迁移旧项目、不提供任意代码沙箱；同一状态文件由单写入者维护。
 
-初始化不覆盖已有文件，拒绝将写入导向项目外的符号链接；不安装依赖。结构检查器只验证记录一致性、文件、依赖和声明的检查状态，不能判定科学成立或报告真实。默认检查不会执行记录中的命令，也不会改变项目状态。
-
-辅助脚本使用 Python 3.9 及以上版本，仅依赖标准库；研究程序可以使用 R、Python、Julia 或其他环境。新项目采用状态结构 v2；旧结构 v1 保持可读，不自动迁移，也不自动补齐复现或批准证据。同一项目安排一个状态写入者，避免并发更新相互覆盖。脚本不是任意研究代码的沙箱。
-
-## 9. 按需读取的资源
-
-- [工作流程](references/workflow.md)：启动、续接、任务粒度、风险探针和工作周期。
-- [角色与检查点](references/roles-and-checkpoints.md)：AI 的六个角色、CP0–CP9 与决策卡、意图简报与解释简报。
-- [问题塑形与增量](references/question-shaping.md)：启动问卷、澄清度阶梯、追问清单、证据地图、增量评估、问题树与下一步导航。
-- [假设锦标赛](references/hypothesis-tournament.md)：多假设的生成、评审、比较、进化和人评。
-- [研究类型](references/research-types.md)：各类研究的 AI 执行深度、额外关口和报告规范。
-- [论证骨架](references/narrative-spine.md)：边做边写，叙事锁定与投稿前流程。
-- [能力注册表](references/capability-registry.md)：数据库、工具、技能与操作经验的检索，计划清单。
-- [外部经验](references/design-lessons.md)：借鉴 Co-Scientist、Biomni 等系统的取舍与来源。
-- [科研流程](references/research.md)：G1/G2/G3 细则及分析到投稿前衔接。
-- [公共数据可行性](references/public-data-feasibility.md)：公共数据选题时的配对/人数上限、精度、必要支持路径、分层接触与停止。
-- [技能协作](references/skill-composition.md)：发现、调用、权限、冲突、集成和回退。
-- [质量与变更](references/quality-and-change.md)：验收、证据、状态结构和影响追踪。
-- [迁移规则](references/migration.md)：旧包缺陷、兼容和渐进采用。
-- [目录职责](references/project-layout.md)、[治理协议](references/governance.md)、[状态结构](references/state-schema-v2.md)。
-- [复现管理](references/reproducibility.md)、[审阅页面](references/reviewer.md)、[固定交付](references/release.md)。
-- [宿主适配](references/portability.md)：能力发现、执行方式和降级。
-- `assets/task-package.md`、`assets/REVIEW.md`：任务交接与可审查记录。
-- `scripts/test_tools.py`：在临时目录验证脚本行为；技能维护时运行。
-- `scripts/test_v3.py`：治理、实际运行、比较、审阅快照与固定包行为验证。
-- `scripts/test_v4.py`：研究类型初始化、问题树校验、锦标赛与能力注册表行为验证。
-- `scripts/test_v41.py`：标准目录、`record.py`、CP3 与论证骨架留空警告、未登记运行目录的行为验证。
-- `scripts/test_v42.py`：元数据/分析运行的 CP3 边界、已采纳决定与任务创建的行为验证。
-- `scripts/test_v43.py`：停止/恢复的实际执行边界、验收及任务结束的事务回归；[科研判断情景](references/behavioral-evaluation.md)另评推荐依据、收敛与用户负担，不把结构测试当科学判断验证。
-- `scripts/test_v431.py`：意图更新与新旧运行绑定、历史不可改写、时间/快照检查和既有目录适配。
+技能维护才读取[情景评估](references/behavioral-evaluation.md)、CHANGELOG与AUDIT；历史审计和合成夹具不是新研究的规则或证据。维护测试不需要每个科研项目运行。

@@ -1,0 +1,70 @@
+{
+  "evaluation": "human-ai-research-workflow v4.4.0 independent forward check",
+  "agent_task": "v440_generality_forward",
+  "cases_completed": [
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6"
+  ],
+  "case_execution_mode": "independent text responses from supplied facts only",
+  "input_reads": [
+    {
+      "path": "C:/Users/DELL/.codex/skills/.system/skill-creator/SKILL.md",
+      "sha256": "cccd291077ec57c6f50ca6529f0f3fb93212da09473effb2fcec808e81b21288",
+      "read_mode": "full_text",
+      "purpose": "independent forward-testing protocol"
+    },
+    {
+      "path": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/SKILL.md",
+      "sha256": "5151f761cc7a7c75cd8bc1ed34583f0baab4fbcd88be7207cb5b36038a78e693",
+      "read_mode": "full_text",
+      "purpose": "skill entry and task scope"
+    },
+    {
+      "path": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/assets/evaluation/generality-scenarios.json",
+      "sha256": "ffa3662c66e59acccd25479e2c2789575a599332b5bbebfa17da1a0e2df6a899",
+      "read_mode": "full_text",
+      "purpose": "six original requests and facts"
+    },
+    {
+      "path": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/references/research-types.md",
+      "sha256": "c6f95b2e54df668e298885c218854ff279fca06c8ed0bf16e447a17e98d88ff1",
+      "read_mode": "full_text",
+      "purpose": "study-specific evidence and independent unit boundaries"
+    },
+    {
+      "path": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/references/research-value-review.md",
+      "sha256": "3a32280cf5242656dce8033512bb18c0d794330baac581afddd5eb1ea934e65b",
+      "read_mode": "full_text",
+      "purpose": "U4 technical credibility, scientific information, and next investment"
+    }
+  ],
+  "outputs": [
+    "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/archive/audits/v4.4.0/forward-check.md",
+    "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/archive/audits/v4.4.0/forward-read-files.json"
+  ],
+  "artifact_readback_scope": "generated outputs read only to verify exact write and JSON validity, not used as case inputs",
+  "restrictions_observed": {
+    "no_prior_audits_or_maintenance_conclusions_read": true,
+    "no_test_scripts_or_WF_120_read": true,
+    "no_real_research_projects_or_github_workcopies_or_research_skill_installation_read": true,
+    "no_network_installation_contact_or_subagents": true,
+    "no_new_research_or_simulation": true,
+    "no_skill_source_edits": true
+  },
+  "encountered_observations": [
+    {
+      "type": "scope_wording_tension",
+      "file": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow/references/research-types.md",
+      "detail": "Section 5's broad only-drafts/checklists wording can conflict with B-level analysis and local-review support; interpreted here as operations and approval boundaries, without editing source."
+    },
+    {
+      "type": "recovered_tool_command_error",
+      "detail": "One PowerShell foreach-to-pipeline syntax error during hash collection; corrected by collecting rows before ConvertTo-Json; all five hashes obtained."
+    }
+  ],
+  "required_capability_missing": false
+}

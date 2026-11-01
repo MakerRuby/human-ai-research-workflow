@@ -1,0 +1,51 @@
+{
+  "task": "v4.4.0 A1/A2 applicability check",
+  "scope": "Read-only fictional-case judgment; no network, research execution, packaging, source changes, or agents.",
+  "source_root": "D:/桌面/skill_barn/sci_skill/human-ai-research-workflow",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "5151F761CC7A7C75CD8BC1ED34583F0BAAB4FBCD88BE7207CB5B36038A78E693",
+      "read_extent": "full",
+      "purpose": "Applicable workflow, authorization boundaries, and necessary reference selection"
+    },
+    {
+      "path": "assets/evaluation/tool-scope-scenarios.json",
+      "sha256": "10268A99A28951103BD2E259E99FCC4DE0943D405A9E3A81929C813C207A15C0",
+      "read_extent": "full",
+      "purpose": "A1 and A2 requests and fictional facts"
+    },
+    {
+      "path": "references/research-types.md",
+      "sha256": "7CB52AE6061A2DAA1A6BE4D6C0894646C08408099D03EBD1FED5F218289EFAD3",
+      "read_extent": "full",
+      "purpose": "A1 action-specific B/C roles and ethics/data boundaries"
+    },
+    {
+      "path": "references/tooling.md",
+      "sha256": "8AC62DF74BAD9FF615C81035FF9C96098964F6808279B01764D1E6028C956EA9",
+      "read_extent": "full",
+      "purpose": "Identify the actual release tool and authority before interface inspection"
+    },
+    {
+      "path": "references/release.md",
+      "sha256": "038FEC70F43359825324DECFDD8AC4AA07CC1E7D8FEA2E7AD73D4615BC1A2051",
+      "read_extent": "full",
+      "purpose": "A2 research ready limitation, truthful draft, and noncomputational manual packaging"
+    },
+    {
+      "path": "scripts/build_release.py",
+      "sha256": "CBBC9DCFAB97239B585963C73F2491822CFDA79464871D98781140DCF3883EFE",
+      "read_extent": "full",
+      "purpose": "Read-only verification of ready mode, research requirements, reproduction coverage, and draft behavior"
+    }
+  ],
+  "verification": {
+    "sha256_method": "PowerShell Get-FileHash -Algorithm SHA256 at input read time",
+    "implementation_executed": false,
+    "imported_modules_read": false,
+    "real_project_records_read": false,
+    "prior_reports_or_maintainer_answers_read": false,
+    "passing_status_assigned": false
+  }
+}

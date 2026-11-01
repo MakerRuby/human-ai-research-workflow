@@ -2,7 +2,7 @@
 id: kh.public-omics-reuse
 summary: 公开组学数据复用：元数据核对、来源重叠、独立验证与数据泄漏防护
 source: 二次数据分析经验、卒中公共数据阶段试点 WF-014/017/021/023/024及组学返工复盘；非通用效果验证
-version: v3
+version: v4
 date: 2026-11-02
 license: 随技能分发
 scope: GEO/SRA/TCGA/CELLxGENE 等公开组学数据的发现与验证分析
@@ -62,6 +62,9 @@ scope: GEO/SRA/TCGA/CELLxGENE 等公开组学数据的发现与验证分析
 - [ ] 结论措辞与研究类型相符（关联研究不写成因果）
 
 ## 排错
+
+- GEO series matrix可能在表头前有空行；按`!series_matrix_table_begin/end`界定矩阵，不简单丢弃所有`!`行。
+- 部分10x CSV缺基因列名，需先核表头/数据列数；必要时用`index_col=0`并抽查基因、条码及计数，不能对所有文件机械套用。
 
 | 报错或异常 | 可能原因 | 处理 |
 |---|---|---|

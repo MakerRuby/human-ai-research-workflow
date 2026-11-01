@@ -1,0 +1,26 @@
+[
+  {
+    "path": "SKILL.md",
+    "matches_final": true
+  },
+  {
+    "path": "assets/evaluation/tool-scope-scenarios.json",
+    "matches_final": true
+  },
+  {
+    "path": "references/research-types.md",
+    "matches_final": true
+  },
+  {
+    "path": "references/tooling.md",
+    "matches_final": true
+  },
+  {
+    "path": "references/release.md",
+    "matches_final": true
+  },
+  {
+    "path": "scripts/build_release.py",
+    "matches_final": true
+  }
+]

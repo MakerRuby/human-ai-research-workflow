@@ -1,0 +1,130 @@
+{
+  "ok": true,
+  "errors": [],
+  "warnings": [],
+  "actual_output": {
+    "identities": [
+      "synthetic-A",
+      "synthetic-B"
+    ]
+  },
+  "current_intent_bound": true,
+  "no_extra_src_created": true,
+  "cp3_not_fabricated": true,
+  "calls": [
+    {
+      "tool": "init_project.py",
+      "args": [
+        "--target",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "--name",
+        "Synthetic metadata bootstrap",
+        "--profile",
+        "research",
+        "--scale",
+        "M",
+        "--no-research-folders"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"mode\": \"initialized\",\n  \"created\": [\n    \"README.md\",\n    \"AI_CONTRACT.md\",\n    \"_pm/BRIEF.md\",\n    \"_pm/STATUS.md\",\n    \"_pm/LAYOUT.md\",\n    \"AGENTS.md\",\n    \"CLAUDE.md\",\n    \"_pm/research/RESEARCH_PLAN.md\",\n    \"_pm/research/DATA_REGISTER.md\",\n    \"_pm/research/EXPOSURE_LOG.md\",\n    \"_pm/research/HYPOTHESES.md\",\n    \"references/SEARCH_LOG.md\",\n    \"references/EVIDENCE_MAP.md\",\n    \"manuscript/NARRATIVE.md\",\n    \"_pm/research/REPRODUCIBILITY.md\",\n    \"references/INDEX.md\",\n    \"references/sources/REFERENCE_CARD.md\",\n    \"_pm/templates/run-spec.json\",\n    \"_pm/templates/release-spec.json\",\n    \"_pm/templates/reproduction-spec.json\",\n    \"_pm/templates/change-spec.json\",\n    \"_pm/FINDINGS.md\",\n    \"_pm/DECISIONS.md\",\n    \"_pm/config.json\",\n    \"_pm/project-state.json\"\n  ],\n  \"skipped\": [],\n  \"config_path\": \"_pm/config.json\",\n  \"message\": \"Templates are drafts; no scientific gate has been passed.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "tool": "record.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "artifact",
+        "--id",
+        "META-001",
+        "--path",
+        "references/probe-input.json",
+        "--version",
+        "v1"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"artifact\": \"META-001\",\n  \"sha256\": \"8902863dd5d188befa064df28825fa17a251e54de9a59d50e552f41efd12b295\",\n  \"warnings\": []\n}\n\n",
+      "stderr": ""
+    },
+    {
+      "tool": "research_tree.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "question",
+        "add",
+        "--id",
+        "Q-001",
+        "--statement",
+        "Synthetic identity inventory",
+        "--clarity",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"question\": \"Q-001\",\n  \"action\": \"add\",\n  \"warnings\": []\n}\n\n",
+      "stderr": ""
+    },
+    {
+      "tool": "research_tree.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "task",
+        "add",
+        "--id",
+        "T-001",
+        "--title",
+        "Read synthetic identity only",
+        "--serves",
+        "Q-001"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"task\": \"T-001\",\n  \"action\": \"add\",\n  \"warnings\": []\n}\n\n",
+      "stderr": ""
+    },
+    {
+      "tool": "research_tree.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "task",
+        "intent",
+        "--id",
+        "T-001",
+        "--path",
+        "_pm/intents/T-001.md"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"task\": \"T-001\",\n  \"intent\": {\n    \"path\": \"_pm/intents/T-001.md\",\n    \"written_at\": \"2026-11-01T17:55:22.085483+00:00\",\n    \"sha256\": \"13f0eabd76af22ec5df695132b6b09de2ee732d4f0c5ae1fac2ed3198ee9b237\"\n  },\n  \"warnings\": []\n}\n\n",
+      "stderr": ""
+    },
+    {
+      "tool": "run_project.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "--spec",
+        "_pm/probe-run.json",
+        "--",
+        "C:\\Users\\DELL\\miniconda3\\python.exe",
+        "-B",
+        "scripts/probe.py"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"run\": {\n    \"id\": \"RUN-001\",\n    \"status\": \"succeeded\",\n    \"purpose\": \"Synthetic identity metadata bootstrap\",\n    \"started_at\": \"2026-11-01T17:55:22.191991+00:00\",\n    \"stage\": \"metadata\",\n    \"task\": \"T-001\",\n    \"intent_ref\": {\n      \"path\": \"_pm/intents/T-001.md\",\n      \"written_at\": \"2026-11-01T17:55:22.085483+00:00\",\n      \"sha256\": \"13f0eabd76af22ec5df695132b6b09de2ee732d4f0c5ae1fac2ed3198ee9b237\"\n    },\n    \"ended_at\": \"2026-11-01T17:55:22.281610+00:00\",\n    \"returncode\": 0,\n    \"cwd\": \".\",\n    \"command\": [\n      \"C:\\\\Users\\\\DELL\\\\miniconda3\\\\python.exe\",\n      \"-B\",\n      \"scripts/probe.py\"\n    ],\n    \"inputs\": [\n      {\n        \"id\": \"META-001\",\n        \"version\": \"v1\"\n      }\n    ],\n    \"input_hashes\": {\n      \"META-001\": \"8902863dd5d188befa064df28825fa17a251e54de9a59d50e552f41efd12b295\"\n    },\n    \"snapshots\": [\n      {\n        \"role\": \"code\",\n        \"source\": \"scripts/probe.py\",\n        \"snapshot\": \"runs/RUN-001/snapshots/000-probe.py\",\n        \"sha256\": \"d31e7cd2806eebf2de268ba83838bf54adc1827a9a457300259ee773fa8fb1db\"\n      },\n      {\n        \"role\": \"config\",\n        \"source\": \"_pm/probe-config.json\",\n        \"snapshot\": \"runs/RUN-001/snapshots/001-probe-config.json\",\n        \"sha256\": \"e3566b3a06430868d71e9287dfd6c6c520a3da027aabea01951d407ee131dc2f\"\n      },\n      {\n        \"role\": \"environment\",\n        \"source\": \"environment.json\",\n        \"snapshot\": \"runs/RUN-001/snapshots/002-environment.json\",\n        \"sha256\": \"7b584135008b3df2dd519f5517b4f8ca66c0be88b5196740effbe97bae9105f9\"\n      },\n      {\n        \"role\": \"intent\",\n        \"source\": \"_pm/intents/T-001.md\",\n        \"snapshot\": \"runs/RUN-001/snapshots/003-T-001.md\",\n        \"sha256\": \"13f0eabd76af22ec5df695132b6b09de2ee732d4f0c5ae1fac2ed3198ee9b237\"\n      }\n    ],\n    \"environment_rebuilt\": false,\n    \"cache_policy\": \"Fresh isolated fixture\",\n    \"stdout\": \"runs/RUN-001/stdout.log\",\n    \"stderr\": \"runs/RUN-001/stderr.log\",\n    \"outputs\": [\n      {\n        \"path\": \"derived/probe.json\",\n        \"sha256\": \"5ed659089419a46db484ddbdc0bd0de6e7e2d0cec6a7e4cdb0bab29780e339ca\"\n      }\n    ],\n    \"integrity_issues\": []\n  }\n}\n\n",
+      "stderr": ""
+    },
+    {
+      "tool": "check_project.py",
+      "args": [
+        "--project",
+        "C:\\Users\\DELL\\AppData\\Local\\Temp\\hairw-bootstrap-16iypkoc\\project",
+        "--verify-hashes"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"counts\": {\n    \"artifacts\": 1,\n    \"checks\": 0,\n    \"tasks\": 1,\n    \"gates\": 3\n  },\n  \"stale_artifacts\": [],\n  \"impact\": null,\n  \"hashes_not_recorded\": [],\n  \"governance\": {\n    \"open_changes\": [],\n    \"invalid_or_pending_reproductions\": [],\n    \"pending_reviews\": [],\n    \"counts\": {\n      \"findings\": 0,\n      \"decisions\": 0,\n      \"changes\": 0,\n      \"claims\": 0,\n      \"risks\": 0,\n      \"review_items\": 0,\n      \"runs\": 1,\n      \"reproductions\": 0\n    },\n    \"research_model\": {\n      \"questions\": 1,\n      \"hypotheses\": 0,\n      \"open_questions\": [\n        \"Q-001\"\n      ],\n      \"hypotheses_in_test\": [],\n      \"unlinked_research_tasks\": []\n    }\n  },\n  \"scope\": \"Read-only record/file consistency; scientific validity and evidence truth are not verified.\"\n}\n",
+      "stderr": ""
+    }
+  ],
+  "scope": "One synthetic local metadata bootstrap, not external retrieval or research validation"
+}

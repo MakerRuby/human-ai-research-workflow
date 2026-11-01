@@ -18,8 +18,8 @@
 - **编码**：中文 Windows 默认使用 GBK。读写文本时显式指定 `encoding='utf-8'`（读取 gzip 也一样），控制台输出设置 `PYTHONIOENCODING=utf-8`。不要把解码失败误判为数据损坏。
 - **R**：`Rscript` 可能不在 PATH 中，先查找绝对路径（例如 `C:/Program Files/R/R-x.y.z/bin/Rscript.exe`）。不要把多行 R 代码通过 `-e` 传入，引号在 shell 中容易失效；应写成 `.R` 脚本文件再运行。
 - **路径**：Git Bash 的 `/tmp` 路径传给 Windows 原生 Python 时可能失效，应使用 `cygpath -m` 或项目内路径。写入前核对盘符和项目根目录，不要把项目文件写到技能仓库或其他盘。
-- **GEO series matrix**：表头前可能有空行。应按 `!series_matrix_table_begin` 和 `!series_matrix_table_end` 截取表格，不能简单跳过以 `!` 开头的行。
-- **10x CSV 计数表**：表头常常缺少基因列的列名，因此数据行比表头多一列。应使用 `index_col=0` 读取，并抽查若干计数，确认条码与基因没有错位。
+
+特定组学格式的解析经验放在[公开组学复用](../assets/capabilities/know-how/public-omics-reuse.md)，不作为所有平台的预检步骤。
 
 ## 批量出图与文档装配前的最小预检
 
