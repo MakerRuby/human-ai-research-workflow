@@ -1,0 +1,20 @@
+{
+  "before-answer.md": {
+    "private_original_sha256": "80c10c2b2b51e839d72ea2de2093f91cc6ce8e90a9d9cbfbda59da841bb9667e",
+    "public_path": "archive/audits/v4.4.1/baseline-answer.md",
+    "public_sha256": "3a9f261da795b4e64371d36c3ede3f645ba00a5d7e54c8a435967f14311eefc1",
+    "redaction": "machine directory prefixes only"
+  },
+  "after-answer.md": {
+    "private_original_sha256": "a4cfa54993c22f1b6a3ca764a9b5e8849f0898ee1aad69312d54948ccd64b08f",
+    "public_path": "archive/audits/v4.4.1/intermediate-answer.md",
+    "public_sha256": "6f133f0d52c6b0ff1884c84aba35c213ef1fa5698412a6477ea00fa06a6ac661",
+    "redaction": "machine directory prefixes only"
+  },
+  "final-review.md": {
+    "private_original_sha256": "bd43ab4b231e7793d0228e6a457d79961e3d874004cb515ba3d798cfd4c72b94",
+    "public_path": "archive/audits/v4.4.1/final-review.md",
+    "public_sha256": "1ceaaaf2d847986502e0fa5af4e513cf38b7f6758b84065e27ad38527a19440a",
+    "redaction": "machine directory prefixes only"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "note": "Reconstructed from saved baseline and applied patch after reversion; compared against evaluator recorded actual input hashes. Not pretended to be a pre-reversion copy.",
+  "files": {
+    "public-data-feasibility.md": "15f6c12533ddef1be069314156e2b259a3d26159974a83ba0ad32e5d1e722a08",
+    "research-value-review.md": "e28b669e5a9eb6c8f422f6931fcbf937270e7157aeb38ba355c71e14b8d431c6",
+    "SKILL.stage.txt": "45be2d43ce8ce05def4704b5a96e4ab321453f0a9d30c29f3cc8d849f77cad78",
+    "research-types.md.txt": "7cb52ae6061a2daa1a6be4d6c0894646c08408099d03ebd1fed5f218289efad3",
+    "cases.json": "2d22bb8138be4374bff30bc7f0e7e937815ed4e7887d117b338082e4faf64d75"
+  }
+}

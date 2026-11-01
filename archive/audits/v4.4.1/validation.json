@@ -1,0 +1,58 @@
+{
+  "version": "4.4.1",
+  "base_commit": "e3a40e49bae0624a9dea674d2fcc76bfef984ddc",
+  "new_scientific_execution_requirements": false,
+  "scripts_and_existing_assets_byte_identical": true,
+  "reference_changes": [
+    "references/behavioral-evaluation.md"
+  ],
+  "unit_runs": {
+    "baseline": {
+      "tests": 159,
+      "passed": 158,
+      "skipped": 1,
+      "raw_sha256": "377aeb0469756067e186f6cb8c30187c4ea48ac638d488738e73badfa5f71102",
+      "scope": "script regression, not scientific or behavioral validity"
+    },
+    "after": {
+      "tests": 159,
+      "passed": 158,
+      "skipped": 1,
+      "raw_sha256": "dc679156accea6bd7ab9ac5866714c1c6d7858f060236575d687c0008c8642a5",
+      "scope": "script regression, not scientific or behavioral validity"
+    },
+    "final": {
+      "tests": 159,
+      "passed": 158,
+      "skipped": 1,
+      "raw_sha256": "b04168b7838f52f9194e4244467efd10908b00ce65df3222a225ee41b66ea663",
+      "scope": "script regression, not scientific or behavioral validity"
+    }
+  },
+  "synthetic_cases": 3,
+  "behavioral_evidence_scope": "Baseline and unpublished intermediate actual answers; final independent file review is not a fresh final behavioral execution. No causal efficiency/acceptance claims.",
+  "original_input_versions_preserved": true,
+  "public_answers_redacted_machine_prefixes_only": true,
+  "published_real_research_material": false,
+  "local_links_checked": 51,
+  "local_link_failures": [],
+  "final_evidence_files": {
+    "AUDIT-4.4.1.md": "1977901d75127c3f6a5b07bf9a7ae4e81a387ff30f0cb28af72eb44ec79fdf5d",
+    "CHANGELOG.md": "6609460fb8b52562304b61e04db8be2df1d320a715753cb437d8838294f30791",
+    "README.md": "c423a526a22263f5d218c44170d51fa5f275abf7e75b876195dc8313f291766c",
+    "SKILL.md": "45be2d43ce8ce05def4704b5a96e4ab321453f0a9d30c29f3cc8d849f77cad78",
+    "references/behavioral-evaluation.md": "0eedfe34ffbfa7e87c8f182602f3cdf4e5a2999619dd2e5f81b7b7f409dcccfd",
+    "assets/evaluation/feasibility-order-scenarios.json": "2d22bb8138be4374bff30bc7f0e7e937815ed4e7887d117b338082e4faf64d75",
+    "archive/audits/v4.4.1/answer-provenance.json": "d8ddc7bb080cd4b7f801d63d4339ad4d969f94956f685d455c7ce5d8a94ba174",
+    "archive/audits/v4.4.1/baseline-answer.md": "3a9f261da795b4e64371d36c3ede3f645ba00a5d7e54c8a435967f14311eefc1",
+    "archive/audits/v4.4.1/final-review.md": "1ceaaaf2d847986502e0fa5af4e513cf38b7f6758b84065e27ad38527a19440a",
+    "archive/audits/v4.4.1/intermediate-answer.md": "6f133f0d52c6b0ff1884c84aba35c213ef1fa5698412a6477ea00fa06a6ac661",
+    "archive/audits/v4.4.1/intermediate-manifest.json": "47a552304e676461842cccbba9fd3efa6b7014347b6059c1fa9179cf2ce0ca29",
+    "archive/audits/v4.4.1/intermediate-public-data-feasibility.md.txt": "15f6c12533ddef1be069314156e2b259a3d26159974a83ba0ad32e5d1e722a08",
+    "archive/audits/v4.4.1/intermediate-research-value-review.md.txt": "e28b669e5a9eb6c8f422f6931fcbf937270e7157aeb38ba355c71e14b8d431c6",
+    "archive/audits/v4.4.1/review.md": "0acb187a80ddc19c522df5e852e37336e1cf444927f7212a627d720cf6549474",
+    "archive/audits/v4.4.1/unit-tests-baseline.txt": "b67859e089a74d1f42264e40f1c9424e16aff035270948d9a34266f50409a1cc",
+    "archive/audits/v4.4.1/unit-tests-final.txt": "c0267293d0bee55d2949d0c1b843b434ba48c3558a0a8daf4b264ace1847c722",
+    "archive/audits/v4.4.1/unit-tests-intermediate.txt": "516ad7853ddeadc626962deb8755811b6487b28e7029e005820387882d4ddf2e"
+  }
+}

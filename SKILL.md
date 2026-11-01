@@ -2,7 +2,7 @@
 name: human-ai-research-workflow
 description: 管理人与 AI 从研究问题到投稿前材料的持续协作：评估科学增量、比较解释、设计与执行研究、解释结果并组织论文，在关键取舍时提供推荐和理由，维护证据、版本与真实决策。适用于公开数据、组学、湿实验、动物、临床、系统评价及方法研究；其他领域可沿用共同原则并调整领域规范。单次答疑或局部修改采用轻量流程。
 metadata:
-  version: "4.4.0"
+  version: "4.4.1"
 ---
 
 # 人与 AI 科研协作工作流
@@ -68,4 +68,4 @@ python <skill>/scripts/check_project.py --project <project> --verify-hashes
 
 S级仅给建议不写文件，M/L按依赖复杂度选择；已有项目可用`--no-research-folders`跳过默认目录占位。命令分工、元数据启动示例和验证边界见[工具说明](references/tooling.md)。脚本不自动迁移旧项目、不提供任意代码沙箱；同一状态文件由单写入者维护。
 
-技能维护才读取[情景评估](references/behavioral-evaluation.md)、CHANGELOG与AUDIT；历史审计和合成夹具不是新研究的规则或证据。维护测试不需要每个科研项目运行。
+技能维护才读取[情景评估](references/behavioral-evaluation.md)、CHANGELOG与AUDIT；先核当前版本是否已覆盖旧经验，再决定修改。历史审计和合成夹具不是新研究的规则或证据，维护测试不需要每个科研项目运行。

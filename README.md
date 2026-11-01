@@ -1,6 +1,6 @@
 # 人与 AI 科研协作工作流
 
-**Human–AI Research Workflow · v4.4.0**
+**Human–AI Research Workflow · v4.4.1**
 
 帮助人与AI把研究问题推进到可信结果、论证和投稿前材料。共同原则跨研究类型使用；公开数据、组学、湿实验、动物、临床、系统评价及方法研究按设计加载相应要求，其他领域可裁剪采用。不依赖单一疾病、平台、AI产品或固定目录。
 
@@ -23,7 +23,7 @@
 | [references/](references/) | 各阶段唯一细则；[工具说明](references/tooling.md)集中命令分工 |
 | [assets/](assets/) | 项目模板与候选能力，按实际需要选用 |
 | [scripts/](scripts/) | 可选本地管理、实际运行、比较及检查工具 |
-| [AUDIT-4.4.0.md](AUDIT-4.4.0.md) | 本版WF-120落实对照、通用性/删重取舍和实际验证 |
+| [AUDIT-4.4.1.md](AUDIT-4.4.1.md) | 当前规则覆盖复核、维护方法与实际验证；[4.4.0审计](AUDIT-4.4.0.md)保留上版结构修订依据 |
 | [CHANGELOG.md](CHANGELOG.md) | 修订历史；历史审计与合成夹具仅用于维护 |
 
 结构检查、AI情景评估与科学证据分开。维护方法见[情景评估](references/behavioral-evaluation.md)；脚本不是研究代码沙箱，同一状态由单写入者维护。具体方法、伦理、作者责任与投稿要求按研究实际确认。
