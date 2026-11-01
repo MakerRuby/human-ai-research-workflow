@@ -11,11 +11,13 @@ import sys
 
 from project_io import atomic_json, digest, encoded, load, local, now, state, write_new_tree
 from research_model import RUN_STAGES
+from lifecycle import require_active
 
 
 def run(root, spec, command, timeout=None):
     root = Path(root).resolve()
     current = state(root)
+    require_active(current, spec.get('task'))
     if current.get('schema_version') != 2:
         raise ValueError('Migrate project state to schema 2 before recording runs')
     identity = spec.get('id', '')

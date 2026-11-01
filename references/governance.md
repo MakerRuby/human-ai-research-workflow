@@ -12,6 +12,35 @@
 
 ## 变更事务
 
+### 事务式常用操作
+
+以下操作只登记已经发生的检查或决定，不执行检查、不判断科学充分性、不授予权限。`--by` 写实际角色，`--evidence` 为已存在的项目相对文件；不要把模板/合成例子当真实批准。AI在项目允许范围内做内容验收时，明确其范围及非独立专业审稿身份。
+
+```text
+python <skill>/scripts/record.py --project <project> check --id C-001 --artifact DOC-001 --version v1 --kind professional --status pass --required --by <实际核对者> --rationale <核对范围> --evidence _pm/checks/C-001.md
+python <skill>/scripts/record.py --project <project> accept --id DOC-001 --check C-001 --by <实际接受者> --rationale <接受范围> --evidence _pm/checks/C-001.md
+python <skill>/scripts/research_tree.py --project <project> task set --id T-001 --status done --output DOC-001 --by <实际执行者> --rationale <完成范围> --evidence _pm/checks/C-001.md
+python <skill>/scripts/record.py --project <project> decision-set --id D-002 --status withdrawn --by <实际撤回者> --rationale <未采用/撤回理由> --evidence _pm/DECISIONS.md
+```
+
+必要检查未通过、目标内容被修改、输入/输出过期或验收字段缺失时，操作拒绝并保持原状态；检查失败不能用一个新通过记录掩盖原必要失败。更改检查要求或版本须按真实评审/变更处理。
+
+### 暂停、停止与恢复
+
+先登记真实的 adopted D 决定，再控制执行。以下 D 编号只是用法占位，不是任何项目的授权：
+
+```text
+python <skill>/scripts/record.py --project <project> project --status stopped --decision D-003 --objective-achieved no --by <实际登记者> --rationale <负责人停止及目标未达成> --evidence _pm/DECISIONS.md
+python <skill>/scripts/record.py --project <project> project --status active --decision D-004 --by <实际登记者> --rationale <真实重启范围> --evidence _pm/DECISIONS.md
+python <skill>/scripts/research_tree.py --project <project> task set --id T-001 --status doing --decision D-004 --by <实际登记者> --rationale <真实重启该任务> --evidence _pm/DECISIONS.md
+```
+
+项目状态可用 paused/stopped，任务也可 cancelled。停止本身不设置目标成功；目标未评估可不传 objective-achieved，已有评估不被默默清空；明确声明 yes 另需 `--objective-evidence`。恢复须新的实际决定，不能复用停止授权，也不自动重开所有任务。只做仍获授权的收尾可继续登记来源、检查和总结，但不以收尾名义运行新研究。旧项目的自定义停止字段和根目录约定先人工核对，再显式登记新字段；不自动迁移真实项目。
+
+已采用决定被实际替代时使用 `decision-set --status superseded --superseded-by D-004`；保留原批准证据。提案未获采用不写成曾被批准。项目只使用一个状态写入者，事务指单次校验后原子写文件，不是并发数据库或权限系统。
+
+### 变更清单
+
 修改数据、排除标准、方法、代码、关键结果、图表或核心论断前，识别影响并登记 CH 编号。一个变更可以关联多项发现和决定。示例规格：
 
 ```json

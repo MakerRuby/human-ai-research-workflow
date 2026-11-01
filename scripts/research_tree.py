@@ -13,6 +13,7 @@ from pathlib import Path
 
 from check_project import Audit
 from project_io import atomic_json, digest, encoded, local, now, state
+from lifecycle import TASK_STATUSES, CONTROLLED_TASK_STATUSES, control, adopted, require_active, set_task
 
 QID = re.compile(r'^Q-[0-9]{3,4}$')
 HID = re.compile(r'^H-[0-9]{3,4}$')
@@ -134,6 +135,26 @@ def task(root, args):
             rows.append(row)
             return {'task': args.id, 'action': 'add'}
         row = find(rows, args.id, 'task')
+        if args.action == 'set':
+            if args.status is None and not args.output:
+                raise ValueError('set needs --status or --output')
+            record = control(root, s, args.by, args.rationale, args.evidence, args.decision)
+            target = args.status or row['status']
+            if target in CONTROLLED_TASK_STATUSES or row['status'] in CONTROLLED_TASK_STATUSES:
+                adopted(s, args.decision)
+                previous = row.get('status_record', {}).get('decision')
+                if target not in CONTROLLED_TASK_STATUSES and args.decision == previous:
+                    raise ValueError('Resumption needs a new adopted decision, not the stopping decision')
+            if target in {'doing', 'todo'}:
+                require_active(s)
+            for identity in args.output or []:
+                find(s.get('artifacts', []), identity, 'artifact')
+            extend(row, 'outputs', args.output)
+            if args.output and args.status is None:
+                row.setdefault('output_history', []).append({'outputs': list(args.output), 'record': record})
+            if args.status is not None:
+                set_task(row, target, record)
+            return {'task': args.id, 'status': row['status'], 'outputs': row['outputs']}
         if args.action == 'link':
             if not args.serves:
                 raise ValueError('link needs at least one --serves')
@@ -177,12 +198,18 @@ def main(argv=None):
     h.add_argument('--validated-on', action='append', help='Independent artifact used to test it')
     h.add_argument('--independence', help='Why shared upstream inputs do not compromise independence')
     t = sub.add_parser('task')
-    t.add_argument('action', choices=('add', 'link', 'intent'))
+    t.add_argument('action', choices=('add', 'link', 'intent', 'set'))
     t.add_argument('--id', required=True)
     t.add_argument('--serves', action='append')
     t.add_argument('--title', help='Required for add; new tasks start as todo')
     t.add_argument('--input', action='append', help='Versioned artifact input for add: ID@version')
     t.add_argument('--path')
+    t.add_argument('--status', choices=sorted(TASK_STATUSES))
+    t.add_argument('--output', action='append', help='Existing artifact id; done still requires accepted current outputs')
+    t.add_argument('--by')
+    t.add_argument('--rationale')
+    t.add_argument('--evidence', action='append')
+    t.add_argument('--decision', help='Actual adopted control/resumption decision, not inferred permission')
     args = parser.parse_args(argv)
     handlers = {'question': question, 'hypothesis': hypothesis, 'task': task}
     try:

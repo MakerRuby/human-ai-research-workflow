@@ -8,11 +8,11 @@ import json
 from pathlib import Path, PureWindowsPath
 import re
 import sys
+from lifecycle import TASK_STATUSES, validate as validate_lifecycle
 
 
 ARTIFACT_STATUSES = {"draft", "produced", "checked", "accepted", "stale", "rejected"}
 CHECK_STATUSES = {"pending", "pass", "fail", "waived"}
-TASK_STATUSES = {"todo", "doing", "blocked", "done"}
 GATE_STATUSES = {"pending", "conditional", "pass", "fail"}
 
 
@@ -151,6 +151,7 @@ class Audit:
         checks = self.index("checks", CHECK_STATUSES)
         tasks = self.index("tasks", TASK_STATUSES)
         gates = self.index("gates", GATE_STATUSES)
+        validate_lifecycle(self, tasks)
 
         graph, direct_stale = {}, set()
         for identity, row in artifacts.items():

@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-11-01T11:26:05.867478+00:00",
+  "scope": "行政一致性；不检验科研、批准或历史关口真实性",
+  "observations": {
+    "two_doing_states_before": true,
+    "two_stopped_states_after": true,
+    "doing_history_retained": true,
+    "execution_stopped": true,
+    "original_objective_false": true,
+    "no_restart_decision": true,
+    "given_historical_facts_unchanged": true,
+    "no_fabricated_historical_gate_passes": true,
+    "no_fabricated_research_outputs_or_runs": true,
+    "no_research_run_directory_created": true
+  }
+}

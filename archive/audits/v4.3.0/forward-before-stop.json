@@ -1,0 +1,77 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "S4 合成停止收尾演示",
+    "profile": "general"
+  },
+  "layout": {
+    "management": "_pm",
+    "references": "references",
+    "raw_data": "data/raw",
+    "interim_data": "data/interim",
+    "analysis_data": "data/processed",
+    "code": "src",
+    "exploration": "notebooks",
+    "runs": "runs",
+    "results": "results",
+    "manuscript": "manuscript",
+    "releases": "releases",
+    "review": "review",
+    "archive": "archive"
+  },
+  "artifacts": [],
+  "checks": [],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "原进行中任务一（合成占位，详情未给定）",
+      "status": "doing",
+      "inputs": [],
+      "outputs": [],
+      "status_history": [
+        {
+          "status": "todo"
+        }
+      ],
+      "status_record": {
+        "by": "AI 合成情景复建者",
+        "rationale": "仅复建给定的原进行中状态，未筛题、分析或执行原任务",
+        "evidence": [
+          "_pm/SCENARIO_INPUT.md"
+        ],
+        "at": "2026-11-01T11:26:05.245557+00:00",
+        "status": "doing"
+      }
+    },
+    {
+      "id": "T-002",
+      "title": "原进行中任务二（合成占位，详情未给定）",
+      "status": "doing",
+      "inputs": [],
+      "outputs": [],
+      "status_history": [
+        {
+          "status": "todo"
+        }
+      ],
+      "status_record": {
+        "by": "AI 合成情景复建者",
+        "rationale": "仅复建给定的原进行中状态，未筛题、分析或执行原任务",
+        "evidence": [
+          "_pm/SCENARIO_INPUT.md"
+        ],
+        "at": "2026-11-01T11:26:05.539084+00:00",
+        "status": "doing"
+      }
+    }
+  ],
+  "gates": [],
+  "findings": [],
+  "decisions": [],
+  "changes": [],
+  "claims": [],
+  "risks": [],
+  "review_items": [],
+  "runs": [],
+  "reproductions": []
+}

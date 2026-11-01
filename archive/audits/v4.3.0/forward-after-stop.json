@@ -1,0 +1,177 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "S4 合成停止收尾演示",
+    "profile": "general",
+    "execution": {
+      "by": "AI 合成情景记录执行者",
+      "rationale": "遵从本例明示停止；论文及投稿包未完成；停止不等于原目标达成",
+      "evidence": [
+        "_pm/SCENARIO_INPUT.md",
+        "_pm/DECISIONS.md"
+      ],
+      "at": "2026-11-01T11:26:05.818761+00:00",
+      "decision": "D-001",
+      "status": "stopped"
+    },
+    "objective_achieved": false,
+    "objective_assessment": {
+      "by": "AI 合成情景记录执行者",
+      "rationale": "遵从本例明示停止；论文及投稿包未完成；停止不等于原目标达成",
+      "evidence": [
+        "_pm/SCENARIO_INPUT.md",
+        "_pm/DECISIONS.md"
+      ],
+      "at": "2026-11-01T11:26:05.818761+00:00",
+      "decision": "D-001"
+    }
+  },
+  "layout": {
+    "management": "_pm",
+    "references": "references",
+    "raw_data": "data/raw",
+    "interim_data": "data/interim",
+    "analysis_data": "data/processed",
+    "code": "src",
+    "exploration": "notebooks",
+    "runs": "runs",
+    "results": "results",
+    "manuscript": "manuscript",
+    "releases": "releases",
+    "review": "review",
+    "archive": "archive"
+  },
+  "artifacts": [
+    {
+      "id": "END-001",
+      "path": "END_NOTE.md",
+      "version": "s4-v1",
+      "status": "accepted",
+      "depends_on": [],
+      "required_checks": [
+        "C-END-001"
+      ],
+      "sha256": "5b2a1a49120ff61a081f2612ce8a65fc5e72fe46fd40c06c378a095453d229e9",
+      "acceptance": {
+        "by": "AI 合成情景执行者（仅行政收尾范围）",
+        "rationale": "仅接受合成结束说明的行政记录一致性，不代表科研结果接受",
+        "evidence": [
+          "_pm/CLOSEOUT_CHECK.md"
+        ],
+        "at": "2026-11-01T11:26:06.245062+00:00"
+      }
+    }
+  ],
+  "checks": [
+    {
+      "id": "C-END-001",
+      "artifact": "END-001",
+      "version": "s4-v1",
+      "kind": "machine",
+      "status": "pass",
+      "required": true,
+      "artifact_sha256": "5b2a1a49120ff61a081f2612ce8a65fc5e72fe46fd40c06c378a095453d229e9",
+      "by": "AI 合成情景执行者",
+      "rationale": "实际核对结束说明、状态和输入的行政一致性；不检验科学充分性",
+      "evidence": [
+        "_pm/CLOSEOUT_CHECK.md"
+      ],
+      "at": "2026-11-01T11:26:06.114230+00:00"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "原进行中任务一（合成占位，详情未给定）",
+      "status": "stopped",
+      "inputs": [],
+      "outputs": [],
+      "status_history": [
+        {
+          "status": "todo"
+        },
+        {
+          "status": "doing",
+          "record": {
+            "by": "AI 合成情景复建者",
+            "rationale": "仅复建给定的原进行中状态，未筛题、分析或执行原任务",
+            "evidence": [
+              "_pm/SCENARIO_INPUT.md"
+            ],
+            "at": "2026-11-01T11:26:05.245557+00:00",
+            "status": "doing"
+          }
+        }
+      ],
+      "status_record": {
+        "by": "AI 合成情景记录执行者",
+        "rationale": "遵从本例明示停止；论文及投稿包未完成；停止不等于原目标达成",
+        "evidence": [
+          "_pm/SCENARIO_INPUT.md",
+          "_pm/DECISIONS.md"
+        ],
+        "at": "2026-11-01T11:26:05.818761+00:00",
+        "decision": "D-001",
+        "status": "stopped"
+      }
+    },
+    {
+      "id": "T-002",
+      "title": "原进行中任务二（合成占位，详情未给定）",
+      "status": "stopped",
+      "inputs": [],
+      "outputs": [],
+      "status_history": [
+        {
+          "status": "todo"
+        },
+        {
+          "status": "doing",
+          "record": {
+            "by": "AI 合成情景复建者",
+            "rationale": "仅复建给定的原进行中状态，未筛题、分析或执行原任务",
+            "evidence": [
+              "_pm/SCENARIO_INPUT.md"
+            ],
+            "at": "2026-11-01T11:26:05.539084+00:00",
+            "status": "doing"
+          }
+        }
+      ],
+      "status_record": {
+        "by": "AI 合成情景记录执行者",
+        "rationale": "遵从本例明示停止；论文及投稿包未完成；停止不等于原目标达成",
+        "evidence": [
+          "_pm/SCENARIO_INPUT.md",
+          "_pm/DECISIONS.md"
+        ],
+        "at": "2026-11-01T11:26:05.818761+00:00",
+        "decision": "D-001",
+        "status": "stopped"
+      }
+    }
+  ],
+  "gates": [],
+  "findings": [],
+  "decisions": [
+    {
+      "id": "D-001",
+      "title": "仅 S4 合成：执行明示停止并保存结束说明",
+      "status": "adopted",
+      "record": "_pm/DECISIONS.md",
+      "findings": [],
+      "by": "本例虚构负责人（合成角色，非真实科研批准）",
+      "decided_at": "2026-11-01T11:26:05.680544+00:00",
+      "authorization": "我们停止到这里。请保存一个诚实的结束说明；不要继续筛题或分析。【仅限 S4 虚构隔离演示，不构成真实科研批准】",
+      "evidence": [
+        "_pm/SCENARIO_INPUT.md"
+      ]
+    }
+  ],
+  "changes": [],
+  "claims": [],
+  "risks": [],
+  "review_items": [],
+  "runs": [],
+  "reproductions": []
+}

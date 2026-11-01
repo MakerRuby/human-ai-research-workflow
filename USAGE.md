@@ -21,6 +21,8 @@ python <技能目录>/scripts/init_project.py --target <项目目录> --name <�
 
 ## 初始化后持续使用
 
+v4.3新增任务状态、检查/验收和执行停止的事务式命令，见[治理协议](references/governance.md)。这些命令记录真实决定，不代替授权或专业判断。既有schema1/2项目可继续只读检查，无需自动迁移；使用新控制字段前核对原项目约定，停止与原目标是否达成分开记录。
+
 项目统一约定保存在根目录 `AI_CONTRACT.md`，其中记录技能路径与每轮恢复、收尾规则。不要再创建一份重复的管理总纲。
 
 初始化 M/L 项目时默认生成 `AGENTS.md` 与 `CLAUDE.md`。可用 `--ai-entry agents` 或 `--ai-entry claude` 仅选择一种，或用 `--no-ai-entry` 关闭。两种入口也可显式指定：

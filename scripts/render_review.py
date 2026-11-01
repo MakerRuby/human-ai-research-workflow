@@ -19,7 +19,8 @@ LABELS = {'draft': '草稿', 'produced': '已生成', 'checked': '已检查', 'a
           'observed': '已观察', 'under_review': '待核实', 'refuted': '被反驳', 'superseded': '已替代',
           'adopted': '已采用', 'proposed': '提议', 'withdrawn': '已撤回', 'succeeded': '执行成功',
           'failed': '执行失败', 'running': '执行中', 'mitigated': '已缓解', 'retired': '已退出使用',
-          'ready': '就绪（生成时）'}
+          'ready': '就绪（生成时）', 'active': '执行中', 'paused': '已暂停',
+          'stopped': '已停止', 'cancelled': '已取消'}
 
 
 def esc(value):
@@ -142,6 +143,10 @@ def render(root, check=False, baseline=None):
               (len(report.get('governance', {}).get('invalid_or_pending_reproductions', [])), '待处理复现验证')]
     cards = '<div class="cards">' + ''.join('<div><strong>' + str(count) + '</strong><span>' + label + '</span></div>' for count, label in counts) + '</div>'
     overview = '<p>' + links(['README.md', '_pm/BRIEF.md', '_pm/STATUS.md', '_pm/LAYOUT.md', 'AI_CONTRACT.md']) + '</p>'
+    if 'execution' in current['project']:
+        objective = current['project'].get('objective_achieved')
+        objective_label = '已达成' if objective is True else '未达成' if objective is False else '未评估'
+        overview += '<p>执行状态：' + badge(current['project']['execution']['status']) + '；原目标：' + objective_label + '。</p>'
     overview += table(['关口', '状态', '依据'], [(esc(r['id']), badge(r['status']), links(r.get('evidence', []))) for r in current['gates']])
     overview += '<h3>复现覆盖</h3>' + table(['验证', '状态 / 范围', '版本', '证据与限制'], [
         (esc(r['id']) + '<br>' + esc(r.get('title', '')), badge('stale' if r['status'] == 'pass' and r['id'] in report.get('governance', {}).get('invalid_or_pending_reproductions', []) else r['status']) + ' ' + badge(r.get('scope', '?')),

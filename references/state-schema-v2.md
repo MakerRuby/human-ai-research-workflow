@@ -9,10 +9,16 @@
 - artifacts：id/path/version/status/depends_on/required_checks。depends_on 为 `[{"id":"上游编号","version":"v1"}]`。状态 draft/produced/checked/accepted/stale/rejected。accepted 需 acceptance.by/rationale 与当前必需检查通过。可加 sha256、requires_professional_review、requires_reproduction（布尔值）。
 - artifacts 可选 lifecycle 为 active/retired；retired 需 retirement.by/at/reason/disposition/manifest/snapshot/evidence。disposition 与操作见 [归档协议](archive.md)。当前质量状态与是否还被采用分别表达。
 - checks：id/artifact/version/kind/status/required；kind 为 machine/professional/source，status 为 pending/pass/fail/waived。完成检查需 by/rationale/evidence 文件列表。waived 仅用于非必要检查并有 waiver_reason；命令字段只是记录，核查器不执行。
-- tasks：id/status/inputs/outputs；inputs 为版本引用，outputs 为成果编号列表。状态 todo/doing/blocked/done。
+- tasks：id/status/inputs/outputs；inputs 为版本引用，outputs 为成果编号列表。状态 todo/doing/blocked/done/paused/stopped/cancelled。后3种是执行控制，不代表完成；需 `status_record` 的 status/by/rationale/at/evidence/decision（真实已采用的 D）。历史状态留在 status_history。
 - gates：id/status/artifacts/checks/depends_on；列表使用编号，状态 pending/conditional/pass/fail。pass 需 by/rationale/evidence，且必要前置与证据满足。
 
 ## v4 研究模型扩展（可选集合，schema_version 仍为 2）
+
+v4.3可选字段：`project.execution` 含 status（active/paused/stopped）、by/rationale/at/evidence/decision；`project.objective_achieved` 为 true/false/null，已评估的布尔值附 `objective_assessment` 的责任/理由/证据。无字段的旧项目无需迁移，不补造历史暂停/停止或成功。状态变更历史分别为 execution_history/objective_history。
+
+停止/暂停把未完成任务设为相应状态，保留已完成任务与历史关口；恢复项目不自动恢复任务。新控制/恢复需当前 adopted 决定；历史控制可引用保留原批准证据的 superseded 决定。结构检查不判定批准内容是否真的覆盖本次动作，仍须核实际授权。`run_project.py` 在创建运行目录/输出之前拒绝非active项目及 paused/stopped/cancelled任务。
+
+`record.py check` 记录的 `artifact_sha256` 绑定当时成果内容，不能由同版本的变更内容沿用；`accept` 一次写入真实验收者、证据及当前必要检查。`decision-set` 沿用既有 withdrawn/superseded 状态并保留历史：未采用提案只撤回，不补造批准；替代已采用决定须指向另一实际已采用决定。
 
 v4 新建的研究项目会带 `questions`、`hypotheses` 两个空数组。旧项目没有这两个集合也照样有效；需要时手工补上即可，不需要迁移状态。这些扩展字段由 `scripts/research_model.py` 校验。
 

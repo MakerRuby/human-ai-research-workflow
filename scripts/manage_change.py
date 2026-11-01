@@ -6,6 +6,7 @@ import sys
 
 from check_project import Audit, check_project
 from project_io import atomic_json, encoded, load, local, now, state
+from lifecycle import CONTROLLED_TASK_STATUSES
 
 
 def open_change(root, spec):
@@ -44,7 +45,14 @@ def open_change(root, spec):
     for row in current['tasks']:
         if set(row['outputs']) & affected or any(ref['id'] in affected for ref in row['inputs']):
             add('task', row)
-            row['status'] = 'todo'
+            if row['status'] in CONTROLLED_TASK_STATUSES:
+                row['pending_input_change'] = spec['id']
+            else:
+                if 'status_record' in row:
+                    row.setdefault('status_history', []).append(
+                        {'status': row['status'], 'record': row.pop('status_record'),
+                         'invalidated_by': spec['id'], 'at': now()})
+                row['status'] = 'todo'
     check_index = {row['id']: row for row in current['checks']}
     affected_gates = {row['id'] for row in current['gates'] if set(row['artifacts']) & affected or any(check_index.get(c, {}).get('artifact') in affected for c in row['checks'])}
     gate_children = {row['id']: [] for row in current['gates']}
