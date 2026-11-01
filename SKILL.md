@@ -2,7 +2,7 @@
 name: human-ai-research-workflow
 description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
 metadata:
-  version: "4.1.0"
+  version: "4.2.0"
 ---
 
 # 人与 AI 科研协作工作流
@@ -54,6 +54,8 @@ metadata:
 
 可以合并澄清问题；优先使用已有上下文。开始调查前，先读取项目材料并判断用户已有知识或已做工作是否会改变调查范围；只有会改变方向、范围或判断时才提出针对性问题。可逆、低风险的实施细节自行判断并说明假设。缺失数据、科学事实或授权不能靠默认值补齐。遇到阻塞，只暂停依赖该信息的部分，继续独立工作。
 
+仅依赖公共数据时，在承诺主体分析前并列筛查认知增量与最小证据链，尽早核实际测量、独立人数/配对上限、乐观精度和论断确实需要的外部支持；见 [公共数据可行性](references/public-data-feasibility.md)。验证元数据可提前查，验证效应按锁定规则解锁。
+
 ## 3. 按需调用专项技能
 
 本技能可以作为统筹入口调用其他技能；专项技能负责领域工作，本技能负责目标、接口、证据和集成验收。**技能调用不等同于开设新会话、创建子代理或获得额外权限。**
@@ -75,7 +77,7 @@ metadata:
 | 设计定稿：对照、功效、预期结果矩阵；补注册关口 | CP5 → G3、R1 | 同上；`experimental-design`、`statistical-power` |
 | 执行：计算分析或湿实验在环 | — | [能力注册表](references/capability-registry.md)、[复现](references/reproducibility.md) |
 | 结果解释，更新问题树 | CP6 | [角色与检查点](references/roles-and-checkpoints.md) 解释简报 |
-| 解锁验证数据或开展验证实验（核对独立性） | CP7 | 同上；`research_tree.py` 的 `derived_from` / `validated_on` |
+| 解锁验证效应或开展验证实验（提前核元数据与独立性） | CP7 | 同上；`research_tree.py` 的 `derived_from` / `validated_on` |
 | 论证骨架锁定、模拟审稿、投稿前对账 | CP8、CP9 | [论证骨架](references/narrative-spine.md)、[固定交付](references/release.md) |
 
 **必须**：
@@ -88,6 +90,7 @@ metadata:
 - 每个检查点要么有 `D-*`，要么登记“不适用”及理由。选定一个过程、机制或假设去检验，就是 CP3 决定：走锦标赛，或登记跳过理由。
 - CP2 起就填论证骨架；每个正式分析先写明对应哪张图、支撑哪条论断。
 - 已批准的工作包连续做完并验收再汇报；只在越权、科学取舍或真阻塞时停下（见 [角色与检查点](references/roles-and-checkpoints.md) 第 3 节）。
+- 负责人已采用的明确停止条件命中后，依原授权执行并报告，不重复索要同一确认；探索值或内部审计通过不自动接管原主线。
 - 预检产出正式执行直接加载的冻结输入；面向负责人的数字只来自已验收的输出。对照、分组或样本来源的判断，核对全文方法与原始记录，不凭摘要或 AI 生成的标签。
 
 这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
@@ -161,6 +164,7 @@ python <skill>/scripts/build_release.py --project <project> --spec _pm/release-s
 python <skill>/scripts/archive_artifacts.py --project <project> --spec _pm/archive-spec.json
 python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research --design secondary --design wet_lab
 python <skill>/scripts/research_tree.py --project <project> question add --id Q-001 --statement "…" --clarity 2
+python <skill>/scripts/research_tree.py --project <project> task add --id T-003 --title "候选数据身份核查" --serves Q-001
 python <skill>/scripts/research_tree.py --project <project> task intent --id T-003 --path _pm/intents/T-003.md
 python <skill>/scripts/tournament.py --project <project> rank --id T01
 python <skill>/scripts/registry_search.py --project <project> --query "单细胞 注释"
@@ -191,6 +195,7 @@ python <skill>/scripts/record.py --project <project> decision --id D-003 --title
 - [能力注册表](references/capability-registry.md)：数据库、工具、技能与操作经验的检索，计划清单。
 - [外部经验](references/design-lessons.md)：借鉴 Co-Scientist、Biomni 等系统的取舍与来源。
 - [科研流程](references/research.md)：G1/G2/G3 细则及分析到投稿前衔接。
+- [公共数据可行性](references/public-data-feasibility.md)：公共数据选题时的配对/人数上限、精度、必要支持路径、分层接触与停止。
 - [技能协作](references/skill-composition.md)：发现、调用、权限、冲突、集成和回退。
 - [质量与变更](references/quality-and-change.md)：验收、证据、状态结构和影响追踪。
 - [迁移规则](references/migration.md)：旧包缺陷、兼容和渐进采用。
@@ -202,3 +207,4 @@ python <skill>/scripts/record.py --project <project> decision --id D-003 --title
 - `scripts/test_v3.py`：治理、实际运行、比较、审阅快照与固定包行为验证。
 - `scripts/test_v4.py`：研究类型初始化、问题树校验、锦标赛与能力注册表行为验证。
 - `scripts/test_v41.py`：标准目录、`record.py`、CP3 与论证骨架留空警告、未登记运行目录的行为验证。
+- `scripts/test_v42.py`：元数据/分析运行的 CP3 边界、已采纳决定与任务创建的行为验证。

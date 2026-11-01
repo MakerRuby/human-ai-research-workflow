@@ -25,10 +25,13 @@ v4 新建的研究项目会带 `questions`、`hypotheses` 两个空数组。旧�
 | tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 文件散列须一致；须早于 run.json 中 `task` 指向该任务的运行 |
 | gates.question | 可选，问题编号：在混合项目中把关口限定到某个子问题 | 必须是已登记的问题 |
 | run.json.task | 可选；由运行规格的 `task` 写入 | 必须是已登记的任务 |
+| run.json.stage | 可选；由运行规格的 `stage` 原样登记 | metadata/analysis/validation；仅显式 metadata 且无其他选路信号时不因该运行提示 CP3，缺省/未知按保守提示；标签不证明盲法 |
 | claims.basis | data/literature/synthesis | `synthesis` 标为 supported 时需要 `reviewed_by` |
 | project.designs | 研究类型列表，取值见 [研究类型](research-types.md) | — |
 
 问题树不允许出现环；`type` 必须是已知的研究类型。由 `tournament.py promote` 写入的假设带 `source`（锦标赛、名次、排名快照），排名文件必须存在。
+
+`research_tree.py task add --id T-003 --title "…" --serves Q-001 --input DATA-001@v1` 可创建 todo 任务，输入和挂靠由同一检查器核对；输入可重复传入或省略。新命令不批准科学选择，也不登记虚构结果。CP3 提案不消除已选路线的警告，须有 adopted 决定；检查器仍不能自动判断某条旧决定是否覆盖新的科学路线，应按实际作用范围审阅。
 
 ## 新集合
 

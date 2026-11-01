@@ -1,0 +1,45 @@
+test_blind_packet_hides_origin_and_respects_order (test_v4.V4Tests.test_blind_packet_hides_origin_and_respects_order) ... ok
+test_design_requires_research_profile (test_v4.V4Tests.test_design_requires_research_profile) ... ok
+test_designs_add_experiment_register_and_extra_gates (test_v4.V4Tests.test_designs_add_experiment_register_and_extra_gates) ... ok
+test_general_project_has_no_research_collections (test_v4.V4Tests.test_general_project_has_no_research_collections) ... ok
+test_intent_brief_must_precede_runs_and_stay_unchanged (test_v4.V4Tests.test_intent_brief_must_precede_runs_and_stay_unchanged) ... ok
+test_invalid_designs_fail (test_v4.V4Tests.test_invalid_designs_fail) ... ok
+test_null_baseline_needs_owner_decision_to_leave (test_v4.V4Tests.test_null_baseline_needs_owner_decision_to_leave) ... ok
+test_project_registry_overrides_and_verified_needs_evidence (test_v4.V4Tests.test_project_registry_overrides_and_verified_needs_evidence) ... ok
+test_question_tree_hypothesis_and_task_links (test_v4.V4Tests.test_question_tree_hypothesis_and_task_links) ... ok
+test_rank_replays_matches_and_promote_registers_hypothesis (test_v4.V4Tests.test_rank_replays_matches_and_promote_registers_hypothesis) ... ok
+test_research_init_creates_thinking_and_narrative_layers (test_v4.V4Tests.test_research_init_creates_thinking_and_narrative_layers) ... ok
+test_research_model_rejects_broken_links (test_v4.V4Tests.test_research_model_rejects_broken_links) ... ok
+test_research_tree_writes_only_valid_changes (test_v4.V4Tests.test_research_tree_writes_only_valid_changes) ... ok
+test_seed_registry_is_valid_and_searchable (test_v4.V4Tests.test_seed_registry_is_valid_and_searchable) ... ok
+test_supported_synthesis_claim_needs_named_reviewer (test_v4.V4Tests.test_supported_synthesis_claim_needs_named_reviewer) ... ok
+test_tournament_requires_freeze_and_valid_records (test_v4.V4Tests.test_tournament_requires_freeze_and_valid_records) ... ok
+test_unknown_question_and_budget_are_enforced (test_v4.V4Tests.test_unknown_question_and_budget_are_enforced) ... ok
+test_unlinked_research_task_warns_and_unknown_serves_fails (test_v4.V4Tests.test_unlinked_research_task_warns_and_unknown_serves_fails) ... ok
+test_validation_must_be_independent_of_discovery (test_v4.V4Tests.test_validation_must_be_independent_of_discovery) ... ok
+test_blank_templates_warn_only_after_g1_started (test_v41.PilotLessonTests.test_blank_templates_warn_only_after_g1_started) ... ok
+test_filled_documents_clear_template_warning (test_v41.PilotLessonTests.test_filled_documents_clear_template_warning) ... ok
+test_general_init_has_no_research_folders (test_v41.PilotLessonTests.test_general_init_has_no_research_folders) ... ok
+test_record_artifact_hashes_and_refuses_duplicates (test_v41.PilotLessonTests.test_record_artifact_hashes_and_refuses_duplicates) ... ok
+test_record_finding_requires_evidence_file (test_v41.PilotLessonTests.test_record_finding_requires_evidence_file) ... ok
+test_research_init_creates_standard_folders (test_v41.PilotLessonTests.test_research_init_creates_standard_folders) ... ok
+test_route_chosen_without_cp3_warns_until_recorded (test_v41.PilotLessonTests.test_route_chosen_without_cp3_warns_until_recorded) ... ok
+test_skipped_checkpoint_needs_rationale_and_adopted_needs_authority (test_v41.PilotLessonTests.test_skipped_checkpoint_needs_rationale_and_adopted_needs_authority) ... ok
+test_unregistered_run_folder_warns_and_triggers_cp3 (test_v41.PilotLessonTests.test_unregistered_run_folder_warns_and_triggers_cp3) ... ok
+test_analysis_run_triggers_cp3 (test_v42.StageAndTaskTests.test_analysis_run_triggers_cp3) ... ok
+test_bad_stage_is_rejected_before_any_run_or_output (test_v42.StageAndTaskTests.test_bad_stage_is_rejected_before_any_run_or_output) ... ok
+test_checker_rejects_tampered_stage (test_v42.StageAndTaskTests.test_checker_rejects_tampered_stage) ... ok
+test_duplicate_task_cannot_overwrite (test_v42.StageAndTaskTests.test_duplicate_task_cannot_overwrite) ... ok
+test_invalid_task_add_is_transactional (test_v42.StageAndTaskTests.test_invalid_task_add_is_transactional) ... ok
+test_legacy_run_is_conservative_despite_metadata_purpose (test_v42.StageAndTaskTests.test_legacy_run_is_conservative_despite_metadata_purpose) ... ok
+test_metadata_does_not_hide_g2_start (test_v42.StageAndTaskTests.test_metadata_does_not_hide_g2_start) ... ok
+test_metadata_does_not_hide_selected_hypothesis (test_v42.StageAndTaskTests.test_metadata_does_not_hide_selected_hypothesis) ... ok
+test_metadata_run_persists_stage_and_defers_cp3 (test_v42.StageAndTaskTests.test_metadata_run_persists_stage_and_defers_cp3) ... ok
+test_proposed_cp3_does_not_clear_warning_but_adopted_skip_does (test_v42.StageAndTaskTests.test_proposed_cp3_does_not_clear_warning_but_adopted_skip_does) ... ok
+test_task_add_versions_inputs_and_retains_intent_support (test_v42.StageAndTaskTests.test_task_add_versions_inputs_and_retains_intent_support) ... ok
+test_validation_run_triggers_cp3 (test_v42.StageAndTaskTests.test_validation_run_triggers_cp3) ... ok
+
+----------------------------------------------------------------------
+Ran 40 tests in 8.405s
+
+OK

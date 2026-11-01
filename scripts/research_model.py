@@ -67,6 +67,7 @@ def run_starts(audit, state):
 
 
 CHECKPOINTS = {f'CP{i}' for i in range(10)}
+RUN_STAGES = {'metadata', 'analysis', 'validation'}
 STARTED = {'pass', 'conditional', 'waived'}
 # Research documents that must carry content once G1 has started (template still = warning).
 G1_DOCUMENTS = {'references/EVIDENCE_MAP.md': 'research/EVIDENCE_MAP.md',
@@ -125,13 +126,23 @@ def checkpoint_and_template_checks(audit, state, hypotheses):
     if unregistered:
         audit.warnings.append('Run folders exist on disk but are not registered in state runs: '
                               + ', '.join(unregistered) + '; register them so gates and impacts can see them')
-    selected = [h for h, r in hypotheses.items() if r.get('status') in {'prioritized', 'testing', 'supported', 'refuted'}]
-    later = any(gates.get(g, {}).get('status') in STARTED for g in ('G2', 'G3')) or bool(on_disk) \
-        or bool(state.get('runs'))
-    has_cp3 = any(r.get('checkpoint') == 'CP3' for r in decisions)
+    selected = [h for h, r in hypotheses.items()
+                if r.get('status') in {'prioritized', 'testing', 'supported', 'refuted', 'inconclusive'}]
+    # Only an explicit metadata label defers this warning. Unknown/legacy/unreadable runs
+    # remain conservative; do not infer blind access from a purpose string or folder name.
+    effect_or_unknown_run = bool(unregistered)
+    for run in state.get('runs', []):
+        try:
+            doc = load(local(audit.root, run['path'], True))
+            if doc.get('stage') != 'metadata':
+                effect_or_unknown_run = True
+        except (ValueError, OSError, KeyError, TypeError, AttributeError):
+            effect_or_unknown_run = True
+    later = any(gates.get(g, {}).get('status') in STARTED for g in ('G2', 'G3')) or effect_or_unknown_run
+    has_cp3 = any(r.get('checkpoint') == 'CP3' and r.get('status') == 'adopted' for r in decisions)
     if (selected or later) and not has_cp3:
-        audit.warnings.append('A hypothesis or analysis route has been chosen but no decision records CP3; '
-                   'run a tournament or record the skip with its rationale')
+        audit.warnings.append('A hypothesis/analysis route or an unclassified run needs CP3 review, '
+                   'but no adopted decision records CP3; run a tournament or record the skip with its rationale')
 
 
 def validate(audit, tasks):

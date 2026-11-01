@@ -60,6 +60,10 @@
 
 先判断增量属于哪种类型：新现象；机制上升一级；新情境或推广（人群、组织、物种、时间）；解决矛盾；新方法或新资源；有意义的阴性结果；稳健性或重复验证；转化或临床应用。“换个疾病名”“换个算法”“多画几张图”本身都不构成增量。
 
+推荐方案前，先用具体对象写三句话：**最接近研究已知道什么；本研究将区分哪两种目前仍混淆的认识；不同答案会怎样改变理解或行动。** 附支持该差别的原始来源和可取得测量。数据整理、配对审计或多做稳健性分析可以是必要工作，但它们本身不自动成为论文贡献。收窄之后重新检查这三句话，不能只剩“能算出一个数”。
+
+以公共数据为硬约束时，按 [公共数据可行性](public-data-feasibility.md) 将增量与最小证据链并列筛查，尽早核独立人数上限及必要验证路径。方法可执行性与科学价值分别判断；评分高低不能补偿关键测量不存在。
+
 逐项评估，每项给 1–5 分。分数只是摘要，必须写明理由和依据，因为有理由的分数才能被复核：
 
 | 维度 | 要回答的问题 |
@@ -94,6 +98,7 @@
 python <skill>/scripts/research_tree.py --project <project> question add --id Q-001 --statement "…" --clarity 2
 python <skill>/scripts/research_tree.py --project <project> question set --id Q-002 --parent Q-001 --type wet_lab
 python <skill>/scripts/research_tree.py --project <project> hypothesis add --id H-001 --question Q-002 --statement "…" --prediction "…" --origin human
+python <skill>/scripts/research_tree.py --project <project> task add --id T-003 --title "配对上限核查" --serves Q-002 --input DATA-001@v1
 python <skill>/scripts/research_tree.py --project <project> task link --id T-003 --serves H-001
 python <skill>/scripts/research_tree.py --project <project> task intent --id T-003 --path _pm/intents/T-003.md
 ```

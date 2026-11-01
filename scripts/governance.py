@@ -1,6 +1,7 @@
 """Schema-2 governance validation. Scientific findings and reviews remain evidence claims."""
 from pathlib import Path
 from project_io import digest, local, load
+from research_model import RUN_STAGES
 
 
 COLLECTIONS = {
@@ -68,6 +69,8 @@ def validate(audit, artifacts, tasks, gates, children, impact=None):
             doc = load(file)
             if doc.get('id') != row['id'] or doc.get('status') != row['status']:
                 audit.error(f"{row['id']}: run index and run.json disagree")
+            if 'stage' in doc and (not isinstance(doc['stage'], str) or doc['stage'] not in RUN_STAGES):
+                audit.error(f"{row['id']}: invalid run stage")
             for key in ('started_at', 'purpose', 'cache_policy', 'cwd'):
                 if not audit.nonempty(doc.get(key)):
                     audit.error(f"{row['id']}: missing actual run {key}")

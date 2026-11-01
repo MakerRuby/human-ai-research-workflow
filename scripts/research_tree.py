@@ -16,6 +16,7 @@ from project_io import atomic_json, digest, encoded, local, now, state
 
 QID = re.compile(r'^Q-[0-9]{3,4}$')
 HID = re.compile(r'^H-[0-9]{3,4}$')
+TID = re.compile(r'^T-[0-9]{3,4}$')
 
 
 def commit(root, current, mutate):
@@ -110,7 +111,29 @@ def task(root, args):
     current = state(root)
 
     def mutate(s):
-        row = find(s.get('tasks', []), args.id, 'task')
+        rows = s.setdefault('tasks', [])
+        if args.action == 'add':
+            if not TID.fullmatch(args.id):
+                raise ValueError('Task id must look like T-001')
+            if any(r.get('id') == args.id for r in rows):
+                raise ValueError(f'{args.id} already exists')
+            if not args.title or not args.title.strip():
+                raise ValueError('add needs a nonempty --title')
+            inputs = []
+            for value in args.input or []:
+                identity, separator, version = value.partition('@')
+                if not separator or not identity or not version:
+                    raise ValueError('Task inputs must use ID@version')
+                artifact = find(s.get('artifacts', []), identity, 'artifact')
+                if (artifact.get('version') != version or artifact.get('status') == 'stale'
+                        or artifact.get('lifecycle') == 'retired'):
+                    raise ValueError('Task input version is stale or retired')
+                inputs.append({'id': identity, 'version': version})
+            row = {'id': args.id, 'title': args.title, 'status': 'todo', 'inputs': inputs, 'outputs': []}
+            extend(row, 'serves', args.serves)
+            rows.append(row)
+            return {'task': args.id, 'action': 'add'}
+        row = find(rows, args.id, 'task')
         if args.action == 'link':
             if not args.serves:
                 raise ValueError('link needs at least one --serves')
@@ -154,9 +177,11 @@ def main(argv=None):
     h.add_argument('--validated-on', action='append', help='Independent artifact used to test it')
     h.add_argument('--independence', help='Why shared upstream inputs do not compromise independence')
     t = sub.add_parser('task')
-    t.add_argument('action', choices=('link', 'intent'))
+    t.add_argument('action', choices=('add', 'link', 'intent'))
     t.add_argument('--id', required=True)
     t.add_argument('--serves', action='append')
+    t.add_argument('--title', help='Required for add; new tasks start as todo')
+    t.add_argument('--input', action='append', help='Versioned artifact input for add: ID@version')
     t.add_argument('--path')
     args = parser.parse_args(argv)
     handlers = {'question': question, 'hypothesis': hypothesis, 'task': task}

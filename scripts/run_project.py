@@ -10,6 +10,7 @@ import subprocess
 import sys
 
 from project_io import atomic_json, digest, encoded, load, local, now, state, write_new_tree
+from research_model import RUN_STAGES
 
 
 def run(root, spec, command, timeout=None):
@@ -26,6 +27,9 @@ def run(root, spec, command, timeout=None):
         raise ValueError('Explicit command argv is required')
     if timeout is not None and timeout <= 0:
         raise ValueError('Timeout must be positive')
+    stage = spec.get('stage')
+    if 'stage' in spec and (not isinstance(stage, str) or stage not in RUN_STAGES):
+        raise ValueError('stage must be metadata, analysis or validation when provided')
     for key in ('purpose', 'cache_policy'):
         if not isinstance(spec.get(key), str) or not spec[key].strip() or '待' in spec[key]:
             raise ValueError(f'Fill actual {key}')
@@ -65,6 +69,7 @@ def run(root, spec, command, timeout=None):
     if task is not None and task not in {t.get('id') for t in current.get('tasks', []) if isinstance(t, dict)}:
         raise ValueError('Unknown task for this run; register the task first')
     record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': now(),
+              **({'stage': stage} if stage is not None else {}),
               **({'task': task} if task is not None else {}),
               'ended_at': None, 'returncode': None, 'cwd': '.', 'command': command,
               'inputs': inputs, 'input_hashes': input_hashes, 'snapshots': snapshots,
