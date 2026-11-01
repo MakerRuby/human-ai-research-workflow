@@ -1,0 +1,14 @@
+usage: run_project.py [-h] --project PROJECT --spec SPEC [--timeout TIMEOUT]
+                      ...
+
+Execute explicitly supplied argv, preserving actual run evidence. No shell or
+recorded-command replay.
+
+positional arguments:
+  command
+
+options:
+  -h, --help         show this help message and exit
+  --project PROJECT
+  --spec SPEC        Project-relative run specification
+  --timeout TIMEOUT

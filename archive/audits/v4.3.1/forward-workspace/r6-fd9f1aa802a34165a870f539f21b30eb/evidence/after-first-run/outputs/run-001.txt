@@ -1,0 +1,3 @@
+fixture=R6
+label=first
+synthetic fixture only; no real research data

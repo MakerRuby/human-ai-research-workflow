@@ -1,0 +1,966 @@
+--- before/CHANGELOG.md
++++ after/CHANGELOG.md
+@@ -1,4 +1,17 @@
+ # 更新日志
++
++## 4.3.1 — 2026-11-02
++
++根据既有研究的返工复盘定向修订。保留4.3的推荐、累计投入、执行停止与验收工具；不重复造关口或把负结果当失败。只优化指定源副本，不自动安装、迁移项目或发布。schema仍为2。
++
++- 在原CP6/CP8区分技术可信度、科学答案/信息量及下一块投入价值；实质审稿先于大排版，重大意见区分新增证据、表达澄清与仍未解决。
++- 模拟作为论证支柱时，在冻结前用小先导核阴性、可检出阳性及关键边界/过渡；计算夹具与场景信息性分别说明，已见网格不改到“成功”。
++- 补分析/湿实验先说明边际收益；同供者重测不新增n，qPCR质量完善不自动升级成独立验证或机制确认。纠正“所有计算结论都必须补湿实验/独立验证”的过强表述。
++- CP3允许有依据的简表；解释、识别边界、实现核查与任务优先级不混排。复用单场blind工具，反序评审避免先读另一顺序意见。
++- 当前稿与待采纳提案分明，工作稿与固定版本分开；目录/渲染/章节组装/检查器边界经验按需加载，澄清种子know-how相对路径。
++- 修复意图版本更新使旧RUN误报后验预期的问题：新运行自动冻结intent_ref和快照，历史按实际适用版本核查；旧意图变更、时间倒置与歧义仍拒绝，登记失败不继续依赖执行。
++- 初始化新增`--no-research-folders`，跳过默认业务目录占位以适配既有项目，不推断目录或自动迁移。默认新项目行为保持。
++- 实际回归、隔离科研判断情景、安装目录前后完整性与限制见[AUDIT-4.3.1.md](AUDIT-4.3.1.md)。不将结构测试或AI情景意见视为发表率证据。
+ 
+ ## 4.3.0 — 2026-11-01
+ 
+--- before/README.md
++++ after/README.md
+@@ -1,6 +1,6 @@
+ # 人与 AI 科研协作工作流
+ 
+-**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.3.0
++**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.3.1
+ 
+ 这是人与 AI 合作完成生物医学科研的全流程工作流。负责人只需提出一个初步想法，AI 就会引导把问题具体化，评估现状与科学增量，组织多个假设竞争，再陪同完成设计、执行、解释和论证骨架，一直到投稿前材料。在关键节点，AI 给出推荐和理由，由负责人拍板。工作流适用于公开数据、组学、湿实验、动物、临床和系统评价研究，并按任务调用已可用的专项技能。
+ 
+@@ -42,6 +42,8 @@
+ 
+ 确认路径和初始化范围后，移除 `--dry-run` 执行。完整说明见 [USAGE.md](USAGE.md)。没有终端权限时，可由有权限的人执行，并回传真实输出。
+ 
++已有业务目录时可加 `--no-research-folders` 跳过默认目录占位；它不推断或迁移现有路径。关键结果后的科学价值/补强收益审阅见[结果后的价值审阅](references/research-value-review.md)，复用既有检查点。
++
+ ## 文件导航
+ 
+ | 文件或目录 | 职责 |
+@@ -56,7 +58,7 @@
+ | [assets/capabilities/](assets/capabilities/) | 种子能力注册表与操作经验文档 |
+ | [references/design-lessons.md](references/design-lessons.md) | 借鉴外部 AI 科学家系统的取舍与来源 |
+ | [CHANGELOG.md](CHANGELOG.md) | 版本和命名变更 |
+-| [AUDIT-4.3.0.md](AUDIT-4.3.0.md) | 当前版本的依据、改动代价、验证与未验证项；旧版审核记录保留 |
++| [AUDIT-4.3.1.md](AUDIT-4.3.1.md) | 当前版本的依据、改动代价、验证与未验证项；旧版审核记录保留 |
+ 
+ ## 验证与边界
+ 
+@@ -68,7 +70,7 @@
+ 
+ ## 版本与许可
+ 
+-技能名称保持稳定，版本保存在元数据和 Git 标签中。由 `ai-project-blueprint-v3` 更名而来，参见 [迁移说明](references/migration.md)。
++技能名称保持稳定，版本写入元数据；实际发布后才有对应 Git 标签。由 `ai-project-blueprint-v3` 更名而来，参见 [迁移说明](references/migration.md)。
+ 
+ 当前尚未选择开源许可证。公开发布与许可授权是不同决定；在作者选择并加入 LICENSE 前，本仓库不声明采用某种开源许可证。
+ 
+--- before/SKILL.md
++++ after/SKILL.md
+@@ -2,7 +2,7 @@
+ name: human-ai-research-workflow
+ description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
+ metadata:
+-  version: "4.3.0"
++  version: "4.3.1"
+ ---
+ 
+ # 人与 AI 科研协作工作流
+@@ -93,6 +93,7 @@
+ - CP2 起就填论证骨架；每个正式分析先写明对应哪张图、支撑哪条论断。
+ - 已批准的工作包连续做完并验收再汇报；只在越权、科学取舍或真阻塞时停下（见 [角色与检查点](references/roles-and-checkpoints.md) 第 3 节）。
+ - 负责人已采用的明确停止条件命中后，依原授权执行并报告，不重复索要同一确认；探索值或内部审计通过不自动接管原主线。
++- 关键结果使主张收窄、必要支持失效或准备大规模写作/出图时，在现有 CP6/CP8 分别判断可信度、科学信息量和下一块投入价值；实质审稿先于大排版，见 [结果后的价值审阅](references/research-value-review.md)。
+ - 预检产出正式执行直接加载的冻结输入；面向负责人的数字只来自已验收的输出。对照、分组或样本来源的判断，核对全文方法与原始记录，不凭摘要或 AI 生成的标签。
+ 
+ 这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
+@@ -156,6 +157,7 @@
+ ```text
+ python <skill>/scripts/init_project.py --target <project> --name <name> --scale M --profile general --dry-run
+ python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research
++python <skill>/scripts/init_project.py --target <existing-project> --name <name> --scale M --profile research --no-research-folders --dry-run
+ python <skill>/scripts/check_project.py --project <project>
+ python <skill>/scripts/check_project.py --project <project> --impact DATA01
+ python <skill>/scripts/check_project.py --project <project> --require-gate G3 --verify-hashes
+@@ -213,3 +215,4 @@
+ - `scripts/test_v41.py`：标准目录、`record.py`、CP3 与论证骨架留空警告、未登记运行目录的行为验证。
+ - `scripts/test_v42.py`：元数据/分析运行的 CP3 边界、已采纳决定与任务创建的行为验证。
+ - `scripts/test_v43.py`：停止/恢复的实际执行边界、验收及任务结束的事务回归；[科研判断情景](references/behavioral-evaluation.md)另评推荐依据、收敛与用户负担，不把结构测试当科学判断验证。
++- `scripts/test_v431.py`：意图更新与新旧运行绑定、历史不可改写、时间/快照检查和既有目录适配。
+--- before/USAGE.md
++++ after/USAGE.md
+@@ -23,6 +23,8 @@
+ 
+ v4.3新增任务状态、检查/验收和执行停止的事务式命令，见[治理协议](references/governance.md)。这些命令记录真实决定，不代替授权或专业判断。既有schema1/2项目可继续只读检查，无需自动迁移；使用新控制字段前核对原项目约定，停止与原目标是否达成分开记录。
+ 
++v4.3.1修复意图版本与运行的绑定：更新意图用新文件，运行器自动保存当时引用与快照，旧运行不回绑；登记失败先处理错误，不继续启动依赖运行。既有布局可用初始化的 `--no-research-folders --dry-run` 预览，只跳过业务目录占位，不自动迁移state或合并旧约定。详见[迁移](references/migration.md)与[复现](references/reproducibility.md)。
++
+ 项目统一约定保存在根目录 `AI_CONTRACT.md`，其中记录技能路径与每轮恢复、收尾规则。不要再创建一份重复的管理总纲。
+ 
+ 初始化 M/L 项目时默认生成 `AGENTS.md` 与 `CLAUDE.md`。可用 `--ai-entry agents` 或 `--ai-entry claude` 仅选择一种，或用 `--no-ai-entry` 关闭。两种入口也可显式指定：
+--- before/references/behavioral-evaluation.md
++++ after/references/behavioral-evaluation.md
+@@ -14,4 +14,15 @@
+ | S4 明确停止 | 仅收尾，执行停止与目标未达成分开；历史成果保留，未完成任务不虚记完成，不自动重启 |
+ | S5 资源漂移 | 分开历史描述、当前版本/条件、实际取得内容；独立性与标签未知保持未知，不推导大样本或现成验证 |
+ 
++返工与后续投入扩展见[rework-scenarios.json](../assets/evaluation/rework-scenarios.json)，按改动选择相关例，不要求每次维护重演全部情景。以下仅供维护者判定，不交给独立执行者：
++
++| 情景 | 审阅的可观察结果 |
++|---|---|
++| R1 技术通过而增量/精度弱 | 分开可信度、答案信息量与追加投入；仅执行本轮评估，不自动扩包或终止总目标 |
++| R2 有信息的负结果 | 根据事前问题/精度与解决矛盾的价值判断，不因无显著停止，也不无据升级成等效性或保证接收 |
++| R3 全网格零检出 | 区分计算夹具与场景信息性；保留冻结结果，新网格只是待授权方案，不宣布无生物现象/程序必错或调到成功 |
++| R4 存量qPCR | 先查测量链/部位/独立性和边际收益，不自动重做、挑相符靶标、增加n或宣称必然提升SCI质量 |
++| R5 混合竞争对象 | A/B解释可共存，边界/实现/任务不混作真相排名；简表足够，不强制Elo或新代理 |
++| R6 意图版本实际操作 | 实际执行两次新旧绑定；旧RUN字节保留、第二份登记生效；改写旧简报被检查发现，保留失败/篡改夹具，不冒称科学验证 |
++
+ 记录每例原始答复、实际动作、判定及理由；区分符合、部分符合和不符合。审阅者可提出反例或遗漏，不将另一模型同意当作科学真值。一次独立模型情景评估是有限的行为证据，不是盲法临床试验或新版本因果优效证明；公开报告范围、失败及是否根据已知测试修订。
+--- before/references/capability-registry.md
++++ after/references/capability-registry.md
+@@ -22,6 +22,8 @@
+ | `verified_at` / `evidence` | 冒烟测试的日期与记录位置（`verified` 必填） |
+ | `pitfalls` | 最常见的 1–3 个坑 |
+ | `doc` | know-how 文档路径（若有） |
++
++种子条目的 `doc` 相对 `assets/capabilities/registry.json` 所在目录解析，例如 `know-how/public-omics-reuse.md` 对应 `<skill>/assets/capabilities/know-how/public-omics-reuse.md`，不是 `<skill>/know-how/...`。项目条目的相对文档位置以项目自己的登记约定为准，不能沿用种子根路径猜测。
+ 
+ 种子条目只表示“值得考虑”，不保证在当前环境可用。技能类条目使用前，要用宿主的技能清单确认确实已安装；数据库类条目，要在本次运行中实际访问一次，并记下版本和访问日期。
+ 
+@@ -56,7 +58,7 @@
+ 3. [ ] 改为分层分析并在讨论中说明（D-006）
+ ```
+ 
+-规则：打勾的项目必须附 `RUN-*` 或产物路径；失败的项目保留不删，写明原因，再插入修正步骤。所有命令通过 `run_project.py` 执行（见 [复现](reproducibility.md)），设超时；完整日志落盘，回传给 AI 的只是开头、结尾和报错行。
++规则：打勾的项目必须附 `RUN-*` 或产物路径；失败的项目保留不删，写明原因，再插入修正步骤。进入正式研究证据链的计算用 `run_project.py` 留痕（见 [复现](reproducibility.md)），设适用超时并保留完整日志，回传必要摘要。普通读取、工具帮助和治理登记不为形式包装成研究运行；需登记的元数据探针使用实际来源清单和独立运行配置，不把持续变化的项目状态冒充冻结分析输入。
+ 
+ ## 6. 维护规则
+ 
+--- before/references/hypothesis-tournament.md
++++ after/references/hypothesis-tournament.md
+@@ -4,17 +4,17 @@
+ 
+ ## 0. 触发与跳过登记
+ 
+-以下任一情况出现，就是在做 CP3 决定，必须二选一：开一轮锦标赛，或在 `D-*` 中登记跳过理由。
++以下任一情况出现，就是在做 CP3 决定，需要登记选择依据；采用锦标赛，或用竞争解释表完成比较并说明无需锦标赛的理由。
+ 
+ - 准备从多个过程、通路、机制或细胞类型中选一个作为主线；
+ - 准备锁定要用实验（qPCR、敲低等）检验的候选；
+ - 文献检索发现已有多个相互竞争的解释，而本研究要在其中站队。
+ 
+-允许跳过的理由：备选只有一两个且显而易见（附竞争解释表，必须包含“最无聊解释”）；问题仍停在 L0–L1（先回到问题塑形）；负责人明确不需要（记录原话）。“时间紧”“AI 已经想清楚了”不是跳过理由。选定之后，`HYPOTHESES.md` 要写清选择依据和被放弃的备选；所依据的文献论断须经全文核对（见 [资料与证据](evidence-and-materials.md)），不能只凭摘要。
++简表足以呈现解释、判别性预测、反证及最省力核查，且进一步排序不会改变资源选择时，可不做锦标赛，不以候选数为硬门槛。附“最无聊解释”，在 `D-*` 说明为何简表足够。问题仍在 L0–L1 时先回到问题塑形；负责人明确不需要时记录原话。“时间紧”“AI 已经想清楚了”不能替代选择依据。选定之后，`HYPOTHESES.md` 写清依据与备选；关键文献论断须经全文核对（见 [资料与证据](evidence-and-materials.md)）。
+ 
+ ## 1. 何时用，何时不用
+ 
+-适用于机制尚不明确、存在多种合理解释，而选错方向代价很大的问题。问题本身还停留在 L0–L1 时不要用，先回到问题塑形。只有一两个显而易见的备选时也不必用，直接写竞争解释表即可。
++适用于机制尚不明确、多种合理解释需要分配有限检验资源，且比较收益足以抵偿评审负担的问题。先区分候选的性质：同一科学问题的解释可以竞争，不必互斥；“无法识别因果”等设计边界、计算实现是否正确及先做哪项任务，分别核查，不与生物解释混成一张Elo榜。若要比较任务，明确排序对象是信息价值与代价，不能称假设证据排序。问题在 L0–L1 时先塑形；简表足够时直接使用。
+ 
+ 锦标赛的输出是“值得优先检验的假设”，不是“正确的假设”。Elo 排名是 AI 内部的相对偏好，不是证据，不能写进论文作为支持。Co-Scientist 的作者自己也说明，Elo 是基于自评的有限指标，三个湿实验验证都有专家在环筛选。
+ 
+@@ -81,7 +81,7 @@
+ ## 5. 防偏差
+ 
+ - 评价标准在看到假设之前冻结；中途要改，就登记 `D-*`，并说明对已有比较的影响（必要时重开一轮）。
+-- 评委不知道假设来源：给评委的材料用 `blind` 生成，只保留表述、机制、预测和参考文献，隐去 `origin`、`strategy`、`parents`，按指定顺序展示。
++- 评委不知道假设来源：用现有 `blind --order` 逐场生成，只保留表述、机制、预测和参考文献，隐去 `origin`、`strategy`、`parents`。反序比较使用未见正序意见的上下文；不先投递全轮packet、既有排名或另一顺序评语。已经暴露则如实标为非独立，必要时在原预算内重评，不用另一场同上下文评语冒充盲评。
+ - `null` 假设必须入池。它排在前列是重要信号，不能静默删掉；只有负责人做出已登记的决定，它才能离开候选池。
+ - 小样本时 Elo 波动大。报告每个假设的比较场数；场数不足的排名，标为不稳定。
+ - 不追求“看起来新”：只有可检验性和判别性预测清楚的假设，才能进入 CP3 的推荐。
+--- before/references/migration.md
++++ after/references/migration.md
+@@ -1,4 +1,8 @@
+ # 原包适配与迁移
++
++## 既有目录的最小适配
++
++先看现有约定、代码与来源目录。可在 `init_project.py` 的预览/执行加 `--no-research-folders`，跳过默认业务目录的README占位，避免在既有 `scripts/` 旁另造 `src/`；必要研究记录仍按模板补缺。先审查 `--dry-run` 清单，已有等价文档则手工最小合并，不把模板当新权威。此选项不自动推断目录、不调整已有state；职责映射仍在现有 `layout` 与 `LAYOUT.md` 审阅后维护，原件不移动。新项目未提供此选项时保留原默认行为。
+ 
+ ## 从 v3 升级到 v4
+ 
+--- before/references/narrative-spine.md
++++ after/references/narrative-spine.md
+@@ -38,19 +38,19 @@
+ ## 3a. 触发与留空登记
+ 
+ - **CP2（G1 之前）必须写入**：工作标题与一句话结论（可标“设想”）、读者与意义、故事线中的背景/空白/问题节点、预期审稿质疑（检索中发现的重叠研究、对照或独立性问题）。G1 之后骨架仍是空模板，`check_project.py` 会给出警告。
+-- **分析开工前先画图**：每个正式分析在意图简报里写明“对应哪张主图、支撑哪条 CLAIM”。答不出来就先问：这项分析值不值得做。正式统计若未在图故事板中登记，检查器给出警告。
++- **分析开工前先画图**：每个正式分析在意图简报里写明“对应哪张图表、支撑哪条预期 CLAIM”。答不出来就先核这项分析是否值得；诊断或补充分析说明其职责，不强塞进主图。当前检查器会提醒空骨架和已登记链接问题，不会逐项识别每次统计是否进入故事板，覆盖关系仍需实际核对。
+ - **预期论断与实际结果分开**：结果尚不存在时，在故事板/意图中预留论断编号、问题、目标量和不同答案的解释；当前状态结构的 claims.results 要求真实成果，等结果产生后再登记正式 claim。不把方案、输入或占位文件冒充结果以消除检查错误。
+ - **允许留空的部分**：结果段、图注和讨论段只在结果验收后写。结果未被接受、方向暂停或终止时可以留空，但要在修订记录中写明原因（引用 `D-*`）。
+ - **主线暂停或终止时**：骨架冻结为当时版本，写明哪些论断成立、哪些不成立、哪些质疑没有解决。这些内容是转向时最有用的材料，不要清空。
+ 
+ ## 4. 叙事锁定（CP8）
+ 
+-主要结果基本到位后，AI 准备以下材料：
++主要结果基本到位后，先按[结果后的价值审阅](research-value-review.md)复核科学答案与下一块投入价值，再准备以下材料；复用已有 CP6 解释，不另建批准层：
+ 
+ - 当前骨架，以及它和上一版的差异；
+ - 每条主要 CLAIM 的强度和证据链（CLAIM → 图表 → 统计输出 → RUN → 数据或来源）；
+ - 缺口清单，每项写明补上它的代价，以及不补的后果（降低论断强度、移到补充材料、写成局限）；
+-- 模拟审稿意见：调用 `peer-review` 技能，由一个与写作者不同的上下文完成；它的意见只是待核实的提示，不算证据。
++- 模拟审稿意见：按实际可用能力调用 `peer-review` 或等价审阅。先查实质增量、设计可区分的答案、最强拒稿理由和可能改变判断的最小证据，再做一致性对账；上下文与证据边界见上述协议。
+ 
+ 负责人决定锁定主线、补做、降低论断强度或改投方向，决定记为 `D-*`。锁定后如果主要结论改变，要开 `CH-*` 变更，并对摘要、标题、图和正文做影响追踪。
+ 
+@@ -58,5 +58,5 @@
+ 
+ 1. 用检索日志做一次增量检索（只查上次检索之后的文献），确认没有被抢先，也没有遗漏新出现的反方证据。
+ 2. 对账：正文中的每个数字、每条 CLAIM、每张图都对应已验收的结果版本，每条引用都经过核实。
+-3. 换一个新上下文做一轮模拟审稿；针对重大质疑，补做分析或调整措辞。
++3. 对 CP8 后实质变化及未解决质疑做模拟审稿；没有相关变化不机械重复全套。回应区分新增证据、表达澄清与仍未解决，补做须在实际授权范围内；换上下文也不等于新的实证支持。
+ 4. 按 [固定交付](release.md) 生成投稿包，作者信息、利益冲突声明、伦理声明由人确认。
+--- before/references/portability.md
++++ after/references/portability.md
+@@ -21,6 +21,12 @@
+ - **GEO series matrix**：表头前可能有空行。应按 `!series_matrix_table_begin` 和 `!series_matrix_table_end` 截取表格，不能简单跳过以 `!` 开头的行。
+ - **10x CSV 计数表**：表头常常缺少基因列的列名，因此数据行比表头多一列。应使用 `index_col=0` 读取，并抽查若干计数，确认条码与基因没有错位。
+ 
++## 批量出图与文档装配前的最小预检
++
++环境或导出路径不确定时，先用一件代表输出核解释器/架构、编码、字体与目标格式的实际渲染，再扩到全批；已有可用链不重复预检。不要因输出文件存在就当可读，也不在同样失败条件下反复启动挂起的Office转换。直接生成PDF可作备用阅读件，但不能证明另一份可编辑文件已通过原生渲染。
++
++章节组装按明确结构/主标题层级处理，避免宽泛匹配把摘要内的Results误作正文；抽查组装后的正文与边界章节。图件看实际导出页的裁切、图例遮挡、误差条和面板衔接，不只检查像素与DPI。自写检查器先用应通过和应拒绝的代表/边界例核实（如并列最大值、合法引用变体、缺失字段）；假失败修检查器，不让正确结果迎合脆弱文本匹配。这些是交付路径需要时的工程经验，不是每项科研的新关口。
++
+ ## 状态文件
+ 
+ 状态文件位置固定为 `_pm/project-state.json`。登记决定、成果与发现时，优先使用 `scripts/record.py`：它先在副本上运行检查器，不引入新错误才写入。不要用临时脚本直接改写 JSON。其中 `layout` 可映射业务目录（数据、代码、运行、成果、正文、交付、审阅等），不改变状态文件本身的位置。对于权威状态已在其他系统维护的旧项目，先决定复用或显式迁移；不要建立两个完整的手工状态库。
+--- before/references/project-layout.md
++++ after/references/project-layout.md
+@@ -23,6 +23,8 @@
+ 
+ 当前执行控制由 state 的 `project.execution` 保存，真实授权仍在 D 记录及 `AI_CONTRACT.md`；`project.objective_achieved` 单独记录目标评估。STATUS 只保留当前有效的阶段、主要限制和下一动作/终止理由，历史阶段以链接进入原记录，不逐轮追加完整旧状态。一般答疑不创建任务、意图、来源卡和多份报告；只有实质影响研究/决策或重新获得成本较高的证据才持久记录。一次事实更新只改其权威位置及确受影响的摘要，不为形式同步机械改遍所有文件。
+ 
++根入口指向唯一当前稿/图源及已采用方案；候选和待采纳提案标明身份，不与当前采用版本并列。后来已确认的样本事实更新原权威登记及受影响摘要，不能让历史“未知”覆盖新信息。未冻结工作稿正常编辑；已用于正式执行、登记为固定成果或交付审阅的版本保留原件，实质修改另版并追踪依赖。不为每次答疑冻结一套新稿或交付包；整理历史不搬原始科研材料，也不按文件数量判断管理质量。
++
+ 默认业务目录：`references/` 来源材料；`data/raw/` 原始输入；`data/interim/` 中间数据；`data/processed/` 可分析数据；`src/` 正式代码；`notebooks/` 探索；`runs/` 实际执行；`results/` 已登记成果；`manuscript/` 正文；`releases/` 固定交付；`review/` 可重新生成的审阅界面。
+ 
+ 避免以“最终版/最终最终版”或文件移动表达状态。使用稳定成果编号和显式版本，登记输入版本。只在复杂子目录需要补充来源、生成方式或特殊职责时添加 README；不得让每个 README 变成第二个任务台账。较大二进制数据可登记外部存储清单与校验信息，不能假装清单哈希等于远端数据已重新核验。
+--- before/references/reproducibility.md
++++ after/references/reproducibility.md
+@@ -27,6 +27,14 @@
+ 运行配置与持续更新的项目授权/状态分开；执行中不修改已快照的代码、输入或参数。只修缓存、读取次数或时间上限也用新运行并说明科学参数是否改变，不把性能修复写成方法变更或全流程效率提升。
+ 
+ 仅查元数据的运行可在规格中显式写 `stage: "metadata"`，含义是未读取目标读出/效应，用于避免单凭取文件就误触发 CP3；`analysis` 和 `validation` 用于相应运行。未填的历史运行按未知阶段保守提示，不按 purpose 文本猜测。阶段标签不是盲法证明，接触记录和实际代码仍需核对；其他已选假设或 G2/G3 状态照常触发 CP3 检查。
++
++规格含 `task` 且任务已有意图时，运行器在任何运行写入/命令执行前核对简报，自动在 run.json 写 `intent_ref`（path/written_at/sha256）并保留 `intent` 快照。未来更新意图不改变旧绑定。可在规格提供同值的 `intent_ref` 作一致性断言，不能用它选择已被替代的意图。旧无此字段的运行按登记历史只读核查；历史缺口不会因此变成已通过。
++
++## 模拟与复杂筛选：可运行和有信息分开
++
++当论文依赖模拟来解释程序行为，尤其有联合检验、选择或多重负担时，冻结正式网格前先作小型先导：阴性、可检出的阳性及关键边界/过渡是否覆盖；报告选择这些情景的依据和假设。已有公式/边界夹具验证计算，不等于场景能分辨答案；强阳性下检出也不等于现实研究功效或FDR已校准。
++
++先导用于决定网格是否回答目标问题，不用于优化出想要的结论。若所有真值场景都无检出，先检查实现及设计的信息性，不直接判程序错误或生物现象不存在。保留已经冻结/已见的网格与结果；新增情景另版标明接触后提出和理由，不覆盖原网格、不挑选最有利情景。不可行或合理的退化边界也可以报告，明确它没有回答什么。不要求每个描述分析、画图或数据整理都另做功效模拟。
+ 
+ ## 实际比较
+ 
+--- before/references/research-types.md
++++ after/references/research-types.md
+@@ -38,10 +38,10 @@
+ 
+ AI 不能做实验，但这个环节最容易出现“结果散落各处”的问题，所以记录要求反而更严：
+ 
+-1. **实验前**：每项实验先写意图简报（见 [角色与检查点](roles-and-checkpoints.md)）和预期结果矩阵，再按 `EXP-*` 登记方案版本、对照、重复单位、随机化与盲法的安排。
++1. **实验前**：每项实验先写意图简报（见 [角色与检查点](roles-and-checkpoints.md)）和预期结果矩阵，再按 `EXP-*` 登记方案版本、对照、重复单位、随机化与盲法的安排。为论文追加实验时先按[边际收益](research-value-review.md)说明能填补哪条论证缺口；有材料或可做qPCR不自动构成理由。
+ 2. **实验中**：人记录批次、偏离和异常。AI 提供结构化的回填模板（`assets/research/EXPERIMENTS.md`），不要求人改变实验习惯。原始数据（图像、读板数据、凝胶照片）保存原始文件，不只存处理后的图。
+ 3. **实验后**：结果回填后，AI 写解释简报，对照预期矩阵，更新问题树、假设池和论证骨架。失败和阴性的实验同样登记为 `F-*`。
+-4. **验证闭环**：计算得出的假设，要在湿实验或独立数据里验证后，才能在论文中写成结论。验证所用的数据或样本，不得参与当初生成该假设的过程。
++4. **验证边界**：未经独立检验的计算发现按探索性结论表述；是否必须补独立或正交支持，取决于目标论断，不强制所有描述性研究补湿实验。声称独立验证时，验证数据或样本不得参与该假设生成。同供者的另一技术测量可作正交支持，须披露共享个体，不能称新患者独立确认；同份cDNA重测也不新增生物学n。
+ 
+ ## 5. 安全与合规边界
+ 
+--- before/references/roles-and-checkpoints.md
++++ after/references/roles-and-checkpoints.md
+@@ -47,7 +47,7 @@
+ | CP3 | 假设锦标赛后 | 排名前 3–5 的假设、判别性预测、最省力的判别实验或分析 | 推进哪些假设；是否加入自己的假设 | 假设池、`D-*` |
+ | CP4 | 可行性探针后 | 数据或模型实测结果、致命条件清单，以及继续、修正问题或转向的建议 | 是否进入设计 | G2 关口（E1 伦理关口另由人登记） |
+ | CP5 | 设计定稿前 | 方案、对照、功效依据、假设层面的预期结果矩阵 | 批准方案 | G3 关口或实验关口（R1 注册关口另由人登记） |
+-| CP6 | 首次接触关键结果 | 解释简报 | 解释与下一步 | `F-*`、`D-*` |
++| CP6 | 首次接触关键结果 | 解释简报；主张收窄或支持失效时复核信息量与追加投入 | 解释与下一步 | `F-*`、`D-*` |
+ | CP7 | 解锁验证效应或开展验证实验前 | 已锁定的主分析版本、验证计划、来源/条件/精度核对（元数据可行性应提前查） | 是否解锁 | 接触记录、`D-*` |
+ | CP8 | 叙事锁定 | 论证骨架、图故事板、缺口、模拟审稿意见 | 锁定主线 | `NARRATIVE.md`、`D-*` |
+ | CP9 | 投稿前 | 模拟审稿报告与一致性对账 | 是否投稿、投哪本期刊 | 固定交付包 |
+@@ -55,6 +55,8 @@
+ 研究在 CP6 之后常常回到 CP3：新结果更新问题树，再产生新的假设。这个迭代是正常路径，不是返工。
+ 
+ **决策卡**：每个检查点先给一页决策卡，详细材料作为附件。这是为了防止材料太长，负责人只是点头。
++
++对话先讲清要解决什么、为什么推荐、主要代价；数学与细节放附件。一次选择对应一个明确承诺，区分“先评估是否值得”与“批准执行补强”。新答复只更新它实际改变的依赖；AI审阅受托继续写作也不能变成真人审阅或伦理同意。涉及追加投入时按[结果后的价值审阅](research-value-review.md)在原卡片中分别给出三项判断。
+ 
+ ```text
+ 要决定的一件事：
+@@ -66,7 +68,7 @@
+ 附件：证据地图 / 排名报告 / 方案 …（编号）
+ ```
+ 
+-负责人改了推荐或否决推荐时，在 `D-*` 里写明。长期看，如果负责人从不改动推荐，说明检查点的问题提得不够尖锐，或者材料没有暴露真正的取舍。
++负责人改了推荐或否决推荐时，在 `D-*` 里写明。长期只有笼统“同意”时，核对是否讲清问题与真实取舍；不以否决次数评价协作，也不为制造分歧增加选择题。
+ 
+ **检查点必须留痕**：每个检查点要么有对应的 `D-*`，要么在 `D-*` 里登记“不适用”及理由。检查点被跳过且没有登记，本身就是流程缺陷。尤其是 CP3：一旦在多个过程、机制或假设中选定一个去检验，就是在做 CP3 的决定。此时要么走 [假设锦标赛](hypothesis-tournament.md)，要么登记“只有一两个显而易见的备选”等跳过理由，并附上竞争解释表；不能在对话中顺手选定。
+ 
+@@ -98,7 +100,7 @@
+ 
+ 如果“服务于”一栏填不出来，说明这项工作还没想清楚为什么要做。这时先把它挂到问题树上，或交给负责人决定做不做，而不是直接动手。预期结果矩阵要在拿到结果之前写好，这样事前预期和事后解释才分得开。
+ 
+-简报存为 `_pm/intents/<任务编号>.md`，写完后用 `research_tree.py task intent` 登记路径、时间和散列。检查器会核对两件事：简报登记早于相关的运行（运行规格写了 `task` 时），登记后内容没有改动。预期确实需要更新时，就写一份新简报再登记，旧版本保留在 `intent_history`。
++简报存为 `_pm/intents/<任务编号>.md`，写完后用 `research_tree.py task intent` 登记路径、时间和散列。预期确实需要更新时，写新路径（如 `<任务编号>-v2.md`）再登记，旧版本及内容保留在 `intent_history`。新运行自动保存当时的 `intent_ref` 和简报快照；更新当前意图不回绑旧运行。无此字段的旧运行仅按运行前最近的登记版本核查，不改历史文件；时间含糊或所有简报均晚于运行时如实报错。登记失败后不得继续启动依赖该意图的运行。
+ 
+ **解释简报**：用于首次接触关键结果，或出现意外结果时。
+ 
+--- before/references/state-schema-v2.md
++++ after/references/state-schema-v2.md
+@@ -28,12 +28,15 @@
+ | hypotheses | id/question/statement/origin（ai/human）/predictions（非空）；可选 source/findings/decision/record/derived_from/validated_on/independence | candidate/prioritized/testing/supported/refuted/inconclusive/parked/superseded；已检验的状态需要 findings；由锦标赛提升的假设需要已登记的 decision |
+ | hypotheses.derived_from / validated_on | 成果编号列表：生成假设所用的数据，以及验证所用的数据 | 两者不得重叠。上游（depends_on 闭包）有交集时，需在 `independence` 中写明理由 |
+ | tasks.serves | Q/H/CLAIM 编号组成的非空列表 | 研究项目一旦有了问题，未挂靠的任务会收到警告 |
+-| tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 文件散列须一致；须早于 run.json 中 `task` 指向该任务的运行 |
++| tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 当前及历史内容不可改写；各运行绑定其实际适用版本，不要求新意图早于所有旧运行 |
+ | gates.question | 可选，问题编号：在混合项目中把关口限定到某个子问题 | 必须是已登记的问题 |
+ | run.json.task | 可选；由运行规格的 `task` 写入 | 必须是已登记的任务 |
++| run.json.intent_ref | 可选；path/written_at/sha256，与当时任务登记相同 | 已有意图的新运行自动冻结引用和intent快照；历史运行不回填 |
+ | run.json.stage | 可选；由运行规格的 `stage` 原样登记 | metadata/analysis/validation；仅显式 metadata 且无其他选路信号时不因该运行提示 CP3，缺省/未知按保守提示；标签不证明盲法 |
+ | claims.basis | data/literature/synthesis | `synthesis` 标为 supported 时需要 `reviewed_by` |
+ | project.designs | 研究类型列表，取值见 [研究类型](research-types.md) | — |
++
++v4.3.1：含 `task` 且已有意图的新运行自动保存可选 `run.json.intent_ref`（path/written_at/sha256）及 `intent` 快照。检查显式引用是否属于当前/历史登记、早于运行且快照对应。无此字段的历史运行仅按运行前最近版本推断；不同版本同一时刻、全部晚于运行或文件改变均报错，不改写旧记录以制造事前预期。时间使用含时区的ISO格式并按实际时刻比较。schema_version保持2，未登记意图的历史任务不强制补写。
+ 
+ 问题树不允许出现环；`type` 必须是已知的研究类型。由 `tournament.py promote` 写入的假设带 `source`（锦标赛、名次、排名快照），排名文件必须存在。
+ 
+--- before/scripts/init_project.py
++++ after/scripts/init_project.py
+@@ -156,7 +156,7 @@
+     if args.profile == "research":
+         state.update(questions=[], hypotheses=[])
+     plans["_pm/project-state.json"] = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
+-    if args.profile == "research":
++    if args.profile == "research" and not getattr(args, "no_research_folders", False):
+         # Standard folders exist from day one so people and AI file things in one place.
+         for folder, purpose in RESEARCH_FOLDERS.items():
+             plans.setdefault(f"{folder}/README.md", f"# {folder}\n\n{purpose}\n\n职责总表见 `_pm/LAYOUT.md`。\n")
+@@ -214,6 +214,9 @@
+     entry_options.add_argument("--no-ai-entry", action="store_true", help="Do not create host entry files.")
+     parser.add_argument("--design", action="append", choices=DESIGNS,
+                         help="Research study type(s); see references/research-types.md. Repeat for mixed projects.")
++    parser.add_argument("--no-research-folders", action="store_true",
++                        help="Skip default business-folder README placeholders; preserve an existing project layout. "
++                             "Research records still apply. Does not migrate existing state or paths.")
+     parser.add_argument("--dry-run", action="store_true")
+     parser.add_argument("--date", default=date.today().isoformat())
+     args = parser.parse_args(argv)
+--- before/scripts/research_model.py
++++ after/scripts/research_model.py
+@@ -3,6 +3,7 @@
+ All collections are optional so schema-2 projects without them stay valid. The checks
+ verify registered links only; whether a question is worth asking is a human judgement.
+ """
++from datetime import datetime
+ from pathlib import Path
+ import re
+ 
+@@ -51,8 +52,65 @@
+                     'justify in independence or use independent data')
+ 
+ 
++def intent_time(value):
++    """Compare aware ISO timestamps by instant, including old records using Z/offsets."""
++    if not isinstance(value, str):
++        raise ValueError('intent/run time must be an aware ISO timestamp')
++    try:
++        parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
++    except ValueError as error:
++        raise ValueError('intent/run time must be an aware ISO timestamp') from error
++    if parsed.tzinfo is None or parsed.utcoffset() is None:
++        raise ValueError('intent/run time must include a timezone')
++    return parsed
++
++
++def task_intents(root, task):
++    """Validate every frozen brief, including history; never repair or rewrite it."""
++    history = task.get('intent_history', [])
++    if not isinstance(history, list):
++        raise ValueError('intent_history must be a list')
++    if history and task.get('intent') is None:
++        raise ValueError('intent_history needs a current intent')
++    entries = history + ([task['intent']] if task.get('intent') is not None else [])
++    for entry in entries:
++        if (not isinstance(entry, dict)
++                or not all(isinstance(entry.get(k), str) and entry[k].strip()
++                           for k in ('path', 'written_at', 'sha256'))):
++            raise ValueError('intent needs path, written_at and sha256 (use research_tree.py task intent)')
++        intent_time(entry['written_at'])
++        file = local(root, entry['path'], True)
++        if digest(file) != entry['sha256']:
++            raise ValueError('brief changed after it was recorded; record a new intent instead of editing')
++    return entries
++
++
++def intent_for_run(entries, started, reference=None):
++    """Use an explicit frozen ref, or infer only the latest pre-run legacy version."""
++    start = intent_time(started)
++    keys = ('path', 'written_at', 'sha256')
++    if reference is not None:
++        if not isinstance(reference, dict) or not all(k in reference for k in keys):
++            raise ValueError('intent_ref needs path, written_at and sha256')
++        candidates = [e for e in entries if all(e[k] == reference[k] for k in keys)]
++        if not candidates:
++            raise ValueError('intent_ref is not a registered current or historical intent')
++    else:
++        candidates = [e for e in entries if intent_time(e['written_at']) <= start]
++        if not entries:
++            return None  # Legacy tasks without an intent remain compatible.
++    if not candidates or any(intent_time(e['written_at']) > start for e in candidates):
++        raise ValueError('intent written after run started; expectations must precede results')
++    latest = max(intent_time(e['written_at']) for e in candidates)
++    candidates = [e for e in candidates if intent_time(e['written_at']) == latest]
++    signatures = {tuple(e[k] for k in keys) for e in candidates}
++    if len(signatures) != 1:
++        raise ValueError('ambiguous legacy intent timing; preserve the record and review its provenance')
++    return {k: candidates[0][k] for k in keys}
++
++
+ def run_starts(audit, state):
+-    """Map task id -> [(run id, started_at)] from actual run records that name a task."""
++    """Map task id to actual run docs; keep legacy files read-only."""
+     result = {}
+     for row in state.get('runs', []):
+         if not isinstance(row, dict) or not isinstance(row.get('path'), str):
+@@ -62,7 +120,7 @@
+         except (ValueError, OSError):
+             continue  # governance reports unreadable runs
+         if isinstance(doc.get('task'), str) and isinstance(doc.get('started_at'), str):
+-            result.setdefault(doc['task'], []).append((row['id'], doc['started_at']))
++            result.setdefault(doc['task'], []).append((row['id'], doc))
+     return result
+ 
+ 
+@@ -225,17 +283,26 @@
+     unlinked = []
+     run_tasks = run_starts(audit, state)
+     for identity, row in tasks.items():
+-        intent = row.get('intent')
+-        if intent is not None:
+-            if not isinstance(intent, dict) or not all(audit.nonempty(intent.get(k)) for k in ('path', 'written_at', 'sha256')):
+-                audit.error(f'{identity}.intent: needs path, written_at and sha256 (use research_tree.py task intent)')
+-            else:
+-                file = audit.file(intent['path'], identity + '.intent')
+-                if file and digest(file) != intent['sha256']:
+-                    audit.error(f'{identity}.intent: brief changed after it was recorded; record a new intent instead of editing')
+-                for run_id, started in run_tasks.get(identity, []):
+-                    if started < intent['written_at']:
+-                        audit.error(f'{identity}.intent: written after {run_id} started; expectations must precede results')
++        try:
++            intents = task_intents(audit.root, row)
++        except (ValueError, OSError) as error:
++            audit.error(f'{identity}.intent: {error}')
++        else:
++            for run_id, doc in run_tasks.get(identity, []):
++                try:
++                    if 'intent_ref' in doc and doc['intent_ref'] is None:
++                        raise ValueError('intent_ref must be an object when present')
++                    reference = intent_for_run(intents, doc['started_at'], doc.get('intent_ref'))
++                    if 'intent_ref' in doc and reference is not None:
++                        if not isinstance(doc.get('snapshots'), list):
++                            raise ValueError('intent_ref needs a frozen intent snapshot list')
++                        if not any(isinstance(snap, dict) and snap.get('role') == 'intent'
++                                   and snap.get('source') == reference['path']
++                                   and snap.get('sha256') == reference['sha256']
++                                   for snap in doc.get('snapshots', [])):
++                            raise ValueError('intent_ref has no matching frozen intent snapshot')
++                except (ValueError, OSError) as error:
++                    audit.error(f'{identity}.intent / {run_id}: {error}')
+         serves = row.get('serves')
+         if serves is None:
+             if questions and state.get('project', {}).get('profile') == 'research':
+--- before/scripts/research_tree.py
++++ after/scripts/research_tree.py
+@@ -13,6 +13,7 @@
+ 
+ from check_project import Audit
+ from project_io import atomic_json, digest, encoded, local, now, state
++from research_model import task_intents
+ from lifecycle import TASK_STATUSES, CONTROLLED_TASK_STATUSES, control, adopted, require_active, set_task
+ 
+ QID = re.compile(r'^Q-[0-9]{3,4}$')
+@@ -162,7 +163,12 @@
+             return {'task': args.id, 'serves': row['serves']}
+         if not args.path:
+             raise ValueError('intent needs --path to the written intent brief')
++        task_intents(root, row)  # A replacement cannot hide an edited/missing old brief.
+         file = local(root, args.path, must_exist=True)
++        current_intent = row.get('intent')
++        if (isinstance(current_intent, dict) and current_intent['path'] == args.path
++                and current_intent['sha256'] == digest(file)):
++            return {'task': args.id, 'intent': current_intent}
+         if isinstance(row.get('intent'), dict):
+             row.setdefault('intent_history', []).append(row['intent'])
+         row['intent'] = {'path': args.path, 'written_at': now(), 'sha256': digest(file)}
+--- before/scripts/run_project.py
++++ after/scripts/run_project.py
+@@ -10,7 +10,7 @@
+ import sys
+ 
+ from project_io import atomic_json, digest, encoded, load, local, now, state, write_new_tree
+-from research_model import RUN_STAGES
++from research_model import RUN_STAGES, task_intents, intent_for_run
+ from lifecycle import require_active
+ 
+ 
+@@ -70,9 +70,27 @@
+     task = spec.get('task')
+     if task is not None and task not in {t.get('id') for t in current.get('tasks', []) if isinstance(t, dict)}:
+         raise ValueError('Unknown task for this run; register the task first')
+-    record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': now(),
++    started = now()
++    intent_ref = None
++    if task is not None:
++        task_row = next(t for t in current['tasks'] if t.get('id') == task)
++        entries = task_intents(root, task_row)
++        intent_ref = intent_for_run(entries, started, task_row.get('intent'))
++    if 'intent_ref' in spec and spec['intent_ref'] != intent_ref:
++        raise ValueError('Run intent_ref must match the current registered task intent')
++    if intent_ref is not None:
++        relative = intent_ref['path']
++        source = local(root, relative, True)
++        if digest(source) != intent_ref['sha256']:
++            raise ValueError('Intent changed before snapshot; no run was started')
++        resolved.append(('intent', relative, source))
++        snapshots.append({'role': 'intent', 'source': relative,
++                          'snapshot': f'{run_base}/snapshots/{len(snapshots):03d}-{source.name}',
++                          'sha256': intent_ref['sha256']})
++    record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': started,
+               **({'stage': stage} if stage is not None else {}),
+               **({'task': task} if task is not None else {}),
++              **({'intent_ref': intent_ref} if intent_ref is not None else {}),
+               'ended_at': None, 'returncode': None, 'cwd': '.', 'command': command,
+               'inputs': inputs, 'input_hashes': input_hashes, 'snapshots': snapshots,
+               'environment_rebuilt': spec['environment_rebuilt'], 'cache_policy': spec['cache_policy'],
+--- before/assets/capabilities/know-how/public-omics-reuse.md
++++ after/assets/capabilities/know-how/public-omics-reuse.md
+@@ -1,9 +1,9 @@
+ ---
+ id: kh.public-omics-reuse
+ summary: 公开组学数据复用：元数据核对、来源重叠、独立验证与数据泄漏防护
+-source: 二次数据分析经验及卒中公共数据阶段试点 WF-014/017/021/023/024；非通用效果验证
+-version: v2
+-date: 2026-11-01
++source: 二次数据分析经验、卒中公共数据阶段试点 WF-014/017/021/023/024及组学返工复盘；非通用效果验证
++version: v3
++date: 2026-11-02
+ license: 随技能分发
+ scope: GEO/SRA/TCGA/CELLxGENE 等公开组学数据的发现与验证分析
+ ---
+@@ -34,6 +34,7 @@
+ 
+ - 该做：报告纳入和排除的数据集及原因（含被排除的）；保存原始样本表；看效应方向是否一致，而不只看显著性。
+ - 不该做：在多个数据集里挑“结果显著”的那一个作为验证；用发现集的结果去选择验证集；把整合后的同源数据当作外部验证。
++- 背景或集合参数改变时，核对方法与实际调用中哪些统计量一起变化。竞争背景变化可能同时改变经验贝叶斯方差、自由度或集合相关性处理；未经核实不写成“只改变竞争者”的单因素实验。数值复算一致不能替代该语义核查。
+ 
+ ## 常见坑与对策
+ 
+--- /dev/null
++++ after/AUDIT-4.3.1.md
+@@ -0,0 +1,48 @@
++# v4.3.1 定向修订与验证
++
++日期：2026-11-02。依据为既有组学二次研究的返工复盘（WF-120）及指定源目录的实际4.3.0内容。只修改本源副本，不安装、不改真实研究状态、不发布。研究原始材料与详细复盘保留在原项目，不复制到通用技能。
++
++## 修改取舍
++
++4.3已处理首次推荐、累计筛查投入、来源漂移、当前入口、执行停止/恢复与事务式验收；这些沿用，不再列作缺失功能。以下修订主要改变检查发生的时机和具体问题，复用原CP与简报，不增加统一审批、最低样本量、80%功效或湿实验要求。
++
++| 复盘建议 | 本版落实 | 收益与适用代价 |
++|---|---|---|
++| S01 滚动投入判断 | CP6/CP8在关键主张收窄、支持失效或大装配前，分开判断可信度、信息量与下一块投入价值 | 在已有卡片中加短判断；不把阴性当失败，不逐次重审已批准细节 |
++| S02 模拟信息性 | 区分计算夹具与场景信息性，正式冻结前以小先导覆盖阴性、可检出阳性和边界/过渡 | 论证依赖模拟时使用；已见网格保留，新增情景另版，不调到成功 |
++| S03 实质审稿 | 增量/识别/精度/最强拒稿理由先于数值与格式；重大回应分新增证据/表达/未解决 | 调整既有审阅任务，不强制额外代理或真人签字，不把意见自动变新实验 |
++| S04 补强边际收益 | 补分析/实验先说明改变哪条论断；同供者重测、正交测量与独立患者区分 | 意图简报复用；存量材料/技术规范性不等于论文增量，纠正原过强验证要求 |
++| S05 当前与历史 | 唯一当前稿与待采纳提案分明；工作稿可编辑、已固定使用版本留原件 | 仅实质更新时对账；不机械归档所有文档、不为每次答疑冻结新包 |
++| S06 决策与授权粒度 | 通俗问题/理由/代价；先评估与批准执行分清，实际答复影响实际依赖 | 无新增表单或普遍确认；延续4.3事务与停止工具 |
++| S07 竞争对象可比 | 科学解释、识别边界、实现核查和任务优先级分工；简表可完成CP3 | 无硬候选数阈值；Elo不是真相，复用blind逐场/顺序隔离 |
++| S08 安全治理接口 | 沿用4.3现有API；动态复现并修复意图更新/旧运行误判，新增跳过默认目录占位选项 | 意图显式绑定和快照，历史不回写；目录不自动推断/搬移 |
++| S09 工程与语义核查 | 按需补渲染/组装/检查器边界经验，澄清know-how路径及背景变更语义 | 放引用/专项经验，不把每项经验升格为全项目关口；本版不重做具体科研图件 |
++
++细则集中在[结果后的价值审阅](references/research-value-review.md)，由入口与现有角色/论证协议路由；模拟、工程、目录和类型特有内容分别回原引用文件。没有新增强制项目文档模板。
++
++## 意图版本缺陷：实际失败与修复
++
++新增合成夹具先在4.3原实现执行，实际复现“第一轮已执行，再登记第二份预期，被错误要求早于第一轮”的拒绝：[失败记录](archive/audits/v4.3.1/intent-bug-before.txt)。这是工具缺陷；登记失败后仍继续依赖执行则属于编排错误，两个责任分别处理。
++
++本版让运行自动保存当时的intent_ref和简报快照，当前意图更新后旧运行仍对应旧版；所有历史简报仍检查内容不变。无引用字段的历史运行仅按已登记时间只读推断，不补造预期或修改run.json。歧义、事后登记、改写旧简报、伪造引用仍报错；新增运行不能借spec选回已被替代的意图。跨时区按时刻比较；同路径同内容重复登记保持幂等。
++
++初始化的`--no-research-folders`只跳过默认业务目录README占位，保留必要研究模板及原有文件；默认行为不变。它不自动选择既有代码目录或合并同职责文档，仍需先看dry-run并依原LAYOUT适配。
++
++## 实际验证
++
++- [4.3基线](archive/audits/v4.3.1/baseline-tests.txt)：141项，140通过、1跳过。
++- [修订后全量回归](archive/audits/v4.3.1/unit-tests-final.txt)：159项，158通过、1跳过；新增18项实际行为回归。跳过仍为Windows创建符号链接缺权限，不记作执行通过。
++- 回归覆盖意图推进/旧记录字节不变、新运行精确绑定、原件与快照篡改、后验/未登记/时间歧义、时区、失败无运行副作用、历史无意图兼容、拒绝选回旧意图，以及既有目录保留/default/dry-run行为。
++- 技能基础校验通过；24份Python源码解析通过。现有研究项目只读全哈希检查为零错误，保留两个既有partial复现警告，项目状态字节不变；不把兼容检查说成新科学复现。
++- 新增[六例虚构情景](assets/evaluation/rework-scenarios.json)。独立执行者仅获技能、原始案例和最小操作条件，未给维护者答案、源复盘、测试或审计；[原始答复](archive/audits/v4.3.1/forward-check.md)与[维护者判定](archive/audits/v4.3.1/forward-review.md)均保留。六例在给定事实下符合判据，R6有23次官方CLI调用（含帮助与检查），仅故意改写旧简报后的检查以rc=1报错；维护者另按实际文件/日志复算[15项判据](archive/audits/v4.3.1/forward-verification.json)，不只采信AI自述。另有一次报告编排解析失败，未执行内层命令，保留说明且不混入CLI统计。
++- 原目录无Git元数据，本地保留[原文件指纹](archive/audits/v4.3.1/source-before.json)与[受影响源文件备份](archive/audits/v4.3.1/affected-source-before.zip)，用于审查/恢复；不构成发布包或远程版本。
++
++最终文档链接、情景判定与安装版前后完整性见[完整检查](archive/audits/v4.3.1/validation.json)，逐项修改可读[源差异](archive/audits/v4.3.1/source-changes.patch)。安装目录93个非缓存文件的前后整体指纹一致。通用入口仅从215增至218行，详细规则按需读取；回归或情景符合不替代科学判断。
++
++## 边界
++
++这次是技能源修订及有限合成情景评估，不是新真实课题前瞻验证、真人统计审稿或新旧技能优效试验。无法由此证明节省多少返工、提高发表率或保证论文接收。工具不能识别记录中的真实批准内容或科学解释是否充分，仍需单写入者与适任责任判断。
++
++前向演示期间，另修订了否决次数不作指标、故事板检查器覆盖及正式运行包装范围等说明，未据执行者答案改题或改执行逻辑。SKILL与八份所核执行源码前后不变，但没有冻结执行者所读每一份引用全文；因此只称本维护批次的有限行为证据，不称最终所有文档的完整独立验收。
++
++已安装skill保持不动；未改真实研究结果/方案/原始数据，未执行新研究模拟或湿实验。无Git提交、推送、标签、市场发布或重新安装。
+--- /dev/null
++++ after/references/research-value-review.md
+@@ -0,0 +1,38 @@
++# 关键结果之后：科学价值与下一步投入
++
++适用：主要结果使主张明显收窄、必要支持路径失效，或准备投入完整写作、大批图件和投稿包时。复用 CP6、CP8 的解释简报或决策卡；早期判断仍在 CP2/CP4，不另建关口、预算台账或逐次审批。普通答疑、勘误和已批准包内的技术修复不触发重审。
++
++## 1. 三个判断分别说清
++
++在同一份现有材料中各用一句话回答，附关键证据及未知：
++
++| 判断 | 要回答的问题 | 不能替代它的事项 |
++|---|---|---|
++| 技术与来源可信度 | 数据、测量、计算和来源核到哪一步？ | 运行成功不代表设计能回答问题 |
++| 当前科学答案与信息量 | 相对最近工作，区分了哪些解释？区间还容许哪些答案？ | 无显著不证明无作用；严格检验可能看不清 |
++| 下一块投入的价值 | 再做什么能消除关键不确定性？代价及无结论风险是否值得？ | 已投入很多、材料现成或多一张图不构成理由 |
++
++高精度的负结果、纠正实质性错误或解决已知矛盾可以有明确价值；弱精度结果也可诚实描述。不能用统一样本数、80%功效或显著性决定能否发表。接收概率没有依据时不编造。
++
++判断仍支持原路线且范围已批准时继续执行；不能因每次读出都再索要许可。需要改变科学问题、结论强度或重要资源时，通俗说明要解决的问题、推荐理由和主要代价，再交负责人决定。已采用的停止条件按原授权执行；AI提出“不建议追加投入”本身不等于负责人终止项目。
++
++## 2. 补分析或补实验的边际收益
++
++额外实验、扩队列或明显新增计算前，复用意图简报说明：消除哪个关键缺口；增加的是测量可信度、独立生物信息还是解释鉴别力；什么结果会改变哪条具体论断；什么结果仍无结论；前提和停止条件。不因一条模拟审稿意见自动启动工作。
++
++先查人数/重复单位、材料部位与时间、原始测量链、来源独立性和精度，再决定是否解锁目标读出。仅有存量 RNA/cDNA 不说明实验值得追加。同供者重测可以改善测量质量，不能计成新增供者或自动称独立验证；RNA表达也不能直接确认蛋白活性或机制。qPCR等受限平台的设计按实际可解决的局部问题取舍，不只挑选与叙事相符的靶标。
++
++若补充工作只能改善规范性却无法加强当前论证，如实说明；可以先整理已有原记录、保留有限稿件，或建议不追加投入。实验室质量管理可有自身价值，不必包装成论文科学增量。
++
++## 3. 实质审稿先于大规模装配
++
++CP8锁定主线、投入大排版前，模拟审稿先回答下列问题，再核数值、图号、引用和文件规范。已有实质审阅仍适用时只复核变化部分。
++
++- 相对最接近研究，具体新增了什么认识，证据在哪？
++- 最强拒稿理由是什么：重复、无法识别、精度不足、测量含义不符，还是其他问题？若未发现重大缺陷，也如实说明。
++- 当前设计和不确定性真正区分了哪些答案？不能把统计量计算正确当成其科学解释已核实。
++- 哪项最小新增证据可能改变判断，哪些补做只会增加篇幅或规范性？
++
++条件允许且已授权时，由不同上下文执行，传入研究问题、最近工作、方案/接触记录、完整关键结果与边界，不只传漂亮成稿或格式清单。不额外强制新代理、真人签字或新实验；只能在同一上下文自审时说明限制。AI意见仍是待核实线索，不是独立实证或真实专家批准。
++
++回应重大意见时，区分“已增加证据”“只澄清表达”“仍未解决”，附实际依据。改写措辞不能消除设计缺口；无法解决时收窄主张或提交范围选择，不把所有质疑默认变成补分析任务。
+--- /dev/null
++++ after/assets/evaluation/rework-scenarios.json
+@@ -0,0 +1,35 @@
++{
++  "description": "虚构返工与后续投入情景。仅用给定事实，不联网、不接触真实研究/账户；R6允许在隔离目录实际演示官方CLI。各例独立作答。",
++  "cases": [
++    {
++      "id": "R1",
++      "request": "流程都跑通、图表数字也对上了。请先判断是否值得追加大量分析和精排完整投稿包，给我推荐与理由。",
++      "facts": ["已完成有边界的再分析和有限初稿，原继续写作经过批准，但本轮只授权投入评估。", "最接近原研究使用相同来源并回答了宽泛疾病关联；剩余问题是一个具体的相邻状态对比。", "严格主检验无发现，绝大多数区间同时容许有实际意义的正负效应；33个合理规格均没有严格发现。", "来源和计算经实际核对，必要的独立支持尚未找到。", "没有负责人终止整个项目的指令。"]
++    },
++    {
++      "id": "R2",
++      "request": "这项研究没有显著结果，是否应该停止写论文？只判断，不做新分析。",
++      "facts": ["已有研究对同一预先明确问题给出相反结论，新研究为解决该矛盾而设计。", "目标量、科学上关心的效应范围和精度要求均事前固定，设计可识别该目标。", "完整结果估计接近零，区间很窄并排除事前关心范围之外的正负效应；来源/测量/推断经核查，报告全部预定结果。", "没有其他未解决的致命设计问题，资源与写作已在批准范围内。"]
++    },
++    {
++      "id": "R3",
++      "request": "模拟中连真实有序差异也检不出，这是否证明现象不存在或程序错误？接下来怎么处理？",
++      "facts": ["已有独立实现的算术及边界夹具通过。", "正式模拟网格只含零效应与中等效应，严格联合加多重检验下所有场景均零检出。", "网格在看结果前已冻结，全部结果保存，尚无更强阳性或过渡场景。", "只授权诊断与建议；更改网格或启动新计算尚未批准。"]
++    },
++    {
++      "id": "R4",
++      "request": "我们只能做qPCR，存量材料足够。是否值得现在重做六个靶标以提高论文质量？",
++      "facts": ["三组各五位独立供者，有现存RNA/cDNA。", "旧表为归一化摘要，原始Cq/效率/内参记录能否恢复未知，组织精确部位和发现队列是否重叠尚未完全核清。", "六个靶标部分方向与公共数据不一致，没有已证明可消除主问题关键不确定性的补强路径。", "负责人只愿做对稿件质量有明确增益的工作，尚未授权执行新实验。"]
++    },
++    {
++      "id": "R5",
++      "request": "我有五个候选，是否全部放进Elo锦标赛来确定正确解释？请推荐合适做法。",
++      "facts": ["A为细胞内表达改变，B为细胞比例改变，二者可同时存在。", "C为横断面设计无法识别时间因果，D为样本映射代码可能出错，E为先核元数据还是先画图。", "比较资源有限，简表足以展示A/B的判别性读出；已有blind命令可逐场按顺序生成。", "尚无新代理执行或进一步实验的授权。"]
++    },
++    {
++      "id": "R6",
++      "request": "请用官方CLI在虚构隔离项目演示：先登记任务和第一份意图，执行一个写小文本的实际运行；再登记新路径的第二份意图，执行第二次运行。保留全部原件，检查绑定与记录。随后尝试改写第一份简报并检查，报告实际结果。",
++      "facts": ["可在执行者的隔离临时目录新建小项目；所有输入、决定、配置和命令都是合成夹具。", "不得修改skill源码、已安装skill或真实研究；不读取审计报告、测试脚本及维护者预期答案。", "可读SKILL、引用协议和官方工具实现/--help。仅运行本次明确提供的本地Python命令，不联网、不安装、不对外提交。"]
++    }
++  ]
++}
+--- /dev/null
++++ after/scripts/test_v431.py
+@@ -0,0 +1,274 @@
++"""Regression fixtures for versioned intent, not evidence of scientific validity."""
++from argparse import Namespace
++import contextlib
++import io
++import json
++from pathlib import Path
++import sys
++import tempfile
++import unittest
++from unittest.mock import patch
++
++import check_project
++import init_project
++import record
++import research_tree
++import run_project
++
++
++class IntentVersionTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix='hairw-v431-')
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name) / 'project'
++        init_project.initialize(Namespace(target=str(self.root), name='Synthetic intent fixture',
++                                         scale='M', profile='research', dry_run=False,
++                                         date='2026-11-01', design=None))
++        self.ok(research_tree, 'question', 'add', '--id', 'Q-901', '--statement', 'Fixture only', '--clarity', '2')
++        self.ok(research_tree, 'task', 'add', '--id', 'T-901', '--title', 'Fixture work', '--serves', 'Q-901')
++        self.write('data/input.txt', 'Synthetic input.\n')
++        self.ok(record, 'artifact', '--id', 'A-901', '--path', 'data/input.txt', '--version', 'v1')
++        self.write('src/worker.py', 'from pathlib import Path\nimport sys\np = Path(sys.argv[1])\np.parent.mkdir(parents=True, exist_ok=True)\np.write_text("synthetic output")\n')
++        self.write('environment.txt', sys.version)
++
++    def write(self, relative, content):
++        path = self.root / relative
++        path.parent.mkdir(parents=True, exist_ok=True)
++        path.write_text(content, encoding='utf-8')
++
++    def state(self):
++        return json.loads((self.root / '_pm/project-state.json').read_text(encoding='utf-8'))
++
++    def call(self, module, *args):
++        output = io.StringIO()
++        with contextlib.redirect_stdout(output):
++            code = module.main(['--project', str(self.root), *args])
++        return code, json.loads(output.getvalue())
++
++    def ok(self, module, *args):
++        code, result = self.call(module, *args)
++        self.assertEqual(code, 0, result)
++        return result
++
++    def intent(self, version):
++        path = f'_pm/intents/T-901-{version}.md'
++        self.write(path, f'Synthetic expectations {version}; no real research.\n')
++        self.ok(research_tree, 'task', 'intent', '--id', 'T-901', '--path', path)
++        return self.state()['tasks'][0]['intent']
++
++    def execute(self, identity='RUN-901', **changes):
++        output = f'results/{identity}.txt'
++        spec = {'id': identity, 'task': 'T-901', 'purpose': 'Synthetic fixture execution', 'stage': 'metadata',
++                'inputs': [{'id': 'A-901', 'version': 'v1'}], 'code': ['src/worker.py'],
++                'config': '_pm/config.json', 'environment': 'environment.txt',
++                'environment_rebuilt': False, 'cache_policy': 'Fresh fixture', 'outputs': [output]}
++        spec.update(changes)
++        return run_project.run(self.root, spec, [sys.executable, '-B', 'src/worker.py', output])
++
++    def test_intent_update_preserves_old_run_and_binds_new_run(self):
++        first = self.intent('v1')
++        old_run = self.execute()
++        old_path = self.root / 'runs/RUN-901/run.json'
++        old_bytes = old_path.read_bytes()
++        second = self.intent('v2')
++        new_run = self.execute('RUN-902')
++        self.assertEqual(old_run['intent_ref'], first)
++        self.assertEqual(new_run['intent_ref'], second)
++        self.assertEqual(old_path.read_bytes(), old_bytes)
++        self.assertEqual(self.state()['tasks'][0]['intent_history'], [first])
++        self.assertTrue(check_project.check_project(self.root, verify_hashes=True)['ok'])
++
++    def test_historical_brief_edit_is_detected_and_blocks_execution_without_side_effects(self):
++        first = self.intent('v1')
++        self.execute()
++        self.intent('v2')
++        self.write(first['path'], 'Altered historical expectations.\n')
++        self.assertFalse(check_project.check_project(self.root)['ok'])
++        before = (self.root / '_pm/project-state.json').read_bytes()
++        with self.assertRaisesRegex(ValueError, 'brief changed'):
++            self.execute('RUN-902')
++        self.assertEqual((self.root / '_pm/project-state.json').read_bytes(), before)
++        self.assertFalse((self.root / 'runs/RUN-902').exists())
++        self.assertFalse((self.root / 'results/RUN-902.txt').exists())
++
++    def test_invalid_replacement_cannot_hide_changed_current_brief(self):
++        first = self.intent('v1')
++        self.write(first['path'], 'Edited after registration.\n')
++        self.write('_pm/intents/replacement.md', 'New expectations.\n')
++        before = (self.root / '_pm/project-state.json').read_bytes()
++        code, result = self.call(research_tree, 'task', 'intent', '--id', 'T-901',
++                                 '--path', '_pm/intents/replacement.md')
++        self.assertEqual(code, 1, result)
++        self.assertEqual((self.root / '_pm/project-state.json').read_bytes(), before)
++
++    def test_same_intent_registration_is_idempotent(self):
++        first = self.intent('v1')
++        before = (self.root / '_pm/project-state.json').read_bytes()
++        self.ok(research_tree, 'task', 'intent', '--id', 'T-901', '--path', first['path'])
++        self.assertEqual((self.root / '_pm/project-state.json').read_bytes(), before)
++
++    def test_task_without_registered_intent_is_not_forced_to_backfill(self):
++        run = self.execute()
++        self.assertNotIn('intent_ref', run)
++        self.assertTrue(check_project.check_project(self.root)['ok'])
++
++    def test_run_spec_cannot_select_superseded_intent(self):
++        first = self.intent('v1')
++        self.intent('v2')
++        before = (self.root / '_pm/project-state.json').read_bytes()
++        with self.assertRaisesRegex(ValueError, 'current registered task intent'):
++            self.execute(intent_ref=first)
++        self.assertEqual((self.root / '_pm/project-state.json').read_bytes(), before)
++        self.assertFalse((self.root / 'runs/RUN-901').exists())
++        self.assertFalse((self.root / 'results/RUN-901.txt').exists())
++
++    def legacy_run(self):
++        self.intent('v1')
++        self.execute()
++        path = self.root / 'runs/RUN-901/run.json'
++        doc = json.loads(path.read_text(encoding='utf-8'))
++        del doc['intent_ref']
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        return path, doc
++
++    def test_legacy_run_uses_pre_run_history_without_rewriting_record(self):
++        path, _ = self.legacy_run()
++        old_bytes = path.read_bytes()
++        self.intent('v2')
++        self.assertTrue(check_project.check_project(self.root)['ok'])
++        self.assertEqual(path.read_bytes(), old_bytes)
++
++    def test_legacy_run_without_pre_run_intent_remains_an_error(self):
++        path, doc = self.legacy_run()
++        doc['started_at'] = '2000-01-01T00:00:00Z'
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        result = check_project.check_project(self.root)
++        self.assertFalse(result['ok'])
++        self.assertIn('expectations must precede results', ' '.join(result['errors']))
++
++    def test_explicit_run_reference_cannot_point_to_post_run_intent(self):
++        self.intent('v1')
++        self.execute()
++        second = self.intent('v2')
++        path = self.root / 'runs/RUN-901/run.json'
++        doc = json.loads(path.read_text(encoding='utf-8'))
++        doc['intent_ref'] = second
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        errors = check_project.check_project(self.root)['errors']
++        self.assertIn('expectations must precede results', ' '.join(errors))
++
++    def test_unregistered_reference_is_rejected(self):
++        self.intent('v1')
++        self.execute()
++        path = self.root / 'runs/RUN-901/run.json'
++        doc = json.loads(path.read_text(encoding='utf-8'))
++        doc['intent_ref']['sha256'] = '0' * 64
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        errors = check_project.check_project(self.root)['errors']
++        self.assertIn('not a registered', ' '.join(errors))
++
++    def test_snapshot_of_actual_intent_is_preserved(self):
++        reference = self.intent('v1')
++        run = self.execute()
++        snap = next(s for s in run['snapshots'] if s['role'] == 'intent')
++        self.assertEqual(snap['source'], reference['path'])
++        self.assertEqual(snap['sha256'], reference['sha256'])
++        self.assertEqual((self.root / snap['snapshot']).read_bytes(), (self.root / reference['path']).read_bytes())
++
++    def test_modified_historical_snapshot_is_detected(self):
++        self.intent('v1')
++        run = self.execute()
++        self.intent('v2')
++        snap = next(s for s in run['snapshots'] if s['role'] == 'intent')
++        self.write(snap['snapshot'], 'Tampered snapshot.\n')
++        self.assertIn('snapshot content changed', ' '.join(check_project.check_project(self.root)['errors']))
++
++    def test_malformed_snapshot_collection_is_reported_without_crash(self):
++        self.intent('v1')
++        self.execute()
++        path = self.root / 'runs/RUN-901/run.json'
++        doc = json.loads(path.read_text(encoding='utf-8'))
++        doc['snapshots'] = None
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        self.assertFalse(check_project.check_project(self.root)['ok'])
++
++    def test_same_timestamp_distinct_legacy_versions_are_not_guessed(self):
++        with patch('research_tree.now', return_value='2000-01-01T00:00:00Z'):
++            self.intent('v1')
++            self.intent('v2')
++        self.execute()
++        path = self.root / 'runs/RUN-901/run.json'
++        doc = json.loads(path.read_text(encoding='utf-8'))
++        del doc['intent_ref']
++        path.write_text(json.dumps(doc), encoding='utf-8')
++        self.assertIn('ambiguous legacy intent timing', ' '.join(check_project.check_project(self.root)['errors']))
++
++    def test_timestamps_compare_instants_instead_of_strings(self):
++        # 08:30 +08 is earlier than 01:00 UTC despite its lexical ordering.
++        with patch('research_tree.now', return_value='2000-01-01T08:30:00+08:00'):
++            first = self.intent('v1')
++        with patch('run_project.now', return_value='2000-01-01T01:00:00Z'):
++            run = self.execute()
++        self.assertEqual(run['intent_ref'], first)
++        self.assertTrue(check_project.check_project(self.root)['ok'])
++
++    def test_future_or_naive_intent_is_refused_before_run(self):
++        with patch('research_tree.now', return_value='2999-01-01T00:00:00Z'):
++            self.intent('v1')
++        with self.assertRaisesRegex(ValueError, 'expectations must precede results'):
++            self.execute()
++        self.assertFalse((self.root / 'runs/RUN-901').exists())
++        self.write('_pm/intents/naive.md', 'Naive timestamp fixture.\n')
++        before = (self.root / '_pm/project-state.json').read_bytes()
++        with patch('research_tree.now', return_value='2026-11-01T01:00:00'):
++            code, result = self.call(research_tree, 'task', 'intent', '--id', 'T-901', '--path', '_pm/intents/naive.md')
++        self.assertEqual(code, 1, result)
++        self.assertEqual((self.root / '_pm/project-state.json').read_bytes(), before)
++
++
++class ExistingFolderTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory(prefix='hairw-existing-')
++        self.addCleanup(self.temp.cleanup)
++        self.root = Path(self.temp.name) / 'project'
++
++    def initialize(self, *extra):
++        output = io.StringIO()
++        with contextlib.redirect_stdout(output):
++            code = init_project.main(['--target', str(self.root), '--name', 'Synthetic existing project',
++                                      '--profile', 'research', '--scale', 'M', *extra])
++        return code, json.loads(output.getvalue())
++
++    def test_skip_business_placeholders_preserves_existing_code_and_state(self):
++        (self.root / 'scripts').mkdir(parents=True)
++        (self.root / 'scripts/original.py').write_bytes(b'# original code\n')
++        code, result = self.initialize('--no-research-folders')
++        self.assertEqual(code, 0, result)
++        self.assertFalse((self.root / 'src').exists())
++        self.assertFalse((self.root / 'data/raw/public').exists())
++        self.assertEqual((self.root / 'scripts/original.py').read_bytes(), b'# original code\n')
++        path = self.root / '_pm/project-state.json'
++        state = json.loads(path.read_text(encoding='utf-8'))
++        state['layout']['code'] = 'scripts'  # Explicit fixture adaptation, not a migration by the CLI.
++        path.write_text(json.dumps(state), encoding='utf-8')
++        before = path.read_bytes()
++        code, result = self.initialize('--no-research-folders')
++        self.assertEqual(code, 0, result)
++        self.assertEqual(path.read_bytes(), before)
++        self.assertFalse((self.root / 'src').exists())
++        self.assertTrue(check_project.check_project(self.root)['ok'])
++
++    def test_dry_run_skip_has_no_writes_and_default_still_lists_folders(self):
++        code, result = self.initialize('--no-research-folders', '--dry-run')
++        self.assertEqual(code, 0, result)
++        self.assertNotIn('src/README.md', result['would_create'])
++        self.assertIn('_pm/research/RESEARCH_PLAN.md', result['would_create'])
++        self.assertFalse(self.root.exists())
++        code, default = self.initialize('--dry-run')
++        self.assertEqual(code, 0, default)
++        self.assertIn('src/README.md', default['would_create'])
++        self.assertFalse(self.root.exists())
++
++
++if __name__ == '__main__':
++    unittest.main()

@@ -3,6 +3,7 @@
 All collections are optional so schema-2 projects without them stay valid. The checks
 verify registered links only; whether a question is worth asking is a human judgement.
 """
+from datetime import datetime
 from pathlib import Path
 import re
 
@@ -51,8 +52,65 @@ def independence(audit, identity, row, artifacts):
                     'justify in independence or use independent data')
 
 
+def intent_time(value):
+    """Compare aware ISO timestamps by instant, including old records using Z/offsets."""
+    if not isinstance(value, str):
+        raise ValueError('intent/run time must be an aware ISO timestamp')
+    try:
+        parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
+    except ValueError as error:
+        raise ValueError('intent/run time must be an aware ISO timestamp') from error
+    if parsed.tzinfo is None or parsed.utcoffset() is None:
+        raise ValueError('intent/run time must include a timezone')
+    return parsed
+
+
+def task_intents(root, task):
+    """Validate every frozen brief, including history; never repair or rewrite it."""
+    history = task.get('intent_history', [])
+    if not isinstance(history, list):
+        raise ValueError('intent_history must be a list')
+    if history and task.get('intent') is None:
+        raise ValueError('intent_history needs a current intent')
+    entries = history + ([task['intent']] if task.get('intent') is not None else [])
+    for entry in entries:
+        if (not isinstance(entry, dict)
+                or not all(isinstance(entry.get(k), str) and entry[k].strip()
+                           for k in ('path', 'written_at', 'sha256'))):
+            raise ValueError('intent needs path, written_at and sha256 (use research_tree.py task intent)')
+        intent_time(entry['written_at'])
+        file = local(root, entry['path'], True)
+        if digest(file) != entry['sha256']:
+            raise ValueError('brief changed after it was recorded; record a new intent instead of editing')
+    return entries
+
+
+def intent_for_run(entries, started, reference=None):
+    """Use an explicit frozen ref, or infer only the latest pre-run legacy version."""
+    start = intent_time(started)
+    keys = ('path', 'written_at', 'sha256')
+    if reference is not None:
+        if not isinstance(reference, dict) or not all(k in reference for k in keys):
+            raise ValueError('intent_ref needs path, written_at and sha256')
+        candidates = [e for e in entries if all(e[k] == reference[k] for k in keys)]
+        if not candidates:
+            raise ValueError('intent_ref is not a registered current or historical intent')
+    else:
+        candidates = [e for e in entries if intent_time(e['written_at']) <= start]
+        if not entries:
+            return None  # Legacy tasks without an intent remain compatible.
+    if not candidates or any(intent_time(e['written_at']) > start for e in candidates):
+        raise ValueError('intent written after run started; expectations must precede results')
+    latest = max(intent_time(e['written_at']) for e in candidates)
+    candidates = [e for e in candidates if intent_time(e['written_at']) == latest]
+    signatures = {tuple(e[k] for k in keys) for e in candidates}
+    if len(signatures) != 1:
+        raise ValueError('ambiguous legacy intent timing; preserve the record and review its provenance')
+    return {k: candidates[0][k] for k in keys}
+
+
 def run_starts(audit, state):
-    """Map task id -> [(run id, started_at)] from actual run records that name a task."""
+    """Map task id to actual run docs; keep legacy files read-only."""
     result = {}
     for row in state.get('runs', []):
         if not isinstance(row, dict) or not isinstance(row.get('path'), str):
@@ -62,7 +120,7 @@ def run_starts(audit, state):
         except (ValueError, OSError):
             continue  # governance reports unreadable runs
         if isinstance(doc.get('task'), str) and isinstance(doc.get('started_at'), str):
-            result.setdefault(doc['task'], []).append((row['id'], doc['started_at']))
+            result.setdefault(doc['task'], []).append((row['id'], doc))
     return result
 
 
@@ -225,17 +283,26 @@ def validate(audit, tasks):
     unlinked = []
     run_tasks = run_starts(audit, state)
     for identity, row in tasks.items():
-        intent = row.get('intent')
-        if intent is not None:
-            if not isinstance(intent, dict) or not all(audit.nonempty(intent.get(k)) for k in ('path', 'written_at', 'sha256')):
-                audit.error(f'{identity}.intent: needs path, written_at and sha256 (use research_tree.py task intent)')
-            else:
-                file = audit.file(intent['path'], identity + '.intent')
-                if file and digest(file) != intent['sha256']:
-                    audit.error(f'{identity}.intent: brief changed after it was recorded; record a new intent instead of editing')
-                for run_id, started in run_tasks.get(identity, []):
-                    if started < intent['written_at']:
-                        audit.error(f'{identity}.intent: written after {run_id} started; expectations must precede results')
+        try:
+            intents = task_intents(audit.root, row)
+        except (ValueError, OSError) as error:
+            audit.error(f'{identity}.intent: {error}')
+        else:
+            for run_id, doc in run_tasks.get(identity, []):
+                try:
+                    if 'intent_ref' in doc and doc['intent_ref'] is None:
+                        raise ValueError('intent_ref must be an object when present')
+                    reference = intent_for_run(intents, doc['started_at'], doc.get('intent_ref'))
+                    if 'intent_ref' in doc and reference is not None:
+                        if not isinstance(doc.get('snapshots'), list):
+                            raise ValueError('intent_ref needs a frozen intent snapshot list')
+                        if not any(isinstance(snap, dict) and snap.get('role') == 'intent'
+                                   and snap.get('source') == reference['path']
+                                   and snap.get('sha256') == reference['sha256']
+                                   for snap in doc.get('snapshots', [])):
+                            raise ValueError('intent_ref has no matching frozen intent snapshot')
+                except (ValueError, OSError) as error:
+                    audit.error(f'{identity}.intent / {run_id}: {error}')
         serves = row.get('serves')
         if serves is None:
             if questions and state.get('project', {}).get('profile') == 'research':

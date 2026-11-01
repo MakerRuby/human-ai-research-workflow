@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "R6 Synthetic Intent Lineage Demo",
+    "profile": "general"
+  },
+  "layout": {
+    "management": "_pm",
+    "references": "references",
+    "raw_data": "data/raw",
+    "interim_data": "data/interim",
+    "analysis_data": "data/processed",
+    "code": "src",
+    "exploration": "notebooks",
+    "runs": "runs",
+    "results": "results",
+    "manuscript": "manuscript",
+    "releases": "releases",
+    "review": "review",
+    "archive": "archive"
+  },
+  "artifacts": [
+    {
+      "id": "INPUT-001",
+      "path": "data/raw/fixture.txt",
+      "version": "v1",
+      "status": "produced",
+      "depends_on": [],
+      "required_checks": [],
+      "sha256": "6f93e79a2553d568ffb8fdd0f3746c8b7def09dcc32ae205bd55882882875b68"
+    }
+  ],
+  "checks": [],
+  "tasks": [
+    {
+      "id": "T-001",
+      "title": "合成文本运行与意图绑定演示",
+      "status": "doing",
+      "inputs": [
+        {
+          "id": "INPUT-001",
+          "version": "v1"
+        }
+      ],
+      "outputs": [],
+      "serves": [
+        "Q-001"
+      ],
+      "status_history": [
+        {
+          "status": "todo"
+        }
+      ],
+      "status_record": {
+        "by": "AI执行者（合成演示）",
+        "rationale": "执行已委托的隔离小文本演示，非科研批准",
+        "evidence": [
+          "scope.md"
+        ],
+        "at": "2026-11-01T16:06:03.543595+00:00",
+        "status": "doing"
+      },
+      "intent": {
+        "path": "_pm/intents/T-001-v2.md",
+        "written_at": "2026-11-01T16:06:53.943459+00:00",
+        "sha256": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a"
+      },
+      "intent_history": [
+        {
+          "path": "_pm/intents/T-001-v1.md",
+          "written_at": "2026-11-01T16:06:03.730771+00:00",
+          "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+        }
+      ]
+    }
+  ],
+  "gates": [],
+  "findings": [],
+  "decisions": [],
+  "changes": [],
+  "claims": [],
+  "risks": [],
+  "review_items": [],
+  "runs": [
+    {
+      "id": "RUN-001",
+      "status": "succeeded",
+      "path": "runs/RUN-001/run.json"
+    },
+    {
+      "id": "RUN-002",
+      "status": "succeeded",
+      "path": "runs/RUN-002/run.json"
+    }
+  ],
+  "reproductions": [],
+  "questions": [
+    {
+      "id": "Q-001",
+      "statement": "合成两次小文本运行能否各自保留当时的冻结任务意图，并显露旧简报改写？",
+      "clarity": 2,
+      "status": "open",
+      "findings": [],
+      "claims": [],
+      "decisions": [],
+      "updated_at": "2026-11-01T16:06:03.171714+00:00"
+    }
+  ]
+}

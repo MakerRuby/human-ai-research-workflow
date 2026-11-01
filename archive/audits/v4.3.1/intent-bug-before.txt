@@ -1,0 +1,20 @@
+test_intent_update_preserves_old_run_and_binds_new_run (test_v431.IntentVersionTests.test_intent_update_preserves_old_run_and_binds_new_run) ... FAIL
+
+======================================================================
+FAIL: test_intent_update_preserves_old_run_and_binds_new_run (test_v431.IntentVersionTests.test_intent_update_preserves_old_run_and_binds_new_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\桌面\skill_barn\sci_skill\human-ai-research-workflow\scripts\test_v431.py", line 71, in test_intent_update_preserves_old_run_and_binds_new_run
+    second = self.intent('v2')
+  File "D:\桌面\skill_barn\sci_skill\human-ai-research-workflow\scripts\test_v431.py", line 55, in intent
+    self.ok(research_tree, 'task', 'intent', '--id', 'T-901', '--path', path)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\桌面\skill_barn\sci_skill\human-ai-research-workflow\scripts\test_v431.py", line 49, in ok
+    self.assertEqual(code, 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : {'ok': False, 'error': 'Change refused; it would introduce errors: T-901.intent: written after RUN-901 started; expectations must precede results'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.346s
+
+FAILED (failures=1)

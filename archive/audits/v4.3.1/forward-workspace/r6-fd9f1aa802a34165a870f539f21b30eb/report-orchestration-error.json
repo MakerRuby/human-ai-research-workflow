@@ -1,0 +1,8 @@
+{
+  "stage": "report assembly before any nested tool call executed",
+  "tool": "functions.exec JavaScript evaluation",
+  "original_tool_output": "Script error:\nSyntaxError: Unexpected identifier 'check_project'",
+  "effect": "The JavaScript source failed to parse; no nested command or file write occurred",
+  "correction": "Use chr(96) in the local report helper so Markdown quotation cannot terminate the JavaScript template",
+  "scope": "Only this local report helper was corrected; official CLI/source and all run records were unchanged"
+}

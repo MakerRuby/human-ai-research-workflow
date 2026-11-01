@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "task": "T-001",
+  "intent": {
+    "path": "_pm/intents/T-001-v2.md",
+    "written_at": "2026-11-01T16:06:53.943459+00:00",
+    "sha256": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a"
+  },
+  "warnings": []
+}
+

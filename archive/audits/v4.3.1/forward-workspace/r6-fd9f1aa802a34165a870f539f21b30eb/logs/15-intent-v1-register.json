@@ -1,0 +1,24 @@
+{
+  "label": "15-intent-v1-register",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\research_tree.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "task",
+    "intent",
+    "--id",
+    "T-001",
+    "--path",
+    "_pm/intents/T-001-v1.md"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:06:03.584264+00:00",
+  "finished_at": "2026-11-01T16:06:03.773842+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"task\": \"T-001\",\n  \"intent\": {\n    \"path\": \"_pm/intents/T-001-v1.md\",\n    \"written_at\": \"2026-11-01T16:06:03.730771+00:00\",\n    \"sha256\": \"31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9\"\n  },\n  \"warnings\": []\n}\n\n",
+  "stderr": ""
+}

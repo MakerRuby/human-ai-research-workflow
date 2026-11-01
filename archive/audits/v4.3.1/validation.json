@@ -1,0 +1,139 @@
+{
+  "version": "4.3.1",
+  "date": "2026-11-02",
+  "scope": "仅指定源副本的定向优化；无安装、迁移、发布或新科研执行。",
+  "source_before": {
+    "resolved": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow",
+    "count": 110,
+    "manifest_sha256": "db1a2f20dfe0bb3840af7649447b5f5924c75951ab6d3e2966cba4f68a40305d",
+    "entry_sha256": "44693160b3c403eb02253db3c94115198ceab2a7b1343008f4812337fb1da911"
+  },
+  "installed_before": {
+    "resolved": "C:\\Users\\DELL\\.codex\\skills\\human-ai-research-workflow",
+    "count": 93,
+    "manifest_sha256": "cae98131fa9b1757bd98f209225e957dfc41ce80a38cd237635ddce5e3161361",
+    "entry_sha256": "e73da04752c1b02c8d1b5762f5dc2475869e660b2f2d1c7a57c1bf78d1d64285"
+  },
+  "installed_after": {
+    "resolved": "C:\\Users\\DELL\\.codex\\skills\\human-ai-research-workflow",
+    "count": 93,
+    "manifest_sha256": "cae98131fa9b1757bd98f209225e957dfc41ce80a38cd237635ddce5e3161361",
+    "entry_sha256": "e73da04752c1b02c8d1b5762f5dc2475869e660b2f2d1c7a57c1bf78d1d64285"
+  },
+  "installed_noncache_files_unchanged": true,
+  "source_original_manifest_matches_start": true,
+  "changed_original_files": [
+    "CHANGELOG.md",
+    "README.md",
+    "SKILL.md",
+    "USAGE.md",
+    "references/behavioral-evaluation.md",
+    "references/capability-registry.md",
+    "references/hypothesis-tournament.md",
+    "references/migration.md",
+    "references/narrative-spine.md",
+    "references/portability.md",
+    "references/project-layout.md",
+    "references/reproducibility.md",
+    "references/research-types.md",
+    "references/roles-and-checkpoints.md",
+    "references/state-schema-v2.md",
+    "scripts/init_project.py",
+    "scripts/research_model.py",
+    "scripts/research_tree.py",
+    "scripts/run_project.py",
+    "assets/capabilities/know-how/public-omics-reuse.md"
+  ],
+  "missing_original_files": [],
+  "all_changed_originals_backed_up": true,
+  "new_source_files": [
+    "AUDIT-4.3.1.md",
+    "references/research-value-review.md",
+    "assets/evaluation/rework-scenarios.json",
+    "scripts/test_v431.py"
+  ],
+  "tests": {
+    "baseline": {
+      "total": 141,
+      "passed": 140,
+      "skipped": 1,
+      "log": "baseline-tests.txt"
+    },
+    "final": {
+      "total": 159,
+      "passed": 158,
+      "skipped": 1,
+      "log": "unit-tests-final.txt"
+    },
+    "new_regressions": 18,
+    "skip_reason": "Windows创建符号链接权限不足；未当作执行通过。",
+    "bug_before_log": "intent-bug-before.txt",
+    "basic_skill_validator": "Skill is valid!",
+    "registry_lint": {
+      "ok": true,
+      "entries": 51
+    },
+    "python_syntax_files": 24
+  },
+  "real_project_readonly_compatibility": {
+    "ok": true,
+    "error_count": 0,
+    "warning_count": 2,
+    "state_unchanged": true,
+    "scope": "只读全哈希检查；两个既有partial复现警告；未迁移或执行研究。"
+  },
+  "forward": {
+    "cases": 6,
+    "assessment": "six cases conform to stated criteria under synthetic facts",
+    "file_checks": 15,
+    "all_file_checks_passed": true,
+    "official_cli_invocations": 23,
+    "deliberate_negative_exit_code": 1,
+    "raw_report": "forward-check.md",
+    "maintainer_review": "forward-review.md",
+    "file_verification": "forward-verification.json",
+    "limitations": "One independent AI context, synthetic facts only; a report-orchestration parse failure retained; some explanatory docs edited during evaluation, not a frozen final-document independent sign-off."
+  },
+  "not_performed": [
+    "installed skill update",
+    "real project state/data/result edits",
+    "new research analysis or wet experiments",
+    "Git commit/push/tag",
+    "marketplace publication",
+    "new version effect/acceptance-rate validation"
+  ],
+  "local_links": {
+    "checked": 201,
+    "broken": [],
+    "scope": "top-level, references, assets and this-version audit Markdown; fenced examples excluded"
+  },
+  "source_patch_sha256": "96c3e06bbc085d0584c2f55a2131374195c58553c4e856c855198cd93a539f90",
+  "entry_sha256_after": "dfd6a6c11aa42d6ddd2acfc4136b02102cf1c90151bb987a0bfb9e98812a8618",
+  "changed_source_sha256": {
+    "CHANGELOG.md": "dd4b6a795a605cb9f39f9e6afd9a78f8f3bce245bb82d29e11f6294cd0650a8d",
+    "README.md": "855aa1d56fb87f15ee356c977a9e40b76c65d7fb34991aa8b7c711741fe19646",
+    "SKILL.md": "dfd6a6c11aa42d6ddd2acfc4136b02102cf1c90151bb987a0bfb9e98812a8618",
+    "USAGE.md": "6d9e9b6005e2159b25f6e9d4f7538654e754d22042a89dc001895b6163adc726",
+    "references/behavioral-evaluation.md": "941ada40230c0d20a2ccfa2f05e4dfe8880fcb25a392a85f5e8e8a4461a3b539",
+    "references/capability-registry.md": "0281b73cea0851e23b9f9a57af2a1fc3af2f553fc60ed34741a8a1025eb7102e",
+    "references/hypothesis-tournament.md": "3ad54ce929fd161c1bf90c3c388be3038728d07b92fd2c0d563e96d2cf00c4c4",
+    "references/migration.md": "b70d27e6b7a1e9922773968b5877a1909efabdb62ec7460bf2c8d550ce7506e1",
+    "references/narrative-spine.md": "fbdae2102e29a4772ded49f7c7067971b843b5420bf09357836ab1d64869863f",
+    "references/portability.md": "0dd823af1b38e6023de477aa00da6a9ddec53f193706f15e918026cefca8112e",
+    "references/project-layout.md": "545901c9af4e7612990a31bf5c37d8ad260c5115956d8d10ab820e16382d84c3",
+    "references/reproducibility.md": "e2b89975942b17e801451c97647e389ac35a78d62b2727dc7d275ea05449c8c8",
+    "references/research-types.md": "a930efe4bf6cfef70f894854caed210a35159c42c1ba6176e19584be5657720d",
+    "references/roles-and-checkpoints.md": "c3daca69a75c28fc880b4da97af3fbebc95544505e86ac4dc29ecfca560178a5",
+    "references/state-schema-v2.md": "621e7587f77a98f95fe946e6df34bb8629118e99154b069a405c73cf507ee3f9",
+    "scripts/init_project.py": "27697d415001a91cea567ec6c38690c1e0f221dbed235cc9368a72f6637282a7",
+    "scripts/research_model.py": "9ebd5e26aefe90b406439ca2dd239d3f54edff4ab117a649521e06d24971d7d9",
+    "scripts/research_tree.py": "7082ca2f35eac494769c25b189986df605e218d3e9a9c1032f96112d8ec32a0c",
+    "scripts/run_project.py": "03c7180f3fd79d33bf138eaee32098bbb92efb1e546ee6a17a17d2e08cd58196",
+    "assets/capabilities/know-how/public-omics-reuse.md": "e45aaecfbc9e352319636d362f55274c4269f1899b8dc9f1aca775abb6d9f3d2",
+    "AUDIT-4.3.1.md": "acbb77946ef7315cfae61e7c038308855b7edd1c9fa027e1d4a6980e1ba92bc2",
+    "references/research-value-review.md": "a64626495d77949cc625df6a9bf37f0c3cea715210422313106af095f5e26cb7",
+    "assets/evaluation/rework-scenarios.json": "80d18ec99c7d85e6381fdf7198f90469ea0c39140ce58fa2b50a5c6a01b07e10",
+    "scripts/test_v431.py": "f8a26dff346c12e42a1479ba2c0f7e1a4d8f772e9341a6badc08af9d379b57f3"
+  },
+  "validation_status": "passed_with_documented_limits"
+}

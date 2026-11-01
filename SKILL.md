@@ -2,7 +2,7 @@
 name: human-ai-research-workflow
 description: 管理人与 AI 在生物医学科研全过程中的协作：从初步想法出发，引导把问题具体化，评估现状与科学增量，组织多假设竞争，然后完成研究设计、数据或实验执行、结果解释、论证骨架，直到投稿前材料。在关键节点给出推荐及理由，由负责人拍板，同时负责决策留痕、证据链、变更闭环、可复现性和固定交付，并按需调用专项技能。适用于公开数据、组学、湿实验、动物、临床和系统评价等研究，也可用于其他复杂项目。简单的独立任务不必建立项目脚手架。
 metadata:
-  version: "4.3.0"
+  version: "4.3.1"
 ---
 
 # 人与 AI 科研协作工作流
@@ -93,6 +93,7 @@ metadata:
 - CP2 起就填论证骨架；每个正式分析先写明对应哪张图、支撑哪条论断。
 - 已批准的工作包连续做完并验收再汇报；只在越权、科学取舍或真阻塞时停下（见 [角色与检查点](references/roles-and-checkpoints.md) 第 3 节）。
 - 负责人已采用的明确停止条件命中后，依原授权执行并报告，不重复索要同一确认；探索值或内部审计通过不自动接管原主线。
+- 关键结果使主张收窄、必要支持失效或准备大规模写作/出图时，在现有 CP6/CP8 分别判断可信度、科学信息量和下一块投入价值；实质审稿先于大排版，见 [结果后的价值审阅](references/research-value-review.md)。
 - 预检产出正式执行直接加载的冻结输入；面向负责人的数字只来自已验收的输出。对照、分组或样本来源的判断，核对全文方法与原始记录，不凭摘要或 AI 生成的标签。
 
 这几条一起保证三件事：人在每一步都知道为什么做，结果不会散落，写论文时不必重复已做的工作。负责人不确定下一步时，AI 按信息价值和代价给出 2–3 个排好序的选项，并说明推荐理由。
@@ -156,6 +157,7 @@ metadata:
 ```text
 python <skill>/scripts/init_project.py --target <project> --name <name> --scale M --profile general --dry-run
 python <skill>/scripts/init_project.py --target <project> --name <name> --scale L --profile research
+python <skill>/scripts/init_project.py --target <existing-project> --name <name> --scale M --profile research --no-research-folders --dry-run
 python <skill>/scripts/check_project.py --project <project>
 python <skill>/scripts/check_project.py --project <project> --impact DATA01
 python <skill>/scripts/check_project.py --project <project> --require-gate G3 --verify-hashes
@@ -213,3 +215,4 @@ python <skill>/scripts/record.py --project <project> decision --id D-003 --title
 - `scripts/test_v41.py`：标准目录、`record.py`、CP3 与论证骨架留空警告、未登记运行目录的行为验证。
 - `scripts/test_v42.py`：元数据/分析运行的 CP3 边界、已采纳决定与任务创建的行为验证。
 - `scripts/test_v43.py`：停止/恢复的实际执行边界、验收及任务结束的事务回归；[科研判断情景](references/behavioral-evaluation.md)另评推荐依据、收敛与用户负担，不把结构测试当科学判断验证。
+- `scripts/test_v431.py`：意图更新与新旧运行绑定、历史不可改写、时间/快照检查和既有目录适配。

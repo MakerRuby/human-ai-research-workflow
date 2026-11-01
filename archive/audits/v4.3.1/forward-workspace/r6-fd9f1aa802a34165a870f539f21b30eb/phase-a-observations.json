@@ -1,0 +1,80 @@
+{
+  "run": {
+    "id": "RUN-001",
+    "status": "succeeded",
+    "purpose": "Synthetic first text run with v1 intent; no research data",
+    "started_at": "2026-11-01T16:06:04.060510+00:00",
+    "stage": "analysis",
+    "task": "T-001",
+    "intent_ref": {
+      "path": "_pm/intents/T-001-v1.md",
+      "written_at": "2026-11-01T16:06:03.730771+00:00",
+      "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+    },
+    "ended_at": "2026-11-01T16:06:04.234566+00:00",
+    "returncode": 0,
+    "cwd": ".",
+    "command": [
+      "C:\\Users\\DELL\\miniconda3\\python.exe",
+      "-X",
+      "utf8",
+      "-B",
+      "src/write_text.py",
+      "--input",
+      "data/raw/fixture.txt",
+      "--config",
+      "_pm/text-config.json",
+      "--output",
+      "outputs/run-001.txt",
+      "--label",
+      "first"
+    ],
+    "inputs": [
+      {
+        "id": "INPUT-001",
+        "version": "v1"
+      }
+    ],
+    "input_hashes": {
+      "INPUT-001": "6f93e79a2553d568ffb8fdd0f3746c8b7def09dcc32ae205bd55882882875b68"
+    },
+    "snapshots": [
+      {
+        "role": "code",
+        "source": "src/write_text.py",
+        "snapshot": "runs/RUN-001/snapshots/000-write_text.py",
+        "sha256": "b9f6906d174aac4a84f45dc447fcc9156f086cb89874c57c2a0d017067185b6f"
+      },
+      {
+        "role": "config",
+        "source": "_pm/text-config.json",
+        "snapshot": "runs/RUN-001/snapshots/001-text-config.json",
+        "sha256": "0b20983db5adca24daca96dfd25900af92d843f2c38eb7703311724989e6c849"
+      },
+      {
+        "role": "environment",
+        "source": "_pm/environment.json",
+        "snapshot": "runs/RUN-001/snapshots/002-environment.json",
+        "sha256": "2d5c6a7e4baf8e5f98835367193ca20cbfa7f227226f53789a6d0872aa8e076c"
+      },
+      {
+        "role": "intent",
+        "source": "_pm/intents/T-001-v1.md",
+        "snapshot": "runs/RUN-001/snapshots/003-T-001-v1.md",
+        "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+      }
+    ],
+    "environment_rebuilt": false,
+    "cache_policy": "No cache used; explicit Python -B; existing environment, not rebuilt",
+    "stdout": "runs/RUN-001/stdout.log",
+    "stderr": "runs/RUN-001/stderr.log",
+    "outputs": [
+      {
+        "path": "outputs/run-001.txt",
+        "sha256": "b92b5bd16475c0266a7f1fd39ea2ee7736f4c2313e6e86fa7cfd4748c2dfcf4f"
+      }
+    ],
+    "integrity_issues": []
+  },
+  "output": "fixture=R6\nlabel=first\nsynthetic fixture only; no real research data\n"
+}

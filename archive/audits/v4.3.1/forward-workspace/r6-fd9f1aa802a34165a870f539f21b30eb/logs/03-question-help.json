@@ -1,0 +1,21 @@
+{
+  "label": "03-question-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\research_tree.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "question",
+    "add",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:45.631604+00:00",
+  "finished_at": "2026-11-01T16:03:45.736023+00:00",
+  "exit_code": 0,
+  "stdout": "usage: research_tree.py question [-h] --id ID [--statement STATEMENT]\n                                 [--clarity CLARITY] [--status STATUS]\n                                 [--parent PARENT] [--type TYPE]\n                                 [--add-finding ADD_FINDING]\n                                 [--add-claim ADD_CLAIM]\n                                 [--add-decision ADD_DECISION]\n                                 {add,set}\n\npositional arguments:\n  {add,set}\n\noptions:\n  -h, --help            show this help message and exit\n  --id ID\n  --statement STATEMENT\n  --clarity CLARITY\n  --status STATUS\n  --parent PARENT\n  --type TYPE\n  --add-finding ADD_FINDING\n  --add-claim ADD_CLAIM\n  --add-decision ADD_DECISION\n",
+  "stderr": ""
+}

@@ -1,0 +1,11 @@
+usage: research_tree.py [-h] --project PROJECT {question,hypothesis,task} ...
+
+Maintain the question tree, project hypotheses and task purpose links (stdlib
+only).
+
+positional arguments:
+  {question,hypothesis,task}
+
+options:
+  -h, --help            show this help message and exit
+  --project PROJECT

@@ -1,0 +1,17 @@
+{
+  "label": "06-run-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\run_project.py",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:45.960576+00:00",
+  "finished_at": "2026-11-01T16:03:46.068829+00:00",
+  "exit_code": 0,
+  "stdout": "usage: run_project.py [-h] --project PROJECT --spec SPEC [--timeout TIMEOUT]\n                      ...\n\nExecute explicitly supplied argv, preserving actual run evidence. No shell or\nrecorded-command replay.\n\npositional arguments:\n  command\n\noptions:\n  -h, --help         show this help message and exit\n  --project PROJECT\n  --spec SPEC        Project-relative run specification\n  --timeout TIMEOUT\n",
+  "stderr": ""
+}

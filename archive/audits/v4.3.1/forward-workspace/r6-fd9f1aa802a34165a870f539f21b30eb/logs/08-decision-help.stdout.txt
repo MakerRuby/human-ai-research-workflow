@@ -1,0 +1,20 @@
+usage: record.py decision [-h] --id ID --title TITLE
+                          [--status {proposed,adopted}] [--record RECORD]
+                          [--checkpoint CHECKPOINT] [--skipped]
+                          [--rationale RATIONALE] [--by BY]
+                          [--authorization AUTHORIZATION]
+                          [--evidence EVIDENCE]
+
+options:
+  -h, --help            show this help message and exit
+  --id ID
+  --title TITLE
+  --status {proposed,adopted}
+  --record RECORD
+  --checkpoint CHECKPOINT
+                        CP0-CP9 this decision answers
+  --skipped             Checkpoint judged not applicable; requires --rationale
+  --rationale RATIONALE
+  --by BY
+  --authorization AUTHORIZATION
+  --evidence EVIDENCE

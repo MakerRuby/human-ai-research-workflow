@@ -1,0 +1,20 @@
+{
+  "label": "08-decision-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\record.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "decision",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:46.180395+00:00",
+  "finished_at": "2026-11-01T16:03:46.294952+00:00",
+  "exit_code": 0,
+  "stdout": "usage: record.py decision [-h] --id ID --title TITLE\n                          [--status {proposed,adopted}] [--record RECORD]\n                          [--checkpoint CHECKPOINT] [--skipped]\n                          [--rationale RATIONALE] [--by BY]\n                          [--authorization AUTHORIZATION]\n                          [--evidence EVIDENCE]\n\noptions:\n  -h, --help            show this help message and exit\n  --id ID\n  --title TITLE\n  --status {proposed,adopted}\n  --record RECORD\n  --checkpoint CHECKPOINT\n                        CP0-CP9 this decision answers\n  --skipped             Checkpoint judged not applicable; requires --rationale\n  --rationale RATIONALE\n  --by BY\n  --authorization AUTHORIZATION\n  --evidence EVIDENCE\n",
+  "stderr": ""
+}

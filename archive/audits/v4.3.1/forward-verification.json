@@ -1,0 +1,23 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "run001_bytes_unchanged_since_first_execution": true,
+    "current_is_second_intent": true,
+    "old_ref_in_history": true,
+    "new_ref_is_current": true,
+    "state_unchanged_by_negative_check": true,
+    "RUN-001_success": true,
+    "RUN-001_snapshot_hash_matches_ref": true,
+    "RUN-001_output_hash_matches_record": true,
+    "RUN-002_success": true,
+    "RUN-002_snapshot_hash_matches_ref": true,
+    "RUN-002_output_hash_matches_record": true,
+    "tamper_real_not_merely_claimed": true,
+    "old_original_backup_matches_ref": true,
+    "official_check_detects_old_brief_change": true,
+    "only_deliberate_negative_command_failed": true
+  },
+  "official_cli_invocations": 23,
+  "deliberate_negative_exit_code": 1,
+  "scope": "Parent independently recomputed saved-file hashes and inspected actual CLI output; synthetic behavior only, no new CLI reruns."
+}

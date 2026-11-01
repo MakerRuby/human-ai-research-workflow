@@ -1,0 +1,12 @@
+usage: check_project.py [-h] --project PROJECT [--impact IMPACT]
+                        [--require-gate REQUIRE_GATE] [--verify-hashes]
+
+Read-only consistency and transitive-impact checks; never validate scientific
+truth.
+
+options:
+  -h, --help            show this help message and exit
+  --project PROJECT
+  --impact IMPACT
+  --require-gate REQUIRE_GATE
+  --verify-hashes

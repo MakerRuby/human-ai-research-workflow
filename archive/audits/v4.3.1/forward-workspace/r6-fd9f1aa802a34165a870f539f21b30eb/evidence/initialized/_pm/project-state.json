@@ -1,0 +1,34 @@
+{
+  "schema_version": 2,
+  "project": {
+    "name": "R6 Synthetic Intent Lineage Demo",
+    "profile": "general"
+  },
+  "layout": {
+    "management": "_pm",
+    "references": "references",
+    "raw_data": "data/raw",
+    "interim_data": "data/interim",
+    "analysis_data": "data/processed",
+    "code": "src",
+    "exploration": "notebooks",
+    "runs": "runs",
+    "results": "results",
+    "manuscript": "manuscript",
+    "releases": "releases",
+    "review": "review",
+    "archive": "archive"
+  },
+  "artifacts": [],
+  "checks": [],
+  "tasks": [],
+  "gates": [],
+  "findings": [],
+  "decisions": [],
+  "changes": [],
+  "claims": [],
+  "risks": [],
+  "review_items": [],
+  "runs": [],
+  "reproductions": []
+}

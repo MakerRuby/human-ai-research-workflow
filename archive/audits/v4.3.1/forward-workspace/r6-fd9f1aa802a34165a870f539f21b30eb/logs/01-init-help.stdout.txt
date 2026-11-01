@@ -1,0 +1,27 @@
+usage: init_project.py [-h] --target TARGET --name NAME [--scale {S,M,L}]
+                       [--profile {general,research}]
+                       [--ai-entry {agents,claude} | --no-ai-entry]
+                       [--design {secondary,omics,wet_lab,animal,clinical_observational,diagnostic_prognostic,clinical_trial,evidence_synthesis,methods}]
+                       [--no-research-folders] [--dry-run] [--date DATE]
+
+Create minimal project records without replacing existing files (stdlib only).
+
+options:
+  -h, --help            show this help message and exit
+  --target TARGET
+  --name NAME
+  --scale {S,M,L}
+  --profile {general,research}
+  --ai-entry {agents,claude}
+                        Select host entries; defaults to both. Existing files
+                        are preserved.
+  --no-ai-entry         Do not create host entry files.
+  --design {secondary,omics,wet_lab,animal,clinical_observational,diagnostic_prognostic,clinical_trial,evidence_synthesis,methods}
+                        Research study type(s); see references/research-
+                        types.md. Repeat for mixed projects.
+  --no-research-folders
+                        Skip default business-folder README placeholders;
+                        preserve an existing project layout. Research records
+                        still apply. Does not migrate existing state or paths.
+  --dry-run
+  --date DATE

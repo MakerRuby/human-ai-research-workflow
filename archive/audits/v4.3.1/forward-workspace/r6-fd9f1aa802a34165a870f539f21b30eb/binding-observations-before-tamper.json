@@ -1,0 +1,70 @@
+{
+  "current_task_intent": {
+    "path": "_pm/intents/T-001-v2.md",
+    "written_at": "2026-11-01T16:06:53.943459+00:00",
+    "sha256": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a"
+  },
+  "intent_history": [
+    {
+      "path": "_pm/intents/T-001-v1.md",
+      "written_at": "2026-11-01T16:06:03.730771+00:00",
+      "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+    }
+  ],
+  "run_001_record_unchanged_after_v2": true,
+  "run_bindings": {
+    "RUN-001": {
+      "intent_ref": {
+        "path": "_pm/intents/T-001-v1.md",
+        "written_at": "2026-11-01T16:06:03.730771+00:00",
+        "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+      },
+      "snapshot": {
+        "role": "intent",
+        "source": "_pm/intents/T-001-v1.md",
+        "snapshot": "runs/RUN-001/snapshots/003-T-001-v1.md",
+        "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9"
+      },
+      "intent_before_run_start": true,
+      "snapshot_matches_original": true,
+      "status": "succeeded",
+      "returncode": 0
+    },
+    "RUN-002": {
+      "intent_ref": {
+        "path": "_pm/intents/T-001-v2.md",
+        "written_at": "2026-11-01T16:06:53.943459+00:00",
+        "sha256": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a"
+      },
+      "snapshot": {
+        "role": "intent",
+        "source": "_pm/intents/T-001-v2.md",
+        "snapshot": "runs/RUN-002/snapshots/003-T-001-v2.md",
+        "sha256": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a"
+      },
+      "intent_before_run_start": true,
+      "snapshot_matches_original": true,
+      "status": "succeeded",
+      "returncode": 0
+    }
+  },
+  "checks": {
+    "old_run_not_rebound": true,
+    "history_has_v1": true,
+    "current_is_v2": true,
+    "RUN-001_intent_before_run": true,
+    "RUN-001_intent_snapshot_matches": true,
+    "RUN-001_actual_stdout_read": true,
+    "RUN-001_actual_stderr_empty": true,
+    "RUN-002_intent_before_run": true,
+    "RUN-002_intent_snapshot_matches": true,
+    "RUN-002_actual_stdout_read": true,
+    "RUN-002_actual_stderr_empty": true,
+    "first_output_exact": true,
+    "second_output_exact": true
+  },
+  "outputs": {
+    "RUN-001": "fixture=R6\nlabel=first\nsynthetic fixture only; no real research data\n",
+    "RUN-002": "fixture=R6\nlabel=second\nsynthetic fixture only; no real research data\n"
+  }
+}

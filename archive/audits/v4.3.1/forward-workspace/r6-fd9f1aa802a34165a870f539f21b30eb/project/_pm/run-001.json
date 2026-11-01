@@ -1,0 +1,22 @@
+{
+  "id": "RUN-001",
+  "task": "T-001",
+  "stage": "analysis",
+  "purpose": "Synthetic first text run with v1 intent; no research data",
+  "inputs": [
+    {
+      "id": "INPUT-001",
+      "version": "v1"
+    }
+  ],
+  "code": [
+    "src/write_text.py"
+  ],
+  "config": "_pm/text-config.json",
+  "environment": "_pm/environment.json",
+  "environment_rebuilt": false,
+  "cache_policy": "No cache used; explicit Python -B; existing environment, not rebuilt",
+  "outputs": [
+    "outputs/run-001.txt"
+  ]
+}

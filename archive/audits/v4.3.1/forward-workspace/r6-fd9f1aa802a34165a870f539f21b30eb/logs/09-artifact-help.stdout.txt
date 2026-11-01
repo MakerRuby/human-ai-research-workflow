@@ -1,0 +1,10 @@
+usage: record.py artifact [-h] --id ID --path PATH --version VERSION
+                          [--depends-on DEPENDS_ON]
+
+options:
+  -h, --help            show this help message and exit
+  --id ID
+  --path PATH
+  --version VERSION
+  --depends-on DEPENDS_ON
+                        ID@version

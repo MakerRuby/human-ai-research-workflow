@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "mode": "initialized",
+  "created": [
+    "README.md",
+    "AI_CONTRACT.md",
+    "_pm/BRIEF.md",
+    "_pm/STATUS.md",
+    "_pm/LAYOUT.md",
+    "_pm/config.json",
+    "_pm/project-state.json"
+  ],
+  "skipped": [],
+  "config_path": "_pm/config.json",
+  "message": "Templates are drafts; no scientific gate has been passed."
+}

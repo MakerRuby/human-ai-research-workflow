@@ -23,6 +23,8 @@ AI 执行生物医学分析时，常见问题不在于不会写代码，而在�
 | `pitfalls` | 最常见的 1–3 个坑 |
 | `doc` | know-how 文档路径（若有） |
 
+种子条目的 `doc` 相对 `assets/capabilities/registry.json` 所在目录解析，例如 `know-how/public-omics-reuse.md` 对应 `<skill>/assets/capabilities/know-how/public-omics-reuse.md`，不是 `<skill>/know-how/...`。项目条目的相对文档位置以项目自己的登记约定为准，不能沿用种子根路径猜测。
+
 种子条目只表示“值得考虑”，不保证在当前环境可用。技能类条目使用前，要用宿主的技能清单确认确实已安装；数据库类条目，要在本次运行中实际访问一次，并记下版本和访问日期。
 
 ## 3. 两段式检索
@@ -56,7 +58,7 @@ python <skill>/scripts/registry_search.py --project <project> --query "单细胞
 3. [ ] 改为分层分析并在讨论中说明（D-006）
 ```
 
-规则：打勾的项目必须附 `RUN-*` 或产物路径；失败的项目保留不删，写明原因，再插入修正步骤。所有命令通过 `run_project.py` 执行（见 [复现](reproducibility.md)），设超时；完整日志落盘，回传给 AI 的只是开头、结尾和报错行。
+规则：打勾的项目必须附 `RUN-*` 或产物路径；失败的项目保留不删，写明原因，再插入修正步骤。进入正式研究证据链的计算用 `run_project.py` 留痕（见 [复现](reproducibility.md)），设适用超时并保留完整日志，回传必要摘要。普通读取、工具帮助和治理登记不为形式包装成研究运行；需登记的元数据探针使用实际来源清单和独立运行配置，不把持续变化的项目状态冒充冻结分析输入。
 
 ## 6. 维护规则
 

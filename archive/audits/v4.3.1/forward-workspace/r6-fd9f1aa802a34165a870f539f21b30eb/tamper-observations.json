@@ -1,0 +1,38 @@
+{
+  "deliberate_tamper": {
+    "action": "direct local write to a previously registered historical brief",
+    "at": "2026-11-01T16:07:45.842029+00:00",
+    "path": "_pm/intents/T-001-v1.md",
+    "write_succeeded": true,
+    "original_sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9",
+    "changed_sha256": "888b5a77dbb8bc332cad54ae41117864d6121ba3440c867aae158650f87bc17e",
+    "original_preserved_at": "evidence\\before-tamper\\_pm\\intents\\T-001-v1.md",
+    "note": "Deliberate synthetic negative fixture; no attempt to treat changed text as original or approved"
+  },
+  "official_check_exit_code": 1,
+  "preserved_record_hashes_before": {
+    "_pm/project-state.json": "36fd12453f1fb4e8f64e04c36bcc670ea03e533e6d23aa79183fca8688d5e20a",
+    "runs/RUN-001/run.json": "0e7494d473467c4951f1f16ced1406881cb5c256d8e532e95d4147b841aba5b3",
+    "runs/RUN-002/run.json": "c921ed4fc4b0bd9f407e30bb3cca7b57c100d98369d8ca1573e544a9a1bccdde",
+    "runs/RUN-001/snapshots/003-T-001-v1.md": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9",
+    "runs/RUN-002/snapshots/003-T-001-v2.md": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a",
+    "outputs/run-001.txt": "b92b5bd16475c0266a7f1fd39ea2ee7736f4c2313e6e86fa7cfd4748c2dfcf4f",
+    "outputs/run-002.txt": "515a66e27d60a990bc45396f9d0848982abe63b511abe7da959d1db95052ca05"
+  },
+  "preserved_record_hashes_after": {
+    "_pm/project-state.json": "36fd12453f1fb4e8f64e04c36bcc670ea03e533e6d23aa79183fca8688d5e20a",
+    "runs/RUN-001/run.json": "0e7494d473467c4951f1f16ced1406881cb5c256d8e532e95d4147b841aba5b3",
+    "runs/RUN-002/run.json": "c921ed4fc4b0bd9f407e30bb3cca7b57c100d98369d8ca1573e544a9a1bccdde",
+    "runs/RUN-001/snapshots/003-T-001-v1.md": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9",
+    "runs/RUN-002/snapshots/003-T-001-v2.md": "74b241edbd1c28577761b55df345a6573addf428b2b0c667d790651ae1e99f2a",
+    "outputs/run-001.txt": "b92b5bd16475c0266a7f1fd39ea2ee7736f4c2313e6e86fa7cfd4748c2dfcf4f",
+    "outputs/run-002.txt": "515a66e27d60a990bc45396f9d0848982abe63b511abe7da959d1db95052ca05"
+  },
+  "state_runs_snapshots_outputs_unchanged": true,
+  "original_v1_backup_intact": true,
+  "original_v1_run_snapshot_intact": true,
+  "v2_original_intact": true,
+  "selected_official_source_files_unchanged": true,
+  "modified_v1_left_in_place": true,
+  "check_scope": "A single synthetic intent-history/file-consistency case; not scientific validation"
+}

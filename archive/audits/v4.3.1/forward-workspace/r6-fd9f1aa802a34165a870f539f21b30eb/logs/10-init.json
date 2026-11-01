@@ -1,0 +1,27 @@
+{
+  "label": "10-init",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\init_project.py",
+    "--target",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "--name",
+    "R6 Synthetic Intent Lineage Demo",
+    "--scale",
+    "M",
+    "--profile",
+    "general",
+    "--no-ai-entry",
+    "--date",
+    "2026-11-02"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:04:35.168181+00:00",
+  "finished_at": "2026-11-01T16:04:35.293923+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"mode\": \"initialized\",\n  \"created\": [\n    \"README.md\",\n    \"AI_CONTRACT.md\",\n    \"_pm/BRIEF.md\",\n    \"_pm/STATUS.md\",\n    \"_pm/LAYOUT.md\",\n    \"_pm/config.json\",\n    \"_pm/project-state.json\"\n  ],\n  \"skipped\": [],\n  \"config_path\": \"_pm/config.json\",\n  \"message\": \"Templates are drafts; no scientific gate has been passed.\"\n}\n",
+  "stderr": ""
+}

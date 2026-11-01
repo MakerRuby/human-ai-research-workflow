@@ -1,0 +1,26 @@
+usage: research_tree.py task [-h] --id ID [--serves SERVES] [--title TITLE]
+                             [--input INPUT] [--path PATH]
+                             [--status {blocked,cancelled,doing,done,paused,stopped,todo}]
+                             [--output OUTPUT] [--by BY]
+                             [--rationale RATIONALE] [--evidence EVIDENCE]
+                             [--decision DECISION]
+                             {add,link,intent,set}
+
+positional arguments:
+  {add,link,intent,set}
+
+options:
+  -h, --help            show this help message and exit
+  --id ID
+  --serves SERVES
+  --title TITLE         Required for add; new tasks start as todo
+  --input INPUT         Versioned artifact input for add: ID@version
+  --path PATH
+  --status {blocked,cancelled,doing,done,paused,stopped,todo}
+  --output OUTPUT       Existing artifact id; done still requires accepted
+                        current outputs
+  --by BY
+  --rationale RATIONALE
+  --evidence EVIDENCE
+  --decision DECISION   Actual adopted control/resumption decision, not
+                        inferred permission

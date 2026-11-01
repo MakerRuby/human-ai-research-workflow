@@ -1,0 +1,22 @@
+usage: research_tree.py question [-h] --id ID [--statement STATEMENT]
+                                 [--clarity CLARITY] [--status STATUS]
+                                 [--parent PARENT] [--type TYPE]
+                                 [--add-finding ADD_FINDING]
+                                 [--add-claim ADD_CLAIM]
+                                 [--add-decision ADD_DECISION]
+                                 {add,set}
+
+positional arguments:
+  {add,set}
+
+options:
+  -h, --help            show this help message and exit
+  --id ID
+  --statement STATEMENT
+  --clarity CLARITY
+  --status STATUS
+  --parent PARENT
+  --type TYPE
+  --add-finding ADD_FINDING
+  --add-claim ADD_CLAIM
+  --add-decision ADD_DECISION

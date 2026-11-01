@@ -1,0 +1,21 @@
+{
+  "label": "04-task-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\research_tree.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "task",
+    "add",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:45.739328+00:00",
+  "finished_at": "2026-11-01T16:03:45.846409+00:00",
+  "exit_code": 0,
+  "stdout": "usage: research_tree.py task [-h] --id ID [--serves SERVES] [--title TITLE]\n                             [--input INPUT] [--path PATH]\n                             [--status {blocked,cancelled,doing,done,paused,stopped,todo}]\n                             [--output OUTPUT] [--by BY]\n                             [--rationale RATIONALE] [--evidence EVIDENCE]\n                             [--decision DECISION]\n                             {add,link,intent,set}\n\npositional arguments:\n  {add,link,intent,set}\n\noptions:\n  -h, --help            show this help message and exit\n  --id ID\n  --serves SERVES\n  --title TITLE         Required for add; new tasks start as todo\n  --input INPUT         Versioned artifact input for add: ID@version\n  --path PATH\n  --status {blocked,cancelled,doing,done,paused,stopped,todo}\n  --output OUTPUT       Existing artifact id; done still requires accepted\n                        current outputs\n  --by BY\n  --rationale RATIONALE\n  --evidence EVIDENCE\n  --decision DECISION   Actual adopted control/resumption decision, not\n                        inferred permission\n",
+  "stderr": ""
+}

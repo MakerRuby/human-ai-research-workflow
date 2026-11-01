@@ -1,0 +1,17 @@
+{
+  "label": "01-init-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\init_project.py",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:45.423498+00:00",
+  "finished_at": "2026-11-01T16:03:45.514853+00:00",
+  "exit_code": 0,
+  "stdout": "usage: init_project.py [-h] --target TARGET --name NAME [--scale {S,M,L}]\n                       [--profile {general,research}]\n                       [--ai-entry {agents,claude} | --no-ai-entry]\n                       [--design {secondary,omics,wet_lab,animal,clinical_observational,diagnostic_prognostic,clinical_trial,evidence_synthesis,methods}]\n                       [--no-research-folders] [--dry-run] [--date DATE]\n\nCreate minimal project records without replacing existing files (stdlib only).\n\noptions:\n  -h, --help            show this help message and exit\n  --target TARGET\n  --name NAME\n  --scale {S,M,L}\n  --profile {general,research}\n  --ai-entry {agents,claude}\n                        Select host entries; defaults to both. Existing files\n                        are preserved.\n  --no-ai-entry         Do not create host entry files.\n  --design {secondary,omics,wet_lab,animal,clinical_observational,diagnostic_prognostic,clinical_trial,evidence_synthesis,methods}\n                        Research study type(s); see references/research-\n                        types.md. Repeat for mixed projects.\n  --no-research-folders\n                        Skip default business-folder README placeholders;\n                        preserve an existing project layout. Research records\n                        still apply. Does not migrate existing state or paths.\n  --dry-run\n  --date DATE\n",
+  "stderr": ""
+}

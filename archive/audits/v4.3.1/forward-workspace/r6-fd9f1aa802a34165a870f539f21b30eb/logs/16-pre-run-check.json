@@ -1,0 +1,19 @@
+{
+  "label": "16-pre-run-check",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\check_project.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "--verify-hashes"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:06:03.778074+00:00",
+  "finished_at": "2026-11-01T16:06:03.928986+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"errors\": [],\n  \"warnings\": [],\n  \"counts\": {\n    \"artifacts\": 1,\n    \"checks\": 0,\n    \"tasks\": 1,\n    \"gates\": 0\n  },\n  \"stale_artifacts\": [],\n  \"impact\": null,\n  \"hashes_not_recorded\": [],\n  \"governance\": {\n    \"open_changes\": [],\n    \"invalid_or_pending_reproductions\": [],\n    \"pending_reviews\": [],\n    \"counts\": {\n      \"findings\": 0,\n      \"decisions\": 0,\n      \"changes\": 0,\n      \"claims\": 0,\n      \"risks\": 0,\n      \"review_items\": 0,\n      \"runs\": 0,\n      \"reproductions\": 0\n    },\n    \"research_model\": {\n      \"questions\": 1,\n      \"hypotheses\": 0,\n      \"open_questions\": [\n        \"Q-001\"\n      ],\n      \"hypotheses_in_test\": [],\n      \"unlinked_research_tasks\": []\n    }\n  },\n  \"scope\": \"Read-only record/file consistency; scientific validity and evidence truth are not verified.\"\n}\n",
+  "stderr": ""
+}

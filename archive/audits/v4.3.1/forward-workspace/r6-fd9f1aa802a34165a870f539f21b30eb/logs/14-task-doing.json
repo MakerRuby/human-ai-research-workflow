@@ -1,0 +1,30 @@
+{
+  "label": "14-task-doing",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\research_tree.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "task",
+    "set",
+    "--id",
+    "T-001",
+    "--status",
+    "doing",
+    "--by",
+    "AI执行者（合成演示）",
+    "--rationale",
+    "执行已委托的隔离小文本演示，非科研批准",
+    "--evidence",
+    "scope.md"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:06:03.397933+00:00",
+  "finished_at": "2026-11-01T16:06:03.580392+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"task\": \"T-001\",\n  \"status\": \"doing\",\n  \"outputs\": [],\n  \"warnings\": []\n}\n\n",
+  "stderr": ""
+}

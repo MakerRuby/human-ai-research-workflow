@@ -1,0 +1,10 @@
+{
+  "action": "direct local write to a previously registered historical brief",
+  "at": "2026-11-01T16:07:45.842029+00:00",
+  "path": "_pm/intents/T-001-v1.md",
+  "write_succeeded": true,
+  "original_sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9",
+  "changed_sha256": "888b5a77dbb8bc332cad54ae41117864d6121ba3440c867aae158650f87bc17e",
+  "original_preserved_at": "evidence\\before-tamper\\_pm\\intents\\T-001-v1.md",
+  "note": "Deliberate synthetic negative fixture; no attempt to treat changed text as original or approved"
+}

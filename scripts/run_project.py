@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 from project_io import atomic_json, digest, encoded, load, local, now, state, write_new_tree
-from research_model import RUN_STAGES
+from research_model import RUN_STAGES, task_intents, intent_for_run
 from lifecycle import require_active
 
 
@@ -70,9 +70,27 @@ def run(root, spec, command, timeout=None):
     task = spec.get('task')
     if task is not None and task not in {t.get('id') for t in current.get('tasks', []) if isinstance(t, dict)}:
         raise ValueError('Unknown task for this run; register the task first')
-    record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': now(),
+    started = now()
+    intent_ref = None
+    if task is not None:
+        task_row = next(t for t in current['tasks'] if t.get('id') == task)
+        entries = task_intents(root, task_row)
+        intent_ref = intent_for_run(entries, started, task_row.get('intent'))
+    if 'intent_ref' in spec and spec['intent_ref'] != intent_ref:
+        raise ValueError('Run intent_ref must match the current registered task intent')
+    if intent_ref is not None:
+        relative = intent_ref['path']
+        source = local(root, relative, True)
+        if digest(source) != intent_ref['sha256']:
+            raise ValueError('Intent changed before snapshot; no run was started')
+        resolved.append(('intent', relative, source))
+        snapshots.append({'role': 'intent', 'source': relative,
+                          'snapshot': f'{run_base}/snapshots/{len(snapshots):03d}-{source.name}',
+                          'sha256': intent_ref['sha256']})
+    record = {'id': identity, 'status': 'running', 'purpose': spec['purpose'], 'started_at': started,
               **({'stage': stage} if stage is not None else {}),
               **({'task': task} if task is not None else {}),
+              **({'intent_ref': intent_ref} if intent_ref is not None else {}),
               'ended_at': None, 'returncode': None, 'cwd': '.', 'command': command,
               'inputs': inputs, 'input_hashes': input_hashes, 'snapshots': snapshots,
               'environment_rebuilt': spec['environment_rebuilt'], 'cache_policy': spec['cache_policy'],

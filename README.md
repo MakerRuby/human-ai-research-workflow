@@ -1,6 +1,6 @@
 # 人与 AI 科研协作工作流
 
-**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.3.0
+**Human–AI Research Workflow** · `human-ai-research-workflow` · v4.3.1
 
 这是人与 AI 合作完成生物医学科研的全流程工作流。负责人只需提出一个初步想法，AI 就会引导把问题具体化，评估现状与科学增量，组织多个假设竞争，再陪同完成设计、执行、解释和论证骨架，一直到投稿前材料。在关键节点，AI 给出推荐和理由，由负责人拍板。工作流适用于公开数据、组学、湿实验、动物、临床和系统评价研究，并按任务调用已可用的专项技能。
 
@@ -42,6 +42,8 @@ python scripts/init_project.py --target "你的项目目录" --name "研究名�
 
 确认路径和初始化范围后，移除 `--dry-run` 执行。完整说明见 [USAGE.md](USAGE.md)。没有终端权限时，可由有权限的人执行，并回传真实输出。
 
+已有业务目录时可加 `--no-research-folders` 跳过默认目录占位；它不推断或迁移现有路径。关键结果后的科学价值/补强收益审阅见[结果后的价值审阅](references/research-value-review.md)，复用既有检查点。
+
 ## 文件导航
 
 | 文件或目录 | 职责 |
@@ -56,7 +58,7 @@ python scripts/init_project.py --target "你的项目目录" --name "研究名�
 | [assets/capabilities/](assets/capabilities/) | 种子能力注册表与操作经验文档 |
 | [references/design-lessons.md](references/design-lessons.md) | 借鉴外部 AI 科学家系统的取舍与来源 |
 | [CHANGELOG.md](CHANGELOG.md) | 版本和命名变更 |
-| [AUDIT-4.3.0.md](AUDIT-4.3.0.md) | 当前版本的依据、改动代价、验证与未验证项；旧版审核记录保留 |
+| [AUDIT-4.3.1.md](AUDIT-4.3.1.md) | 当前版本的依据、改动代价、验证与未验证项；旧版审核记录保留 |
 
 ## 验证与边界
 
@@ -68,7 +70,7 @@ Windows 下已进行行为测试；具体结果见发布说明。检查器只核
 
 ## 版本与许可
 
-技能名称保持稳定，版本保存在元数据和 Git 标签中。由 `ai-project-blueprint-v3` 更名而来，参见 [迁移说明](references/migration.md)。
+技能名称保持稳定，版本写入元数据；实际发布后才有对应 Git 标签。由 `ai-project-blueprint-v3` 更名而来，参见 [迁移说明](references/migration.md)。
 
 当前尚未选择开源许可证。公开发布与许可授权是不同决定；在作者选择并加入 LICENSE 前，本仓库不声明采用某种开源许可证。
 

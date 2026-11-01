@@ -28,12 +28,15 @@ v4 新建的研究项目会带 `questions`、`hypotheses` 两个空数组。旧�
 | hypotheses | id/question/statement/origin（ai/human）/predictions（非空）；可选 source/findings/decision/record/derived_from/validated_on/independence | candidate/prioritized/testing/supported/refuted/inconclusive/parked/superseded；已检验的状态需要 findings；由锦标赛提升的假设需要已登记的 decision |
 | hypotheses.derived_from / validated_on | 成果编号列表：生成假设所用的数据，以及验证所用的数据 | 两者不得重叠。上游（depends_on 闭包）有交集时，需在 `independence` 中写明理由 |
 | tasks.serves | Q/H/CLAIM 编号组成的非空列表 | 研究项目一旦有了问题，未挂靠的任务会收到警告 |
-| tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 文件散列须一致；须早于 run.json 中 `task` 指向该任务的运行 |
+| tasks.intent | path/written_at/sha256（由 `research_tree.py task intent` 写入）；旧版本保留在 intent_history | 当前及历史内容不可改写；各运行绑定其实际适用版本，不要求新意图早于所有旧运行 |
 | gates.question | 可选，问题编号：在混合项目中把关口限定到某个子问题 | 必须是已登记的问题 |
 | run.json.task | 可选；由运行规格的 `task` 写入 | 必须是已登记的任务 |
+| run.json.intent_ref | 可选；path/written_at/sha256，与当时任务登记相同 | 已有意图的新运行自动冻结引用和intent快照；历史运行不回填 |
 | run.json.stage | 可选；由运行规格的 `stage` 原样登记 | metadata/analysis/validation；仅显式 metadata 且无其他选路信号时不因该运行提示 CP3，缺省/未知按保守提示；标签不证明盲法 |
 | claims.basis | data/literature/synthesis | `synthesis` 标为 supported 时需要 `reviewed_by` |
 | project.designs | 研究类型列表，取值见 [研究类型](research-types.md) | — |
+
+v4.3.1：含 `task` 且已有意图的新运行自动保存可选 `run.json.intent_ref`（path/written_at/sha256）及 `intent` 快照。检查显式引用是否属于当前/历史登记、早于运行且快照对应。无此字段的历史运行仅按运行前最近版本推断；不同版本同一时刻、全部晚于运行或文件改变均报错，不改写旧记录以制造事前预期。时间使用含时区的ISO格式并按实际时刻比较。schema_version保持2，未登记意图的历史任务不强制补写。
 
 问题树不允许出现环；`type` 必须是已知的研究类型。由 `tournament.py promote` 写入的假设带 `source`（锦标赛、名次、排名快照），排名文件必须存在。
 

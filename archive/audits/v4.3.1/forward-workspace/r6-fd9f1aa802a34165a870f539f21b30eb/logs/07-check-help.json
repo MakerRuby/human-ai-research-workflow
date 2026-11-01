@@ -1,0 +1,17 @@
+{
+  "label": "07-check-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\check_project.py",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:46.071889+00:00",
+  "finished_at": "2026-11-01T16:03:46.177154+00:00",
+  "exit_code": 0,
+  "stdout": "usage: check_project.py [-h] --project PROJECT [--impact IMPACT]\n                        [--require-gate REQUIRE_GATE] [--verify-hashes]\n\nRead-only consistency and transitive-impact checks; never validate scientific\ntruth.\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT\n  --impact IMPACT\n  --require-gate REQUIRE_GATE\n  --verify-hashes\n",
+  "stderr": ""
+}

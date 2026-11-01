@@ -1,0 +1,17 @@
+{
+  "label": "02-tree-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\research_tree.py",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:03:45.520770+00:00",
+  "finished_at": "2026-11-01T16:03:45.627451+00:00",
+  "exit_code": 0,
+  "stdout": "usage: research_tree.py [-h] --project PROJECT {question,hypothesis,task} ...\n\nMaintain the question tree, project hypotheses and task purpose links (stdlib\nonly).\n\npositional arguments:\n  {question,hypothesis,task}\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT\n",
+  "stderr": ""
+}

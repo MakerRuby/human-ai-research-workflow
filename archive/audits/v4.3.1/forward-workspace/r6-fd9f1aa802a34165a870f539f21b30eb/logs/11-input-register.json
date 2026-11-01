@@ -1,0 +1,25 @@
+{
+  "label": "11-input-register",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\record.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "artifact",
+    "--id",
+    "INPUT-001",
+    "--path",
+    "data/raw/fixture.txt",
+    "--version",
+    "v1"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:06:02.845362+00:00",
+  "finished_at": "2026-11-01T16:06:03.026011+00:00",
+  "exit_code": 0,
+  "stdout": "{\n  \"ok\": true,\n  \"artifact\": \"INPUT-001\",\n  \"sha256\": \"6f93e79a2553d568ffb8fdd0f3746c8b7def09dcc32ae205bd55882882875b68\",\n  \"warnings\": []\n}\n\n",
+  "stderr": ""
+}

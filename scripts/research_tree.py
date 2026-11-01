@@ -13,6 +13,7 @@ from pathlib import Path
 
 from check_project import Audit
 from project_io import atomic_json, digest, encoded, local, now, state
+from research_model import task_intents
 from lifecycle import TASK_STATUSES, CONTROLLED_TASK_STATUSES, control, adopted, require_active, set_task
 
 QID = re.compile(r'^Q-[0-9]{3,4}$')
@@ -162,7 +163,12 @@ def task(root, args):
             return {'task': args.id, 'serves': row['serves']}
         if not args.path:
             raise ValueError('intent needs --path to the written intent brief')
+        task_intents(root, row)  # A replacement cannot hide an edited/missing old brief.
         file = local(root, args.path, must_exist=True)
+        current_intent = row.get('intent')
+        if (isinstance(current_intent, dict) and current_intent['path'] == args.path
+                and current_intent['sha256'] == digest(file)):
+            return {'task': args.id, 'intent': current_intent}
         if isinstance(row.get('intent'), dict):
             row.setdefault('intent_history', []).append(row['intent'])
         row['intent'] = {'path': args.path, 'written_at': now(), 'sha256': digest(file)}

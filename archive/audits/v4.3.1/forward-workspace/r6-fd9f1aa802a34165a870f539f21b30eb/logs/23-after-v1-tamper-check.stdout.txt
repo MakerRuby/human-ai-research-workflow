@@ -1,0 +1,41 @@
+{
+  "ok": false,
+  "errors": [
+    "T-001.intent: brief changed after it was recorded; record a new intent instead of editing"
+  ],
+  "warnings": [],
+  "counts": {
+    "artifacts": 1,
+    "checks": 0,
+    "tasks": 1,
+    "gates": 0
+  },
+  "stale_artifacts": [],
+  "impact": null,
+  "hashes_not_recorded": [],
+  "governance": {
+    "open_changes": [],
+    "invalid_or_pending_reproductions": [],
+    "pending_reviews": [],
+    "counts": {
+      "findings": 0,
+      "decisions": 0,
+      "changes": 0,
+      "claims": 0,
+      "risks": 0,
+      "review_items": 0,
+      "runs": 2,
+      "reproductions": 0
+    },
+    "research_model": {
+      "questions": 1,
+      "hypotheses": 0,
+      "open_questions": [
+        "Q-001"
+      ],
+      "hypotheses_in_test": [],
+      "unlinked_research_tasks": []
+    }
+  },
+  "scope": "Read-only record/file consistency; scientific validity and evidence truth are not verified."
+}

@@ -1,0 +1,7 @@
+{
+  "ok": true,
+  "artifact": "INPUT-001",
+  "sha256": "6f93e79a2553d568ffb8fdd0f3746c8b7def09dcc32ae205bd55882882875b68",
+  "warnings": []
+}
+

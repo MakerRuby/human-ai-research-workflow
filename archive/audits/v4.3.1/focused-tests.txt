@@ -1,0 +1,21 @@
+test_dry_run_skip_has_no_writes_and_default_still_lists_folders (test_v431.ExistingFolderTests.test_dry_run_skip_has_no_writes_and_default_still_lists_folders) ... ok
+test_skip_business_placeholders_preserves_existing_code_and_state (test_v431.ExistingFolderTests.test_skip_business_placeholders_preserves_existing_code_and_state) ... ok
+test_explicit_run_reference_cannot_point_to_post_run_intent (test_v431.IntentVersionTests.test_explicit_run_reference_cannot_point_to_post_run_intent) ... ok
+test_future_or_naive_intent_is_refused_before_run (test_v431.IntentVersionTests.test_future_or_naive_intent_is_refused_before_run) ... ok
+test_historical_brief_edit_is_detected_and_blocks_execution_without_side_effects (test_v431.IntentVersionTests.test_historical_brief_edit_is_detected_and_blocks_execution_without_side_effects) ... ok
+test_intent_update_preserves_old_run_and_binds_new_run (test_v431.IntentVersionTests.test_intent_update_preserves_old_run_and_binds_new_run) ... ok
+test_invalid_replacement_cannot_hide_changed_current_brief (test_v431.IntentVersionTests.test_invalid_replacement_cannot_hide_changed_current_brief) ... ok
+test_legacy_run_uses_pre_run_history_without_rewriting_record (test_v431.IntentVersionTests.test_legacy_run_uses_pre_run_history_without_rewriting_record) ... ok
+test_legacy_run_without_pre_run_intent_remains_an_error (test_v431.IntentVersionTests.test_legacy_run_without_pre_run_intent_remains_an_error) ... ok
+test_malformed_snapshot_collection_is_reported_without_crash (test_v431.IntentVersionTests.test_malformed_snapshot_collection_is_reported_without_crash) ... ok
+test_modified_historical_snapshot_is_detected (test_v431.IntentVersionTests.test_modified_historical_snapshot_is_detected) ... ok
+test_same_intent_registration_is_idempotent (test_v431.IntentVersionTests.test_same_intent_registration_is_idempotent) ... ok
+test_same_timestamp_distinct_legacy_versions_are_not_guessed (test_v431.IntentVersionTests.test_same_timestamp_distinct_legacy_versions_are_not_guessed) ... ok
+test_snapshot_of_actual_intent_is_preserved (test_v431.IntentVersionTests.test_snapshot_of_actual_intent_is_preserved) ... ok
+test_timestamps_compare_instants_instead_of_strings (test_v431.IntentVersionTests.test_timestamps_compare_instants_instead_of_strings) ... ok
+test_unregistered_reference_is_rejected (test_v431.IntentVersionTests.test_unregistered_reference_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 5.519s
+
+OK

@@ -1,0 +1,23 @@
+{
+  "report": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-check.md",
+  "report_bytes": 48252,
+  "workspace": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "official_cli_calls": 23,
+  "zero_exit_calls": 22,
+  "nonzero_exit_calls": [
+    {
+      "label": "23-after-v1-tamper-check",
+      "exit_code": 1
+    }
+  ],
+  "run_001_succeeded": true,
+  "run_002_succeeded": true,
+  "all_observed_binding_checks_true": true,
+  "all_cases_present": true,
+  "no_pending_report_placeholder": true,
+  "originals_intact_after_tamper": true,
+  "final_project_deliberately_fails_checker": true,
+  "state_runs_snapshots_outputs_unchanged_by_negative_check": true,
+  "selected_official_sources_unchanged": true,
+  "report_orchestration_parse_error_preserved": true
+}

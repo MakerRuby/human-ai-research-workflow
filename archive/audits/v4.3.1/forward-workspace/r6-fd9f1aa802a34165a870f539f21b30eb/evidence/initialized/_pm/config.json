@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "project_name": "R6 Synthetic Intent Lineage Demo",
+  "profile": "general",
+  "created_on": "2026-11-02",
+  "parameters": {},
+  "environment": {
+    "runtime": null,
+    "dependencies": null
+  },
+  "reproducibility": {
+    "seed": null,
+    "tolerance": null
+  },
+  "authorization": {
+    "autonomous_scope": null,
+    "external_actions": null
+  }
+}

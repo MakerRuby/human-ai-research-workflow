@@ -156,7 +156,7 @@ def initialize(args):
     if args.profile == "research":
         state.update(questions=[], hypotheses=[])
     plans["_pm/project-state.json"] = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
-    if args.profile == "research":
+    if args.profile == "research" and not getattr(args, "no_research_folders", False):
         # Standard folders exist from day one so people and AI file things in one place.
         for folder, purpose in RESEARCH_FOLDERS.items():
             plans.setdefault(f"{folder}/README.md", f"# {folder}\n\n{purpose}\n\n职责总表见 `_pm/LAYOUT.md`。\n")
@@ -214,6 +214,9 @@ def main(argv=None):
     entry_options.add_argument("--no-ai-entry", action="store_true", help="Do not create host entry files.")
     parser.add_argument("--design", action="append", choices=DESIGNS,
                         help="Research study type(s); see references/research-types.md. Repeat for mixed projects.")
+    parser.add_argument("--no-research-folders", action="store_true",
+                        help="Skip default business-folder README placeholders; preserve an existing project layout. "
+                             "Research records still apply. Does not migrate existing state or paths.")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--date", default=date.today().isoformat())
     args = parser.parse_args(argv)

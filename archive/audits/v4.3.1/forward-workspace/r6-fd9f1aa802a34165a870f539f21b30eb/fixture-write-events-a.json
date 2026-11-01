@@ -1,0 +1,49 @@
+[
+  {
+    "action": "append_scope_to_synthetic_contract",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\AI_CONTRACT.md",
+    "sha256": "b12200ce63c4ac2f665e9f9ea3f2548ae6e431c54b08d4dde1b76f177576a028"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\scope.md",
+    "sha256": "9db0ca5f59e6ad2545c6921fb19f0d0c8f3d4013468e4a764253faa6fffde1a3",
+    "at": "2026-11-01T16:06:02.681462+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\data\\raw\\fixture.txt",
+    "sha256": "6f93e79a2553d568ffb8fdd0f3746c8b7def09dcc32ae205bd55882882875b68",
+    "at": "2026-11-01T16:06:02.683610+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\_pm\\text-config.json",
+    "sha256": "0b20983db5adca24daca96dfd25900af92d843f2c38eb7703311724989e6c849",
+    "at": "2026-11-01T16:06:02.684717+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\_pm\\environment.json",
+    "sha256": "2d5c6a7e4baf8e5f98835367193ca20cbfa7f227226f53789a6d0872aa8e076c",
+    "at": "2026-11-01T16:06:02.832732+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\src\\write_text.py",
+    "sha256": "b9f6906d174aac4a84f45dc447fcc9156f086cb89874c57c2a0d017067185b6f",
+    "at": "2026-11-01T16:06:02.836694+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\_pm\\intents\\T-001-v1.md",
+    "sha256": "31b6977db6ccc6d4bdcd5537240b18076c0238f2d7dd4fbb51dac3b38c4328c9",
+    "at": "2026-11-01T16:06:02.838856+00:00"
+  },
+  {
+    "action": "write_new_fixture",
+    "path": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project\\_pm\\run-001.json",
+    "sha256": "c6c5f5f076c81bf748cc239f2d160e5b414e2bdca4bdbf1eccd72e3cbca99d52",
+    "at": "2026-11-01T16:06:02.840526+00:00"
+  }
+]

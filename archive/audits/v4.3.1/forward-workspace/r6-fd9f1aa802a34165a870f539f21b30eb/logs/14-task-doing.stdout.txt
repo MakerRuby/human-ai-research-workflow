@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "task": "T-001",
+  "status": "doing",
+  "outputs": [],
+  "warnings": []
+}
+

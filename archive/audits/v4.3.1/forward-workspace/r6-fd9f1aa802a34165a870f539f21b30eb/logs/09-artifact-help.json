@@ -1,0 +1,20 @@
+{
+  "label": "09-artifact-help",
+  "argv": [
+    "C:\\Users\\DELL\\miniconda3\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\scripts\\record.py",
+    "--project",
+    "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb\\project",
+    "artifact",
+    "--help"
+  ],
+  "cwd": "D:\\桌面\\skill_barn\\sci_skill\\human-ai-research-workflow\\archive\\audits\\v4.3.1\\forward-workspace\\r6-fd9f1aa802a34165a870f539f21b30eb",
+  "started_at": "2026-11-01T16:04:01.072654+00:00",
+  "finished_at": "2026-11-01T16:04:01.220097+00:00",
+  "exit_code": 0,
+  "stdout": "usage: record.py artifact [-h] --id ID --path PATH --version VERSION\n                          [--depends-on DEPENDS_ON]\n\noptions:\n  -h, --help            show this help message and exit\n  --id ID\n  --path PATH\n  --version VERSION\n  --depends-on DEPENDS_ON\n                        ID@version\n",
+  "stderr": ""
+}
