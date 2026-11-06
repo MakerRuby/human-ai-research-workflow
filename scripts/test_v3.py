@@ -268,7 +268,8 @@ class V3Tests(unittest.TestCase):
 
     def test_racing_existing_release_is_never_deleted(self):
         self.fixture(); spec=self.release_spec(); actual_mkdir=Path.mkdir
-        target=self.root/'releases/SUB-1'
+        # Match package()'s canonical root when temporary paths have aliases.
+        target=self.root.resolve()/'releases/SUB-1'
         def racing(path,*args,**kwargs):
             if path == target:
                 actual_mkdir(path,parents=True,exist_ok=True)
