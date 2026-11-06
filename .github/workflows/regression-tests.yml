@@ -31,5 +31,49 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Diagnose Windows path aliases (temporary)
+        if: runner.os == 'Windows'
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
+          import sys
+          from types import SimpleNamespace
+          import unittest
+          sys.path.insert(0, str(Path('scripts').resolve()))
+          import test_v3
+
+          case = test_v3.V3Tests('test_racing_existing_release_is_never_deleted')
+          original_setup = case.setUp
+          original_patch_object = test_v3.patch.object
+
+          def emit(data):
+              print('PATH_DIAGNOSTIC ' + json.dumps(data), flush=True)
+
+          def setup():
+              original_setup()
+              emit({'root': str(case.root), 'resolved_root': str(case.root.resolve()),
+                    'roots_equal': case.root == case.root.resolve(),
+                    'base_samefile': case.base.samefile(case.base.resolve())})
+
+          def traced_patch_object(target, attribute, replacement, *args, **kwargs):
+              if target is Path and attribute == 'mkdir':
+                  def traced(path, *mkdir_args, **mkdir_kwargs):
+                      if path.name == 'SUB-1':
+                          expected = case.root / 'releases/SUB-1'
+                          emit({'mkdir_path': str(path), 'test_target': str(expected),
+                                'paths_equal': path == expected,
+                                'resolved_paths_equal': path.resolve() == expected.resolve()})
+                      return replacement(path, *mkdir_args, **mkdir_kwargs)
+                  return original_patch_object(target, attribute, traced, *args, **kwargs)
+              return original_patch_object(target, attribute, replacement, *args, **kwargs)
+
+          case.setUp = setup
+          test_v3.patch = SimpleNamespace(object=traced_patch_object)
+          result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([case]))
+          emit({'diagnostic_tests_run': result.testsRun, 'failures': len(result.failures),
+                'errors': len(result.errors), 'skipped': len(result.skipped)})
+          # The unmodified full suite below determines the job's exit status.
+
       - name: Run regression tests
         run: python -m unittest discover -s scripts -p "test_*.py" -v
